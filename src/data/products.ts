@@ -1,0 +1,58 @@
+import { Product } from '../types';
+
+export const products: Product[] = [
+  {
+    id: '1',
+    name: 'Tas Belanja Kantong Semen',
+    category: 'UPCYCLED_GOODS',
+    description: 'Tas kuat dan unik dari kemasan semen bekas yang sudah dibersihkan. Tahan beban hingga 10kg.',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=400',
+    price: 45000,
+    stock: 12,
+  },
+  {
+    id: '2',
+    name: 'Pot Botol Plastik Lukis',
+    category: 'UPCYCLED_GOODS',
+    description: 'Pot hias cantik yang dibuat dari botol plastik bekas yang dilukis tangan oleh seniman lokal.',
+    image: 'https://images.unsplash.com/photo-1585331509506-699313264101?auto=format&fit=crop&q=80&w=400',
+    price: 25000,
+    stock: 20,
+  },
+  {
+    id: '3',
+    name: 'Kompos Organik (5kg)',
+    category: 'ORGANIC',
+    description: 'Pupuk kompos super subur hasil pengolahan sampah organik rumah tangga dan pasar.',
+    image: 'https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&q=80&w=400',
+    price: 35000,
+    stock: 50,
+  },
+  {
+    id: '4',
+    name: 'Pouch Kain Perca',
+    category: 'UPCYCLED_GOODS',
+    description: 'Pouch serbaguna untuk kosmetik atau alat tulis, dibuat dari sisa potongan kain tekstil.',
+    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&q=80&w=400',
+    price: 15000,
+    stock: 35,
+  },
+  {
+    id: '5',
+    name: 'Bamboo Toothbrush',
+    category: 'ZERO_WASTE',
+    description: 'Sikat gigi ramah lingkungan berbahan bambu yang dapat terurai secara alami.',
+    image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=400',
+    price: 12000,
+    stock: 100,
+  },
+  {
+    id: '6',
+    name: 'Sabun Batang Lerak',
+    category: 'ORGANIC',
+    description: 'Sabun alami dari buah lerak, tanpa deterjen kimia. Aman untuk kulit sensitif dan lingkungan.',
+    image: 'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?auto=format&fit=crop&q=80&w=400',
+    price: 22000,
+    stock: 45,
+  },
+];
