@@ -29,7 +29,7 @@ export function ProductCatalog() {
         <div className="flex flex-wrap justify-center gap-8">
           {products.slice(0, 4).map((product) => (
             <motion.div key={product.id} {...fadeInUp} className="w-70 h-98.75 [395px]">
-              <Card padding="none" className="w-full h-full overflow-hidden flex flex-col border-none rounded-3xl bg-white shadow-none transition-transform hover:scale-[1.01] relative">
+              <Card padding="none" className="w-full h-full overflow-hidden flex flex-col border-none rounded-3xl bg-white shadow-none transition-transform hover:scale-[1.01] relative gap-y-4">
                  {/* Image Section - Flush with top and sides */}
                 <div className="w-full h-48 shrink-0 bg-[#F1F3F2] flex items-center justify-center">
                   <div className="w-full h-full flex items-center justify-center text-black">
@@ -40,7 +40,7 @@ export function ProductCatalog() {
                     </svg>
                   </div>
                 </div>
-                <div className="px-5 pb-6 grow flex flex-col text-left">
+                <div className="px-5 pb-6 grow flex-col text-left">
                   <div className="grow space-y-2">
                     <h4 className="text-lg font-bold text-[#14321A] leading-tight">{product.name}</h4>
                     <p className="text-[#3D4F41] text-sm font-medium leading-relaxed line-clamp-2">
