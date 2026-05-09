@@ -1,8 +1,10 @@
 import { Globe, Mail, Phone } from 'lucide-react';
+import { section } from 'motion/react-client';
 // import Link from 'next/link';
 
 export function Footer() {
   return (
+
     <footer className="bg-bg text-[#3D4F41] py-24">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-12 gap-12 md:gap-8">
         {/* Branding Column */}
@@ -55,7 +57,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Section */}
-      <div className="max-w-7xl mx-auto px-6 mt-32 pt-12 border-t border-[#3D4F41]/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[#3D4F41]/60 text-lg font-medium">
+      <div className="max-w-7xl mx-auto px-6 mt-32 pt-12 border-t border-[#3D4F41]/10 flex flex-col md:flex-row justify-between items-center gap-5 text-[#3D4F41]/60 text-lg font-medium">
         <p>© 2026 Teman Pilah. Melestarikan Lingkungan Bersama Melalui Aksi Nyata.</p>
         <div className="flex gap-12">
           <a href="#" className="hover:text-[#1B3022] transition-colors">Kebijakan Privasi</a>

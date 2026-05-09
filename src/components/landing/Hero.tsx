@@ -20,12 +20,12 @@ export function Hero() {
           </div>
 
           <div className="space-y-6">
-            <h1 className="text-7xl lg:text-8xl font-bold leading-none text-[#1B3022]">
+            <h1 className="text-6xl lg:text-8xl font-bold relative leading-none text-[#1B3022]">
               Bersama <br />
-              Membangun <br />
-              <span className="text-accent relative inline-block">
+              Membangun < br />
+              <span className="text-accent relative inline-block whitespace-nowrap">
                 Ekosistem Hijau
-                <span className="absolute bottom-2 left-0 w-full h-5 bg-accent/20 -z-10" />
+                <span className="absolute bottom-2 left-5 w-full h-full bg-accent/20 -z-10" />
               </span>
             </h1>
             <p className="text-2xl text-[#3D4F41] leading-relaxed max-w-xl font-medium opacity-80">
@@ -55,7 +55,7 @@ export function Hero() {
             <img 
               src="/tb.png" 
               alt="Eco Illustration" 
-              className="w-full h-auto object-contain rounded-[60px]"
+              className="w-full h-full object-contain rounded-[50px]"
             />
           </div>
 
@@ -64,7 +64,7 @@ export function Hero() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="absolute -bottom-10 -left-10 z-20 bg-white p-8 rounded-[40px] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] flex items-center gap-6 min-w-[320px]"
+            className="absolute -bottom-10 -left-10 z-20 bg-white p-8 rounded-[26px] shadow-[0_20px_50px_-10px_rgba(0,0,0,0.1)] flex items-center gap-6 min-w-[320px]"
           >
             <div className="w-16 h-16 bg-bg rounded-3xl flex items-center justify-center text-accent">
               <Users size={32} />
