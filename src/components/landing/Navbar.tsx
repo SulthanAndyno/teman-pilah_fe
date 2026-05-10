@@ -437,7 +437,7 @@ export function Navbar() {
                 {activeLink === link.name && (
                   <motion.span 
                     layoutId="active-underline"
-                    className="absolute -bottom-2 left-0 right-0 h- bg-accent rounded-full"
+                    className="absolute -bottom-2 left-0 right-0 h-[3px] bg-[#FC9430] rounded-full"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
