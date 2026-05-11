@@ -11,7 +11,7 @@ export function Partnerships() {
   };
 
   return (
-    <section className="py-12 bg-bg border-t border-[#1B3022]/5">
+    <section className="py-12 bg-bg">
       <div className="max-w-7xl mx-auto px-6 space-y-10">
         <h3 className="text-center text-[#3D4F41] font-bold text-lg opacity-80">
           Berkolaborasi Dengan
