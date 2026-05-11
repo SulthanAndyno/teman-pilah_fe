@@ -6,9 +6,13 @@ import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { MessageCircle } from 'lucide-react';
 import { products } from '@/data/products';
+import { Product } from '@/types';
 // import { formatPrice } from '@/lib/utils';
 
-export function ProductCatalog() {
+type ProductCatalogProps = {
+  products: Product[]
+}
+export function ProductCatalog({products}:ProductCatalogProps) {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
@@ -27,7 +31,7 @@ export function ProductCatalog() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-8">
-          {products.slice(0, 4).map((product) => (
+          {products.map((product) => (
             <motion.div key={product.id} {...fadeInUp} className="w-70 h-98.75 [395px]">
               <Card padding="none" className="w-full h-full overflow-hidden flex flex-col border-none rounded-3xl bg-white shadow-none transition-transform hover:scale-[1.01] relative gap-y-4">
                  {/* Image Section - Flush with top and sides */}

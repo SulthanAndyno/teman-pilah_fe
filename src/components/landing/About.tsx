@@ -17,7 +17,7 @@ export function About() {
   };
 
   return (
-    <section id="tentang" className="py-24 bg-[#ffffff]">
+    <section id="tentang" className="py-24">
       <div className="max-w-7xl mx-auto px-6 text-center space-y-16">
         <motion.div {...fadeInUp} className="max-w-3xl mx-auto space-y-6">
           <h2 className="text-5xl font-bold text-[#1B3022]">Tentang Teman Pilah</h2>

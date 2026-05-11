@@ -1,4 +1,3 @@
-'use client';
 
 import React from 'react';
 import { Hero } from '@/components/landing/Hero';
@@ -9,15 +8,19 @@ import { ProductCatalog } from '@/components/landing/ProductCatalog';
 import { Gallery } from '@/components/landing/Gallery';
 import { Partnerships } from '@/components/landing/Partnerships';
 import { JoinCTA } from '@/components/landing/JoinCTA';
+import { products } from '@/data/products';
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const res = await fetch ("http://localhost:2000/api/products")
+  const resJson = await res.json();
+  const products = resJson?.data;
   return (
     <div className="overflow-x-hidden pt-20">
       <Hero />
       <About />
       <Programs />
       <Education />
-      <ProductCatalog />
+      <ProductCatalog products={products}  />
       <Gallery />
       <Partnerships />
       <JoinCTA />
