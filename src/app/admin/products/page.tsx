@@ -933,50 +933,53 @@ export default function AdminProducts() {
       {/* HEADER */}
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
-          <h1 className="text-[32px] font-bold leading-[38.4px] text-[#154212]">
+          <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
             Product Management
           </h1>
         </div>
 
         <button
           onClick={() => handleOpenModal()}
-          className="inline-flex items-center gap-2 rounded-lg bg-[#154212] px-6 py-3 shadow-[0px_4px_12px_#0000000d] hover:brightness-110 transition-all text-white font-medium"
+          className="inline-flex items-center gap-2 rounded-lg bg-[#27532B] px-5 py-2.5 hover:brightness-110 transition-all text-white font-medium text-[13px]"
           type="button"
         >
-          <PlusCircleIcon />
-          <span>Add Product</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Product</span>
         </button>
       </header>
 
       {/* FILTER SECTION */}
-      <div className="rounded-2xl border border-[#c2c9b4] bg-white p-4 shadow-[0px_4px_12px_#0000000d]">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+      <div className="rounded-[20px] border border-[#F0F2EB] bg-white p-2.5 shadow-sm">
+        <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
           {/* SEARCH */}
           <div className="relative flex-1">
             <label className="sr-only" htmlFor="product-search">
               Search product
             </label>
-            <div className="flex h-[42px] items-center rounded-lg border border-[#c2c9b8] bg-[#f3f4ef] pl-10 pr-4">
+            <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
                 id="product-search"
-                placeholder="Search product"
+                placeholder="Search by title..."
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 autoComplete="off"
-                className="w-full border-none bg-transparent text-sm text-[#42493e] outline-none placeholder:text-[#72796e]"
+                className="w-full border-none bg-transparent text-[13px] text-[#42493e] outline-none placeholder:text-[#A1A89A]"
               />
             </div>
-            <div className="absolute left-3 top-1/2 -translate-y-1/2">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-50">
               <SearchIcon />
             </div>
           </div>
 
           {/* FILTERS */}
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="relative w-full sm:w-[165px]">
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <div className="relative w-full sm:w-[150px]">
               <select
-                className="h-[42px] w-full appearance-none rounded-lg border border-[#c2c9b8] bg-[#f3f4ef] px-4 pr-10 text-sm text-[#1a1c19] outline-none cursor-pointer"
+                className="h-11 w-full appearance-none rounded-[14px] bg-[#F9FAF8] px-4 pr-10 text-[13px] font-medium text-[#2A3426] outline-none cursor-pointer"
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
               >
@@ -988,9 +991,9 @@ export default function AdminProducts() {
               <ChevronDownIcon />
             </div>
 
-            <div className="relative w-full sm:w-[165px]">
+            <div className="relative w-full sm:w-[150px]">
               <select
-                className="h-[42px] w-full appearance-none rounded-lg border border-[#c2c9b8] bg-[#f3f4ef] px-4 pr-10 text-sm text-[#1a1c19] outline-none cursor-pointer"
+                className="h-11 w-full appearance-none rounded-[14px] bg-[#F9FAF8] px-4 pr-10 text-[13px] font-medium text-[#2A3426] outline-none cursor-pointer"
                 value={sortFilter}
                 onChange={(e) => setSortFilter(e.target.value)}
               >
@@ -1003,10 +1006,10 @@ export default function AdminProducts() {
 
             <button
               type="button"
-              className="inline-flex h-[42px] items-center justify-center gap-2 rounded-lg border border-[#c2c9bb] bg-white px-4 hover:bg-slate-50 transition-colors"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-[#F0F2EB] bg-white px-5 hover:bg-gray-50 transition-colors"
             >
               <SortIcon />
-              <span className="text-base text-[#42493e]">Sort</span>
+              <span className="text-[13px] font-medium text-[#2A3426]">Sort</span>
             </button>
           </div>
         </div>
