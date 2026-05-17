@@ -1,396 +1,1000 @@
+// // 'use client';
+
+// // import { useEffect, useState } from 'react';
+
+// // import { News } from '@/types';
+
+// // import { newsApi } from '@/lib/api/news';
+
+// // import { NewsTable } from '@/components/admin/NewsTable';
+
+// // import { NewsModal } from '@/components/admin/NewsModal';
+
+// // export default function AdminNewsPage() {
+
+// //   const [newsList, setNewsList] =
+// //     useState<News[]>([]);
+
+// //   const [loading, setLoading] =
+// //     useState(true);
+
+// //   const [selectedNews, setSelectedNews] =
+// //     useState<News | null>(null);
+
+// //   const [isModalOpen, setIsModalOpen] =
+// //     useState(false);
+
+// //   // =========================
+// //   // FETCH NEWS
+// //   // =========================
+
+// //   async function fetchNews() {
+
+// //     try {
+
+// //       setLoading(true);
+
+// //       const data =
+// //         await newsApi.getAll();
+
+// //       setNewsList(data);
+
+// //     } catch (error) {
+
+// //       console.error(
+// //         'Fetch News Error:',
+// //         error
+// //       );
+
+// //     } finally {
+
+// //       setLoading(false);
+
+// //     }
+// //   }
+
+// //   useEffect(() => {
+
+// //     fetchNews();
+
+// //   }, []);
+
+// //   // =========================
+// //   // CREATE / UPDATE
+// //   // =========================
+
+// //   async function handleSubmit(
+// //     data: Partial<News>
+// //   ) {
+
+// //     try {
+
+// //       // =========================
+// //       // FIX PAYLOAD BACKEND
+// //       // =========================
+
+// //       const payload = {
+
+// //         title: data.title,
+
+// //         content: data.content,
+
+// //         category:
+// //           data.category || 'Edukasi',
+
+// //         // ENUM BACKEND
+// //         status:
+// //           data.status || 'PUBLISHED',
+
+// //         // REQUIRED BACKEND
+// //         slug: data.title
+// //           ?.toLowerCase()
+// //           .replace(/\s+/g, '-'),
+
+// //         summary:
+// //           data.content?.slice(0, 120),
+
+// //         authors:
+// //           Array.isArray(data.authors)
+// //             ? data.authors
+// //             : ['Admin'],
+
+// //         tags:
+// //           Array.isArray(data.tags)
+// //             ? data.tags
+// //             : ['news'],
+
+// //         visibility: 'PUBLIC',
+
+// //         imageUrl:
+// //           data.image || '',
+
+// //       };
+
+// //       console.log(
+// //         'NEWS PAYLOAD:',
+// //         payload
+// //       );
+
+// //       // =========================
+// //       // UPDATE
+// //       // =========================
+
+// //       if (selectedNews) {
+
+// //         const updated =
+// //           await newsApi.update(
+// //             selectedNews.id,
+// //             payload
+// //           );
+
+// //         setNewsList((prev) =>
+// //           prev.map((item) =>
+// //             item.id === updated.id
+// //               ? updated
+// //               : item
+// //           )
+// //         );
+
+// //       } else {
+
+// //         // =========================
+// //         // CREATE
+// //         // =========================
+
+// //         const created =
+// //           await newsApi.create(
+// //             payload
+// //           );
+
+// //         setNewsList((prev) => [
+// //           created,
+// //           ...prev,
+// //         ]);
+// //       }
+
+// //       // =========================
+// //       // CLOSE MODAL
+// //       // =========================
+
+// //       setIsModalOpen(false);
+
+// //       setSelectedNews(null);
+
+// //     } catch (error) {
+
+// //       console.error(
+// //         'Submit News Error:',
+// //         error
+// //       );
+
+// //       alert(
+// //         error instanceof Error
+// //           ? error.message
+// //           : 'Gagal menyimpan news'
+// //       );
+// //     }
+// //   }
+
+// //   // =========================
+// //   // DELETE
+// //   // =========================
+
+// //   async function handleDelete(
+// //     id: string
+// //   ) {
+
+// //     const confirmDelete =
+// //       window.confirm(
+// //         'Hapus berita ini?'
+// //       );
+
+// //     if (!confirmDelete) return;
+
+// //     try {
+
+// //       await newsApi.delete(id);
+
+// //       setNewsList((prev) =>
+// //         prev.filter(
+// //           (item) => item.id !== id
+// //         )
+// //       );
+
+// //     } catch (error) {
+
+// //       console.error(
+// //         'Delete News Error:',
+// //         error
+// //       );
+
+// //       alert(
+// //         error instanceof Error
+// //           ? error.message
+// //           : 'Gagal menghapus news'
+// //       );
+// //     }
+// //   }
+
+// //   // =========================
+// //   // EDIT
+// //   // =========================
+
+// //   function handleEdit(news: News) {
+
+// //     setSelectedNews(news);
+
+// //     setIsModalOpen(true);
+// //   }
+
+// //   return (
+// //     <div className="space-y-8">
+
+// //       {/* HEADER */}
+// //       <div className="flex items-center justify-between">
+
+// //         <div>
+
+// //           <h1 className="text-3xl font-black text-[#1B361F]">
+// //             News Management
+// //           </h1>
+
+// //           <p className="text-[#72796E] mt-2">
+// //             Kelola berita Teman Pilah
+// //           </p>
+
+// //         </div>
+
+// //         <button
+// //           onClick={() => {
+
+// //             setSelectedNews(null);
+
+// //             setIsModalOpen(true);
+
+// //           }}
+// //           className="bg-[#154212] hover:bg-[#1f5a1a] text-white px-5 py-3 rounded-2xl font-bold transition-all"
+// //         >
+// //           + Tambah News
+// //         </button>
+
+// //       </div>
+
+// //       {/* LOADING */}
+// //       {loading ? (
+
+// //         <div className="py-20 text-center">
+// //           Loading...
+// //         </div>
+
+// //       ) : (
+
+// //         <NewsTable
+// //           newsList={newsList}
+// //           onEdit={handleEdit}
+// //           onDelete={handleDelete}
+// //         />
+
+// //       )}
+
+// //       {/* MODAL */}
+// //       <NewsModal
+// //         news={selectedNews}
+// //         isOpen={isModalOpen}
+// //         onClose={() => {
+
+// //           setIsModalOpen(false);
+
+// //           setSelectedNews(null);
+
+// //         }}
+// //         onSubmit={handleSubmit}
+// //       />
+
+// //     </div>
+// //   );
+// // }
+
 // 'use client';
 
-// import React, { useState, useEffect } from 'react';
-// import { Button } from '@/components/ui/Button';
-// import { Input } from '@/components/ui/Input';
+// import { useEffect, useState } from 'react';
+
 // import { News } from '@/types';
-// import { Search, Plus } from 'lucide-react';
-// import { toast } from 'sonner';
+
+// import { newsApi } from '@/lib/api/news';
+
 // import { NewsTable } from '@/components/admin/NewsTable';
+
 // import { NewsModal } from '@/components/admin/NewsModal';
 
-// import { api } from '@/lib/api-client';
+// const BASE_URL =
+//   process.env.NEXT_PUBLIC_API_URL ||
+//   'http://localhost:2000';
 
-// export default function AdminNews() {
-//   const [newsList, setNewsList] = useState<News[]>([]);
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [searchTerm, setSearchTerm] = useState('');
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [editingNews, setEditingNews] = useState<News | null>(null);
+// export default function AdminNewsPage() {
 
-//   const fetchNews = async () => {
+//   const [newsList, setNewsList] =
+//     useState<News[]>([]);
+
+//   const [loading, setLoading] =
+//     useState(true);
+
+//   const [selectedNews, setSelectedNews] =
+//     useState<News | null>(null);
+
+//   const [isModalOpen, setIsModalOpen] =
+//     useState(false);
+
+//   // =========================
+//   // NORMALIZE IMAGE URL
+//   // =========================
+
+//   function normalizeNews(
+//     item: News
+//   ): News {
+
+//     return {
+
+//       ...item,
+
+//       image:
+//         item.imageUrl
+//           ? `${BASE_URL}/${item.imageUrl}`
+//           : item.image || '',
+
+//     };
+//   }
+
+//   // =========================
+//   // FETCH NEWS
+//   // =========================
+
+//   async function fetchNews() {
+
 //     try {
-//       const data = await api.get<News[]>('/api/news');
-//       setNewsList(data);
+
+//       setLoading(true);
+
+//       const data =
+//         await newsApi.getAll();
+
+//       setNewsList(
+//         data.map(normalizeNews)
+//       );
+
 //     } catch (error) {
-//       toast.error('Gagal mengambil data berita dari server');
+
+//       console.error(
+//         'Fetch News Error:',
+//         error
+//       );
+
 //     } finally {
-//       setIsLoading(false);
+
+//       setLoading(false);
+
 //     }
-//   };
+//   }
 
 //   useEffect(() => {
+
 //     fetchNews();
+
 //   }, []);
 
-//   const filteredNews = newsList.filter(n => 
-//     n.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//     n.category.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
+//   // =========================
+//   // CREATE / UPDATE
+//   // =========================
 
-//   const handleOpenModal = (news?: News) => {
-//     setEditingNews(news || null);
-//     setIsModalOpen(true);
-//   };
+//   async function handleSubmit(
+//     data: Partial<News>
+//   ) {
 
-//   const handleSubmit = async (data: Partial<News>) => {
 //     try {
-//       if (editingNews) {
-//         await api.patch(`/api/news/${editingNews.id}`, data);
-//         toast.success('Berita berhasil diperbarui');
+
+//       // =========================
+//       // FIX PAYLOAD BACKEND
+//       // =========================
+
+//       const payload = {
+
+//         title: data.title,
+
+//         content: data.content,
+
+//         category:
+//           data.category || 'Edukasi',
+
+//         status:
+//           data.status || 'PUBLISHED',
+
+//         slug: data.title
+//           ?.toLowerCase()
+//           .replace(/\s+/g, '-'),
+
+//         summary:
+//           data.content?.slice(0, 120),
+
+//         authors:
+//           Array.isArray(data.authors)
+//             ? data.authors
+//             : ['Admin'],
+
+//         tags:
+//           Array.isArray(data.tags)
+//             ? data.tags
+//             : ['news'],
+
+//         visibility: 'PUBLIC',
+
+//         imageUrl:
+//           data.imageUrl || '',
+
+//       };
+
+//       console.log(
+//         'NEWS PAYLOAD:',
+//         payload
+//       );
+
+//       // =========================
+//       // UPDATE
+//       // =========================
+
+//       if (selectedNews) {
+
+//         const updated =
+//           await newsApi.update(
+//             selectedNews.id,
+//             payload
+//           );
+
+//         setNewsList((prev) =>
+//           prev.map((item) =>
+//             item.id === updated.id
+//               ? normalizeNews(updated)
+//               : item
+//           )
+//         );
+
 //       } else {
-//         await api.post('/api/news', data);
-//         toast.success('Berita berhasil ditambahkan');
-//       }
-//       fetchNews();
-//     } catch (error: unknown) {
-//       const err = error as Error;
-//       toast.error(err.message || 'Gagal menyimpan berita');
-//     }
-//     setIsModalOpen(false);
-//   };
 
-//   const handleDelete = async (id: string) => {
-//     if (window.confirm('Hapus berita ini?')) {
-//       try {
-//         await api.delete(`/api/news/${id}`);
-//         toast.success('Berita dihapus');
-//         fetchNews();
-//       } catch (error: unknown) {
-//         const err = error as Error;
-//         toast.error(err.message || 'Gagal menghapus berita');
-//       }
-//     }
-//   };
+//         // =========================
+//         // CREATE
+//         // =========================
 
-//   if (isLoading) {
-//     return <div className="flex items-center justify-center h-64">Memuat berita...</div>;
+//         const created =
+//           await newsApi.create(
+//             payload
+//           );
+
+//         setNewsList((prev) => [
+
+//           normalizeNews(created),
+
+//           ...prev,
+
+//         ]);
+//       }
+
+//       // =========================
+//       // CLOSE MODAL
+//       // =========================
+
+//       setIsModalOpen(false);
+
+//       setSelectedNews(null);
+
+//     } catch (error) {
+
+//       console.error(
+//         'Submit News Error:',
+//         error
+//       );
+
+//       alert(
+//         error instanceof Error
+//           ? error.message
+//           : 'Gagal menyimpan news'
+//       );
+//     }
+//   }
+
+//   // =========================
+//   // DELETE
+//   // =========================
+
+//   async function handleDelete(
+//     id: string
+//   ) {
+
+//     const confirmDelete =
+//       window.confirm(
+//         'Hapus berita ini?'
+//       );
+
+//     if (!confirmDelete) return;
+
+//     try {
+
+//       await newsApi.delete(id);
+
+//       setNewsList((prev) =>
+//         prev.filter(
+//           (item) => item.id !== id
+//         )
+//       );
+
+//     } catch (error) {
+
+//       console.error(
+//         'Delete News Error:',
+//         error
+//       );
+
+//       alert(
+//         error instanceof Error
+//           ? error.message
+//           : 'Gagal menghapus news'
+//       );
+//     }
+//   }
+
+//   // =========================
+//   // EDIT
+//   // =========================
+
+//   function handleEdit(news: News) {
+
+//     setSelectedNews(news);
+
+//     setIsModalOpen(true);
 //   }
 
 //   return (
-//     <div className="space-y-6">
-//       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-//         <div className="relative w-full sm:w-96">
-//           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral" size={18} />
-//           <Input 
-//             placeholder="Cari berita atau kategori..." 
-//             className="pl-10"
-//             value={searchTerm}
-//             onChange={(e) => setSearchTerm(e.target.value)}
-//           />
+//     <div className="space-y-8">
+
+//       {/* HEADER */}
+//       <div className="flex items-center justify-between">
+
+//         <div>
+
+//           <h1 className="text-3xl font-black text-[#1B361F]">
+//             News Management
+//           </h1>
+
+//           <p className="text-[#72796E] mt-2">
+//             Kelola berita Teman Pilah
+//           </p>
+
 //         </div>
-//         <Button onClick={() => handleOpenModal()} className="flex items-center gap-2">
-//           <Plus size={20} />
-//           Tulis Berita
-//         </Button>
+
+//         <button
+//           onClick={() => {
+
+//             setSelectedNews(null);
+
+//             setIsModalOpen(true);
+
+//           }}
+//           className="bg-[#154212] hover:bg-[#1f5a1a] text-white px-5 py-3 rounded-2xl font-bold transition-all"
+//         >
+//           + Tambah News
+//         </button>
+
 //       </div>
 
-//       <NewsTable 
-//         newsList={filteredNews} 
-//         onEdit={handleOpenModal} 
-//         onDelete={handleDelete} 
+//       {/* LOADING */}
+//       {loading ? (
+
+//         <div className="py-20 text-center">
+//           Loading...
+//         </div>
+
+//       ) : (
+
+//         <NewsTable
+//           newsList={newsList}
+//           onEdit={handleEdit}
+//           onDelete={handleDelete}
+//         />
+
+//       )}
+
+//       {/* MODAL */}
+//       <NewsModal
+//         news={selectedNews}
+//         isOpen={isModalOpen}
+//         onClose={() => {
+
+//           setIsModalOpen(false);
+
+//           setSelectedNews(null);
+
+//         }}
+//         onSubmit={handleSubmit}
 //       />
 
-//       <NewsModal 
-//         isOpen={isModalOpen} 
-//         news={editingNews} 
-//         onClose={() => setIsModalOpen(false)} 
-//         onSubmit={handleSubmit} 
-//       />
 //     </div>
 //   );
 // }
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { News } from '@/types';
-import { toast } from 'sonner';
+
+import { newsApi } from '@/lib/api/news';
+
 import { NewsTable } from '@/components/admin/NewsTable';
+
 import { NewsModal } from '@/components/admin/NewsModal';
 
-const SearchIcon = () => (
-  <svg
-    aria-hidden="true"
-    className="h-[15px] w-[15px]"
-    fill="none"
-    viewBox="0 0 15 15"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M6.875 11.25C9.29125 11.25 11.25 9.29125 11.25 6.875C11.25 4.45875 9.29125 2.5 6.875 2.5C4.45875 2.5 2.5 4.45875 2.5 6.875C2.5 9.29125 4.45875 11.25 6.875 11.25Z"
-      stroke="#72796E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.4"
-    />
-    <path
-      d="M12.5 12.5L10.1562 10.1562"
-      stroke="#72796E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.4"
-    />
-  </svg>
-);
+const BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  'http://localhost:2000';
 
-const AddIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="20"
-    viewBox="0 0 20 20"
-    width="20"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle
-      cx="10"
-      cy="10"
-      r="7"
-      stroke="white"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M10 6.66699V13.3337"
-      stroke="white"
-      strokeLinecap="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M6.66699 10H13.3337"
-      stroke="white"
-      strokeLinecap="round"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
+export default function AdminNewsPage() {
 
-const ChevronDownIcon = () => (
-  <svg
-    aria-hidden="true"
-    className="absolute right-4 top-1/2 -translate-y-1/2"
-    fill="none"
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M4 6L8 10L12 6"
-      stroke="#72796E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
+  const [newsList, setNewsList] =
+    useState<News[]>([]);
 
-const SortIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="20"
-    viewBox="0 0 20 20"
-    width="20"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7.5 4.16699V15.8337"
-      stroke="#42493E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M4.16699 7.5L7.50033 4.16667L10.8337 7.5"
-      stroke="#42493E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M12.5 15.8333V4.16634"
-      stroke="#42493E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M15.8337 12.4997L12.5003 15.833L9.16699 12.4997"
-      stroke="#42493E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
+  const [loading, setLoading] =
+    useState(true);
 
-export default function AdminNews() {
-  const [newsList, setNewsList] = useState<News[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingNews, setEditingNews] = useState<News | null>(null);
+  const [selectedNews, setSelectedNews] =
+    useState<News | null>(null);
 
-  const fetchNews = async () => {
+  const [isModalOpen, setIsModalOpen] =
+    useState(false);
+
+  // =========================
+  // NORMALIZE IMAGE URL
+  // =========================
+
+  function normalizeNews(
+    item: News
+  ): News {
+
+    return {
+
+      ...item,
+
+      image:
+        item.imageUrl
+          ? `${BASE_URL}/${item.imageUrl}`
+          : '',
+
+    };
+  }
+
+  // =========================
+  // FETCH NEWS
+  // =========================
+
+  async function fetchNews() {
+
     try {
-      const data = await api.get<News[]>('/api/news');
-      setNewsList(data);
+
+      setLoading(true);
+
+      const data =
+        await newsApi.getAll();
+
+      setNewsList(
+        data.map(normalizeNews)
+      );
+
     } catch (error) {
-      toast.error('Gagal mengambil data berita dari server');
+
+      console.error(
+        'Fetch News Error:',
+        error
+      );
+
     } finally {
-      setIsLoading(false);
+
+      setLoading(false);
+
     }
-  };
+  }
 
   useEffect(() => {
+
     fetchNews();
+
   }, []);
 
-  const filteredNews = newsList.filter(n => 
-    n.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    n.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // =========================
+  // CREATE / UPDATE
+  // =========================
 
-  const handleOpenModal = (news?: News) => {
-    setEditingNews(news || null);
-    setIsModalOpen(true);
-  };
+  async function handleSubmit(
+    data: any
+  ) {
 
-  const handleSubmit = async (data: Partial<News>) => {
     try {
-      if (editingNews) {
-        await api.patch(`/api/news/${editingNews.id}`, data);
-        toast.success('Berita berhasil diperbarui');
+
+      const payload = {
+
+        title:
+          data.title,
+
+        content:
+          data.content,
+
+        category:
+          data.category ||
+          'Edukasi',
+
+        status:
+          data.status ||
+          'PUBLISHED',
+
+        slug:
+          data.title
+            ?.toLowerCase()
+            .replace(/\s+/g, '-'),
+
+        summary:
+          data.content?.slice(
+            0,
+            120
+          ),
+
+        authors:
+          Array.isArray(
+            data.authors
+          )
+            ? data.authors
+            : ['Admin'],
+
+        tags:
+          Array.isArray(
+            data.tags
+          )
+            ? data.tags
+            : ['news'],
+
+        visibility:
+          'PUBLIC',
+
+        // =========================
+        // IMPORTANT
+        // =========================
+
+        imageFile:
+          data.imageFile ||
+          null,
+      };
+
+      console.log(
+        'FINAL PAYLOAD:',
+        payload
+      );
+
+      console.log(
+        'IMAGE FILE:',
+        payload.imageFile
+      );
+
+      // =========================
+      // UPDATE
+      // =========================
+
+      if (selectedNews) {
+
+        const updated =
+          await newsApi.update(
+            selectedNews.id,
+            payload
+          );
+
+        setNewsList((prev) =>
+          prev.map((item) =>
+            item.id === updated.id
+              ? normalizeNews(
+                  updated
+                )
+              : item
+          )
+        );
+
       } else {
-        await api.post('/api/news', data);
-        toast.success('Berita berhasil ditambahkan');
-      }
-      fetchNews();
-    } catch (error: unknown) {
-      const err = error as Error;
-      toast.error(err.message || 'Gagal menyimpan berita');
-    }
-    setIsModalOpen(false);
-  };
 
-  const handleDelete = async (id: string) => {
-    if (window.confirm('Hapus berita ini?')) {
-      try {
-        await api.delete(`/api/news/${id}`);
-        toast.success('Berita dihapus');
-        fetchNews();
-      } catch (error: unknown) {
-        const err = error as Error;
-        toast.error(err.message || 'Gagal menghapus berita');
-      }
-    }
-  };
+        // =========================
+        // CREATE
+        // =========================
 
-  if (isLoading) {
-    return <div className="flex items-center justify-center h-64">Memuat berita...</div>;
+        const created =
+          await newsApi.create(
+            payload
+          );
+
+        setNewsList((prev) => [
+
+          normalizeNews(
+            created
+          ),
+
+          ...prev,
+
+        ]);
+      }
+
+      // =========================
+      // CLOSE MODAL
+      // =========================
+
+      setIsModalOpen(false);
+
+      setSelectedNews(null);
+
+    } catch (error) {
+
+      console.error(
+        'Submit News Error:',
+        error
+      );
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : 'Gagal menyimpan news'
+      );
+    }
+  }
+
+  // =========================
+  // DELETE
+  // =========================
+
+  async function handleDelete(
+    id: string
+  ) {
+
+    const confirmDelete =
+      window.confirm(
+        'Hapus berita ini?'
+      );
+
+    if (!confirmDelete)
+      return;
+
+    try {
+
+      await newsApi.delete(
+        id
+      );
+
+      setNewsList((prev) =>
+        prev.filter(
+          (item) =>
+            item.id !== id
+        )
+      );
+
+    } catch (error) {
+
+      console.error(
+        'Delete News Error:',
+        error
+      );
+
+      alert(
+        error instanceof Error
+          ? error.message
+          : 'Gagal menghapus news'
+      );
+    }
+  }
+
+  // =========================
+  // EDIT
+  // =========================
+
+  function handleEdit(
+    news: News
+  ) {
+
+    setSelectedNews(news);
+
+    setIsModalOpen(true);
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <header className="flex items-center justify-between">
+    <div className="space-y-8">
+
+      {/* HEADER */}
+      <div className="flex items-center justify-between">
+
         <div>
-          <h1 className="text-[32px] font-bold leading-[38.4px] text-[#154212]">
+
+          <h1 className="text-3xl font-black text-[#1B361F]">
+
             News Management
+
           </h1>
+
+          <p className="text-[#72796E] mt-2">
+
+            Kelola berita Teman Pilah
+
+          </p>
+
         </div>
 
         <button
-          onClick={() => handleOpenModal()}
-          className="inline-flex items-center gap-2 rounded-xl bg-[#154212] px-6 py-3 shadow-[0px_4px_12px_#0000000d] hover:bg-[#1a4d16] transition-colors"
-          type="button"
+          onClick={() => {
+
+            setSelectedNews(
+              null
+            );
+
+            setIsModalOpen(
+              true
+            );
+
+          }}
+          className="bg-[#154212] hover:bg-[#1f5a1a] text-white px-5 py-3 rounded-2xl font-bold transition-all"
         >
-          <AddIcon />
-          <span className="text-base text-white font-medium">Add News</span>
+
+          + Tambah News
+
         </button>
-      </header>
 
-      {/* FILTER SECTION */}
-      <div className="rounded-2xl border border-[#c2c9bb4c] bg-white p-4 shadow-[0px_4px_12px_#0000000d]">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="relative flex-1 min-w-[300px]">
-            <label className="sr-only" htmlFor="news-search">
-              Search by title
-            </label>
-            <input
-              id="news-search"
-              placeholder="Search by title..."
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-[42px] w-full rounded-lg border border-[#c2c9bb80] bg-[#f3f4ef] pl-10 pr-4 text-sm text-[#1a1c19] outline-none focus:ring-1 focus:ring-[#154212]/30 transition-all"
-            />
-            <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 opacity-60">
-              <SearchIcon />
-            </div>
-          </div>
+      </div>
 
-          <div className="relative w-[165px]">
-            <select
-              className="h-[42px] w-full appearance-none rounded-lg border border-[#c2c9bb80] bg-[#f3f4ef] px-4 pr-10 text-sm text-[#1a1c19] outline-none cursor-pointer"
-              defaultValue="all"
-            >
-              <option value="all">Status: All</option>
-              <option value="published">Published</option>
-              <option value="draft">Draft</option>
-            </select>
-            <ChevronDownIcon />
-          </div>
+      {/* LOADING */}
+      {loading ? (
 
-          <div className="relative w-[165px]">
-            <select
-              className="h-[42px] w-full appearance-none rounded-lg border border-[#c2c9bb80] bg-[#f3f4ef] px-4 pr-10 text-sm text-[#1a1c19] outline-none cursor-pointer"
-              defaultValue="newest"
-            >
-              <option value="newest">Date: Newest</option>
-              <option value="oldest">Date: Oldest</option>
-            </select>
-            <ChevronDownIcon />
-          </div>
+        <div className="py-20 text-center">
 
-          <button
-            className="inline-flex h-[42px] items-center gap-2 rounded-lg border border-[#c2c9bb] px-4 hover:bg-slate-50 transition-colors"
-            type="button"
-          >
-            <SortIcon />
-            <span className="text-base text-[#42493e] font-medium">Sort</span>
-          </button>
+          Loading...
+
         </div>
-      </div>
 
-      {/* TABLE HEADER */}
-      <div className="flex items-center justify-between px-2">
-        <h2 className="text-xl font-bold text-[#1a1c19]">All Articles</h2>
-        <span className="text-sm text-[#72796e]">{newsList.length} items total</span>
-      </div>
+      ) : (
 
-      <NewsTable 
-        newsList={filteredNews} 
-        onEdit={handleOpenModal} 
-        onDelete={handleDelete} 
+        <NewsTable
+          newsList={
+            newsList
+          }
+          onEdit={
+            handleEdit
+          }
+          onDelete={
+            handleDelete
+          }
+        />
+
+      )}
+
+      {/* MODAL */}
+      <NewsModal
+        news={
+          selectedNews
+        }
+        isOpen={
+          isModalOpen
+        }
+        onClose={() => {
+
+          setIsModalOpen(
+            false
+          );
+
+          setSelectedNews(
+            null
+          );
+
+        }}
+        onSubmit={
+          handleSubmit
+        }
       />
 
-      <NewsModal 
-        isOpen={isModalOpen} 
-        news={editingNews} 
-        onClose={() => setIsModalOpen(false)} 
-        onSubmit={handleSubmit} 
-      />
     </div>
   );
 }
