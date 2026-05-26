@@ -1,1578 +1,328 @@
-// // /* eslint-disable react-hooks/set-state-in-effect */
-// // 'use client';
-
-// // import React, { useState, useEffect } from 'react';
-// // import { News } from '@/types';
-// // import { Card } from '@/components/ui/Card';
-// // import { Button } from '@/components/ui/Button';
-// // import { Input } from '@/components/ui/Input';
-// // import { X } from 'lucide-react';
-// // import { ImageUpload } from '@/components/ui/ImageUpload';
-
-// // interface NewsModalProps {
-// //   news: News | null;
-// //   isOpen: boolean;
-// //   onClose: () => void;
-// //   onSubmit: (data: Partial<News>) => void;
-// // }
-
-// // export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
-// //   const [formData, setFormData] = useState({
-// //     title: '',
-// //     category: 'Edukasi',
-// //     status: 'published' as 'published' | 'draft',
-// //     content: '',
-// //     image: ''
-// //   });
-
-// //   useEffect(() => {
-// //     if (isOpen) {
-// //       if (news) {
-// //         setFormData({
-// //           title: news.title,
-// //           category: news.category,
-// //           status: news.status,
-// //           content: news.content || '',
-// //           image: news.image || '',
-// //         });
-// //       } else {
-// //         setFormData({
-// //           title: '',
-// //           category: 'Edukasi',
-// //           status: 'published',
-// //           content: '',
-// //           image: '',
-// //         });
-// //       }
-// //     }
-// //   }, [news, isOpen]);
-
-// //   const handleSubmit = (e: React.FormEvent) => {
-// //     e.preventDefault();
-// //     onSubmit(formData);
-// //   };
-
-// //   if (!isOpen) return null;
-
-// //   return (
-// //     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-// //       <div className="absolute inset-0 bg-primary/20 backdrop-blur-sm" onClick={onClose} />
-// //       <Card className="w-full max-w-lg relative z-10 animate-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-// //         <div className="flex items-center justify-between mb-8">
-// //           <h3 className="text-2xl font-bold">{news ? 'Edit Berita' : 'Tulis Berita Baru'}</h3>
-// //           <button onClick={onClose} className="w-10 h-10 rounded-full hover:bg-bg flex items-center justify-center">
-// //             <X size={20} />
-// //           </button>
-// //         </div>
-// //         <form onSubmit={handleSubmit} className="space-y-6 pb-4">
-// //           <ImageUpload 
-// //             label="Gambar Berita"
-// //             value={formData.image}
-// //             onChange={(val) => setFormData(prev => ({ ...prev, image: val }))}
-// //           />
-// //           <Input 
-// //             label="Judul Berita" 
-// //             value={formData.title} 
-// //             onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))} 
-// //             required 
-// //           />
-// //           <div className="space-y-1.5">
-// //             <label className="text-sm font-medium text-primary-light block">Konten Berita</label>
-// //             <textarea 
-// //               className="w-full px-4 py-2.5 bg-white border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-neutral min-h-[120px]"
-// //               value={formData.content}
-// //               onChange={e => setFormData(prev => ({ ...prev, content: e.target.value }))}
-// //               required
-// //             />
-// //           </div>
-// //           <div className="grid grid-cols-2 gap-4">
-// //             <div className="space-y-1.5">
-// //               <label className="text-sm font-medium text-primary-light block">Kategori</label>
-// //               <select 
-// //                 className="w-full px-4 py-2.5 bg-white border border-border rounded-xl text-neutral"
-// //                 value={formData.category}
-// //                 onChange={e => setFormData(prev => ({ ...prev, category: e.target.value }))}
-// //               >
-// //                 <option value="Edukasi">Edukasi</option>
-// //                 <option value="Kampanye">Kampanye</option>
-// //                 <option value="Produk">Produk</option>
-// //                 <option value="Tips & Trick">Tips & Trick</option>
-// //               </select>
-// //             </div>
-// //             <div className="space-y-1.5">
-// //               <label className="text-sm font-medium text-primary-light block">Status</label>
-// //               <select 
-// //                 className="w-full px-4 py-2.5 bg-white border border-border rounded-xl text-neutral"
-// //                 value={formData.status}
-// //                 onChange={e => setFormData(prev => ({ ...prev, status: e.target.value as 'published' | 'draft' }))}
-// //               >
-// //                 <option value="published">Published</option>
-// //                 <option value="draft">Draft</option>
-// //               </select>
-// //             </div>
-// //           </div>
-// //           <div className="pt-4 flex gap-3">
-// //             <Button variant="secondary" className="flex-grow" type="button" onClick={onClose}>Batal</Button>
-// //             <Button type="submit" className="flex-[2]">Simpan Berita</Button>
-// //           </div>
-// //         </form>
-// //       </Card>
-// //     </div>
-// //   );
-// // }
-
-// /* eslint-disable react-hooks/set-state-in-effect */
-// 'use client';
-
-// import React, { useState, useEffect } from 'react';
-// import { News } from '@/types';
-// import { Card } from '@/components/ui/Card';
-// import { Button } from '@/components/ui/Button';
-// import { Input } from '@/components/ui/Input';
-// import { X } from 'lucide-react';
-// import { ImageUpload } from '@/components/ui/ImageUpload';
-
-// interface NewsModalProps {
-//   news: News | null;
-//   isOpen: boolean;
-//   onClose: () => void;
-//   onSubmit: (data: Partial<News>) => void;
-// }
-
-// export function NewsModal({
-//   news,
-//   isOpen,
-//   onClose,
-//   onSubmit,
-// }: NewsModalProps) {
-
-//   const [formData, setFormData] = useState({
-//     title: '',
-//     category: 'Edukasi',
-
-//     // SESUAI ENUM BACKEND
-//     status: 'PUBLISHED' as
-//       | 'PUBLISHED'
-//       | 'DRAFT'
-//       | 'ARCHIVED',
-
-//     content: '',
-//     image: '',
-//   });
-
-//   useEffect(() => {
-
-//     if (!isOpen) return;
-
-//     if (news) {
-
-//       setFormData({
-//         title: news.title || '',
-
-//         category: news.category || 'Edukasi',
-
-//         // fallback agar aman
-//         status:
-//           (news.status as
-//             | 'PUBLISHED'
-//             | 'DRAFT'
-//             | 'ARCHIVED') || 'PUBLISHED',
-
-//         content: news.content || '',
-
-//         image: news.image || '',
-//       });
-
-//     } else {
-
-//       setFormData({
-//         title: '',
-//         category: 'Edukasi',
-
-//         // DEFAULT ENUM BACKEND
-//         status: 'PUBLISHED',
-
-//         content: '',
-//         image: '',
-//       });
-
-//     }
-
-//   }, [news, isOpen]);
-
-//   const handleSubmit = (
-//     e: React.FormEvent
-//   ) => {
-
-//     e.preventDefault();
-
-//     onSubmit(formData);
-
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-
-//       <div
-//         className="absolute inset-0 bg-primary/20 backdrop-blur-sm"
-//         onClick={onClose}
-//       />
-
-//       <Card className="w-full max-w-lg relative z-10 animate-in zoom-in-95 max-h-[90vh] overflow-y-auto">
-
-//         {/* HEADER */}
-//         <div className="flex items-center justify-between mb-8">
-
-//           <h3 className="text-2xl font-bold">
-//             {news
-//               ? 'Edit Berita'
-//               : 'Tulis Berita Baru'}
-//           </h3>
-
-//           <button
-//             onClick={onClose}
-//             className="w-10 h-10 rounded-full hover:bg-bg flex items-center justify-center"
-//           >
-//             <X size={20} />
-//           </button>
-
-//         </div>
-
-//         {/* FORM */}
-//         <form
-//           onSubmit={handleSubmit}
-//           className="space-y-6 pb-4"
-//         >
-
-//           {/* IMAGE */}
-//           <ImageUpload
-//             label="Gambar Berita"
-//             value={formData.image}
-//             onChange={(val) =>
-//               setFormData((prev) => ({
-//                 ...prev,
-//                 image: val,
-//               }))
-//             }
-//           />
-
-//           {/* TITLE */}
-//           <Input
-//             label="Judul Berita"
-//             value={formData.title}
-//             onChange={(e) =>
-//               setFormData((prev) => ({
-//                 ...prev,
-//                 title: e.target.value,
-//               }))
-//             }
-//             required
-//           />
-
-//           {/* CONTENT */}
-//           <div className="space-y-1.5">
-
-//             <label className="text-sm font-medium text-primary-light block">
-//               Konten Berita
-//             </label>
-
-//             <textarea
-//               className="w-full px-4 py-2.5 bg-white border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-neutral min-h-[120px]"
-//               value={formData.content}
-//               onChange={(e) =>
-//                 setFormData((prev) => ({
-//                   ...prev,
-//                   content: e.target.value,
-//                 }))
-//               }
-//               required
-//             />
-
-//           </div>
-
-//           {/* CATEGORY + STATUS */}
-//           <div className="grid grid-cols-2 gap-4">
-
-//             {/* CATEGORY */}
-//             <div className="space-y-1.5">
-
-//               <label className="text-sm font-medium text-primary-light block">
-//                 Kategori
-//               </label>
-
-//               <select
-//                 className="w-full px-4 py-2.5 bg-white border border-border rounded-xl text-neutral"
-//                 value={formData.category}
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-//                     category: e.target.value,
-//                   }))
-//                 }
-//               >
-//                 <option value="Edukasi">
-//                   Edukasi
-//                 </option>
-
-//                 <option value="Kampanye">
-//                   Kampanye
-//                 </option>
-
-//                 <option value="Produk">
-//                   Produk
-//                 </option>
-
-//                 <option value="Tips & Trick">
-//                   Tips & Trick
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//             {/* STATUS */}
-//             <div className="space-y-1.5">
-
-//               <label className="text-sm font-medium text-primary-light block">
-//                 Status
-//               </label>
-
-//               <select
-//                 className="w-full px-4 py-2.5 bg-white border border-border rounded-xl text-neutral"
-//                 value={formData.status}
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-
-//                     // ENUM BACKEND
-//                     status: e.target.value as
-//                       | 'PUBLISHED'
-//                       | 'DRAFT'
-//                       | 'ARCHIVED',
-//                   }))
-//                 }
-//               >
-
-//                 <option value="PUBLISHED">
-//                   Published
-//                 </option>
-
-//                 <option value="DRAFT">
-//                   Draft
-//                 </option>
-
-//                 <option value="ARCHIVED">
-//                   Archived
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//           </div>
-
-//           {/* BUTTON */}
-//           <div className="pt-4 flex gap-3">
-
-//             <Button
-//               variant="secondary"
-//               className="flex-grow"
-//               type="button"
-//               onClick={onClose}
-//             >
-//               Batal
-//             </Button>
-
-//             <Button
-//               type="submit"
-//               className="flex-[2]"
-//             >
-//               Simpan Berita
-//             </Button>
-
-//           </div>
-
-//         </form>
-
-//       </Card>
-
-//     </div>
-//   );
-// }
-
-// 'use client';
-
-// import React, {
-//   useState,
-//   useEffect,
-// } from 'react';
-
-// import { News } from '@/types';
-
-// import { Card } from '@/components/ui/Card';
-
-// import { Button } from '@/components/ui/Button';
-
-// import { Input } from '@/components/ui/Input';
-
-// import { X } from 'lucide-react';
-
-// interface NewsModalProps {
-//   news: News | null;
-
-//   isOpen: boolean;
-
-//   onClose: () => void;
-
-//   onSubmit: (data: any) => void;
-// }
-
-// export function NewsModal({
-//   news,
-//   isOpen,
-//   onClose,
-//   onSubmit,
-// }: NewsModalProps) {
-
-//   const [formData, setFormData] =
-//     useState({
-//       title: '',
-
-//       category: 'Edukasi',
-
-//       status:
-//         'PUBLISHED' as
-//           | 'PUBLISHED'
-//           | 'DRAFT'
-//           | 'ARCHIVED',
-
-//       content: '',
-
-//       imagePreview: '',
-
-//       imageFile:
-//         null as File | null,
-//     });
-
-//   useEffect(() => {
-
-//     if (!isOpen) return;
-
-//     if (news) {
-
-//       setFormData({
-//         title:
-//           news.title || '',
-
-//         category:
-//           news.category ||
-//           'Edukasi',
-
-//         status:
-//           (news.status as
-//             | 'PUBLISHED'
-//             | 'DRAFT'
-//             | 'ARCHIVED') ||
-//           'PUBLISHED',
-
-//         content:
-//           news.content || '',
-
-//         imagePreview:
-//           news.imageUrl || '',
-
-//         imageFile: null,
-//       });
-
-//     } else {
-
-//       setFormData({
-//         title: '',
-
-//         category: 'Edukasi',
-
-//         status:
-//           'PUBLISHED',
-
-//         content: '',
-
-//         imagePreview: '',
-
-//         imageFile: null,
-//       });
-
-//     }
-
-//   }, [news, isOpen]);
-
-//   const handleImageChange = (
-//     e: React.ChangeEvent<HTMLInputElement>
-//   ) => {
-
-//     const file =
-//       e.target.files?.[0];
-
-//     if (!file) return;
-
-//     setFormData((prev) => ({
-//       ...prev,
-
-//       imageFile: file,
-
-//       imagePreview:
-//         URL.createObjectURL(file),
-//     }));
-//   };
-
-//   const handleSubmit = (
-//     e: React.FormEvent
-//   ) => {
-
-//     e.preventDefault();
-
-//     onSubmit({
-//       ...formData,
-//     });
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-
-//       <div
-//         className="absolute inset-0 bg-black/30"
-//         onClick={onClose}
-//       />
-
-//       <Card className="w-full max-w-lg relative z-10 max-h-[90vh] overflow-y-auto">
-
-//         {/* HEADER */}
-//         <div className="flex items-center justify-between mb-8">
-
-//           <h3 className="text-2xl font-bold">
-//             {news
-//               ? 'Edit Berita'
-//               : 'Tulis Berita Baru'}
-//           </h3>
-
-//           <button
-//             onClick={onClose}
-//             className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center"
-//           >
-//             <X size={20} />
-//           </button>
-
-//         </div>
-
-//         {/* FORM */}
-//         <form
-//           onSubmit={handleSubmit}
-//           className="space-y-6"
-//         >
-
-//           {/* IMAGE */}
-//           <div className="space-y-2">
-
-//             <label className="text-sm font-medium">
-//               Gambar Berita
-//             </label>
-
-//             {formData.imagePreview && (
-//               <img
-//                 src={
-//                   formData.imagePreview
-//                 }
-//                 alt="Preview"
-//                 className="w-full h-56 object-cover rounded-xl border"
-//               />
-//             )}
-
-//             <input
-//               type="file"
-//               accept="image/*"
-//               onChange={
-//                 handleImageChange
-//               }
-//               className="w-full border rounded-xl p-2"
-//             />
-
-//           </div>
-
-//           {/* TITLE */}
-//           <Input
-//             label="Judul Berita"
-//             value={formData.title}
-//             onChange={(e) =>
-//               setFormData((prev) => ({
-//                 ...prev,
-//                 title:
-//                   e.target.value,
-//               }))
-//             }
-//             required
-//           />
-
-//           {/* CONTENT */}
-//           <div className="space-y-2">
-
-//             <label className="text-sm font-medium">
-//               Konten Berita
-//             </label>
-
-//             <textarea
-//               value={
-//                 formData.content
-//               }
-//               onChange={(e) =>
-//                 setFormData((prev) => ({
-//                   ...prev,
-//                   content:
-//                     e.target.value,
-//                 }))
-//               }
-//               className="w-full min-h-[120px] border rounded-xl p-4"
-//               required
-//             />
-
-//           </div>
-
-//           {/* CATEGORY + STATUS */}
-//           <div className="grid grid-cols-2 gap-4">
-
-//             <div>
-
-//               <label className="text-sm font-medium">
-//                 Kategori
-//               </label>
-
-//               <select
-//                 value={
-//                   formData.category
-//                 }
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-//                     category:
-//                       e.target.value,
-//                   }))
-//                 }
-//                 className="w-full border rounded-xl p-3"
-//               >
-//                 <option value="Edukasi">
-//                   Edukasi
-//                 </option>
-
-//                 <option value="Kampanye">
-//                   Kampanye
-//                 </option>
-
-//                 <option value="Produk">
-//                   Produk
-//                 </option>
-
-//                 <option value="Tips & Trick">
-//                   Tips & Trick
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//             <div>
-
-//               <label className="text-sm font-medium">
-//                 Status
-//               </label>
-
-//               <select
-//                 value={
-//                   formData.status
-//                 }
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-
-//                     status:
-//                       e.target
-//                         .value as
-//                         | 'PUBLISHED'
-//                         | 'DRAFT'
-//                         | 'ARCHIVED',
-//                   }))
-//                 }
-//                 className="w-full border rounded-xl p-3"
-//               >
-
-//                 <option value="PUBLISHED">
-//                   Published
-//                 </option>
-
-//                 <option value="DRAFT">
-//                   Draft
-//                 </option>
-
-//                 <option value="ARCHIVED">
-//                   Archived
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//           </div>
-
-//           {/* BUTTON */}
-//           <div className="flex gap-3 pt-4">
-
-//             <Button
-//               type="button"
-//               variant="secondary"
-//               className="flex-1"
-//               onClick={onClose}
-//             >
-//               Batal
-//             </Button>
-
-//             <Button
-//               type="submit"
-//               className="flex-[2]"
-//             >
-//               Simpan Berita
-//             </Button>
-
-//           </div>
-
-//         </form>
-
-//       </Card>
-
-//     </div>
-//   );
-// }
-
-// 'use client';
-
-// import React, {
-//   useState,
-//   useEffect,
-// } from 'react';
-
-// import { News } from '@/types';
-
-// import { Card } from '@/components/ui/Card';
-
-// import { Button } from '@/components/ui/Button';
-
-// import { Input } from '@/components/ui/Input';
-
-// import { X } from 'lucide-react';
-
-// interface NewsModalProps {
-//   news: News | null;
-
-//   isOpen: boolean;
-
-//   onClose: () => void;
-
-//   onSubmit: (data: any) => void;
-// }
-
-// export function NewsModal({
-//   news,
-//   isOpen,
-//   onClose,
-//   onSubmit,
-// }: NewsModalProps) {
-
-//   const [formData, setFormData] =
-//     useState({
-//       title: '',
-
-//       category: 'Edukasi',
-
-//       status:
-//         'PUBLISHED' as
-//           | 'PUBLISHED'
-//           | 'DRAFT'
-//           | 'ARCHIVED',
-
-//       content: '',
-
-//       imagePreview: '',
-
-//       imageFile:
-//         null as File | null,
-//     });
-
-//   // =========================
-//   // SET DATA EDIT
-//   // =========================
-
-//   useEffect(() => {
-
-//     if (!isOpen) return;
-
-//     if (news) {
-
-//       setFormData({
-//         title:
-//           news.title || '',
-
-//         category:
-//           news.category ||
-//           'Edukasi',
-
-//         status:
-//           (news.status as
-//             | 'PUBLISHED'
-//             | 'DRAFT'
-//             | 'ARCHIVED') ||
-//           'PUBLISHED',
-
-//         content:
-//           news.content || '',
-
-//         // IMPORTANT
-//         imagePreview:
-//           news.imageUrl
-//             ? `http://localhost:2000${news.imageUrl}`
-//             : '',
-
-//         imageFile: null,
-//       });
-
-//     } else {
-
-//       setFormData({
-//         title: '',
-
-//         category: 'Edukasi',
-
-//         status:
-//           'PUBLISHED',
-
-//         content: '',
-
-//         imagePreview: '',
-
-//         imageFile: null,
-//       });
-
-//     }
-
-//   }, [news, isOpen]);
-
-//   // =========================
-//   // IMAGE CHANGE
-//   // =========================
-
-//   const handleImageChange = (
-//     e: React.ChangeEvent<HTMLInputElement>
-//   ) => {
-
-//     const file =
-//       e.target.files?.[0];
-
-//     if (!file) return;
-
-//     const previewUrl =
-//       URL.createObjectURL(file);
-
-//     setFormData((prev) => ({
-//       ...prev,
-
-//       imageFile: file,
-
-//       imagePreview:
-//         previewUrl,
-//     }));
-//   };
-
-//   // =========================
-//   // SUBMIT
-//   // =========================
-
-//   const handleSubmit = (
-//     e: React.FormEvent
-//   ) => {
-
-//     e.preventDefault();
-
-//     onSubmit({
-//       title:
-//         formData.title,
-
-//       category:
-//         formData.category,
-
-//       status:
-//         formData.status,
-
-//       content:
-//         formData.content,
-
-//       imageFile:
-//         formData.imageFile,
-//     });
-//   };
-
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-
-//       {/* BACKDROP */}
-//       <div
-//         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-//         onClick={onClose}
-//       />
-
-//       {/* MODAL */}
-//       <Card className="w-full max-w-lg relative z-10 max-h-[90vh] overflow-y-auto rounded-3xl p-8">
-
-//         {/* HEADER */}
-//         <div className="flex items-center justify-between mb-8">
-
-//           <h3 className="text-2xl font-black text-[#1B361F]">
-
-//             {news
-//               ? 'Edit Berita'
-//               : 'Tulis Berita Baru'}
-
-//           </h3>
-
-//           <button
-//             onClick={onClose}
-//             className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition"
-//           >
-//             <X size={20} />
-//           </button>
-
-//         </div>
-
-//         {/* FORM */}
-//         <form
-//           onSubmit={handleSubmit}
-//           className="space-y-6"
-//         >
-
-//           {/* IMAGE */}
-//           <div className="space-y-3">
-
-//             <label className="text-sm font-semibold text-[#1B361F]">
-
-//               Gambar Berita
-
-//             </label>
-
-//             {/* PREVIEW */}
-//             <div className="w-full h-56 rounded-2xl overflow-hidden border bg-[#F3F4EF]">
-
-//               {formData.imagePreview ? (
-
-//                 <img
-//                   src={
-//                     formData.imagePreview
-//                   }
-//                   alt="Preview"
-//                   className="w-full h-full object-cover"
-//                 />
-
-//               ) : (
-
-//                 <div className="w-full h-full flex items-center justify-center text-sm text-[#72796E]">
-
-//                   Belum ada gambar
-
-//                 </div>
-
-//               )}
-
-//             </div>
-
-//             {/* INPUT */}
-//             <input
-//               type="file"
-//               accept="image/*"
-//               onChange={
-//                 handleImageChange
-//               }
-//               className="w-full border border-[#D6D9D2] rounded-xl p-3 text-sm"
-//             />
-
-//           </div>
-
-//           {/* TITLE */}
-//           <Input
-//             label="Judul Berita"
-//             value={formData.title}
-//             onChange={(e) =>
-//               setFormData((prev) => ({
-//                 ...prev,
-//                 title:
-//                   e.target.value,
-//               }))
-//             }
-//             required
-//           />
-
-//           {/* CONTENT */}
-//           <div className="space-y-2">
-
-//             <label className="text-sm font-semibold text-[#1B361F]">
-
-//               Konten Berita
-
-//             </label>
-
-//             <textarea
-//               value={
-//                 formData.content
-//               }
-//               onChange={(e) =>
-//                 setFormData((prev) => ({
-//                   ...prev,
-//                   content:
-//                     e.target.value,
-//                 }))
-//               }
-//               className="w-full min-h-[140px] border border-[#D6D9D2] rounded-2xl p-4 resize-none focus:outline-none focus:ring-2 focus:ring-[#1B361F]/20"
-//               required
-//             />
-
-//           </div>
-
-//           {/* CATEGORY + STATUS */}
-//           <div className="grid grid-cols-2 gap-4">
-
-//             {/* CATEGORY */}
-//             <div className="space-y-2">
-
-//               <label className="text-sm font-semibold text-[#1B361F]">
-
-//                 Kategori
-
-//               </label>
-
-//               <select
-//                 value={
-//                   formData.category
-//                 }
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-//                     category:
-//                       e.target.value,
-//                   }))
-//                 }
-//                 className="w-full border border-[#D6D9D2] rounded-xl p-3"
-//               >
-
-//                 <option value="Edukasi">
-//                   Edukasi
-//                 </option>
-
-//                 <option value="Kampanye">
-//                   Kampanye
-//                 </option>
-
-//                 <option value="Produk">
-//                   Produk
-//                 </option>
-
-//                 <option value="Tips & Trick">
-//                   Tips & Trick
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//             {/* STATUS */}
-//             <div className="space-y-2">
-
-//               <label className="text-sm font-semibold text-[#1B361F]">
-
-//                 Status
-
-//               </label>
-
-//               <select
-//                 value={
-//                   formData.status
-//                 }
-//                 onChange={(e) =>
-//                   setFormData((prev) => ({
-//                     ...prev,
-
-//                     status:
-//                       e.target
-//                         .value as
-//                         | 'PUBLISHED'
-//                         | 'DRAFT'
-//                         | 'ARCHIVED',
-//                   }))
-//                 }
-//                 className="w-full border border-[#D6D9D2] rounded-xl p-3"
-//               >
-
-//                 <option value="PUBLISHED">
-//                   Published
-//                 </option>
-
-//                 <option value="DRAFT">
-//                   Draft
-//                 </option>
-
-//                 <option value="ARCHIVED">
-//                   Archived
-//                 </option>
-
-//               </select>
-
-//             </div>
-
-//           </div>
-
-//           {/* BUTTON */}
-//           <div className="flex gap-3 pt-4">
-
-//             <Button
-//               type="button"
-//               variant="secondary"
-//               className="flex-1"
-//               onClick={onClose}
-//             >
-//               Batal
-//             </Button>
-
-//             <Button
-//               type="submit"
-//               className="flex-[2]"
-//             >
-//               Simpan Berita
-//             </Button>
-
-//           </div>
-
-//         </form>
-
-//       </Card>
-
-//     </div>
-//   );
-// }
-
 'use client';
 
-import React, {
-  useState,
-  useEffect,
-} from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { News } from '@/types';
-
-import { Card } from '@/components/ui/Card';
-
-import { Button } from '@/components/ui/Button';
-
-import { Input } from '@/components/ui/Input';
-
-import { X } from 'lucide-react';
+import { X, ArrowLeft, Bold, Italic, Underline, List, ListOrdered, Quote, Link2, Image as ImageIcon, Code } from 'lucide-react';
 
 interface NewsModalProps {
   news: News | null;
-
   isOpen: boolean;
-
   onClose: () => void;
-
   onSubmit: (data: any) => void;
 }
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:2000';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
 
-export function NewsModal({
-  news,
-  isOpen,
-  onClose,
-  onSubmit,
-}: NewsModalProps) {
-
-  const [title, setTitle] =
-    useState('');
-
-  const [category, setCategory] =
-    useState('Edukasi');
-
-  const [status, setStatus] =
-    useState<
-      | 'PUBLISHED'
-      | 'DRAFT'
-      | 'ARCHIVED'
-    >('PUBLISHED');
-
-  const [content, setContent] =
-    useState('');
-
-  const [imagePreview, setImagePreview] =
-    useState('');
-
-  const [imageFile, setImageFile] =
-    useState<File | null>(
-      null
-    );
-
-  // =========================
-  // SET EDIT DATA
-  // =========================
+export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
+  const [title, setTitle] = useState('');
+  const [slug, setSlug] = useState('');
+  const [summary, setSummary] = useState('');
+  const [content, setContent] = useState('');
+  const [category, setCategory] = useState('Edukasi');
+  const [status, setStatus] = useState<'PUBLISHED' | 'DRAFT' | 'ARCHIVED'>('PUBLISHED');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState('');
+  const [imagePreview, setImagePreview] = useState('');
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
-
     if (!isOpen) return;
 
     if (news) {
-
-      setTitle(
-        news.title || ''
-      );
-
-      setCategory(
-        news.category ||
-          'Edukasi'
-      );
-
-      setStatus(
-        (news.status as
-          | 'PUBLISHED'
-          | 'DRAFT'
-          | 'ARCHIVED') ||
-          'PUBLISHED'
-      );
-
-      setContent(
-        news.content || ''
-      );
-
-      setImagePreview(
-
-        news.imageUrl
-          ? `${BASE_URL}/${news.imageUrl}`
-          : ''
-
-      );
-
+      setTitle(news.title || '');
+      setSlug(news.slug || '');
+      setSummary(news.summary || '');
+      setContent(news.content || '');
+      setCategory(news.category || 'Edukasi');
+      setStatus((news.status as 'PUBLISHED' | 'DRAFT' | 'ARCHIVED') || 'PUBLISHED');
+      setStartDate(news.publishDate ? news.publishDate.substring(0, 10) : '');
+      setTags(news.tags || []);
+      setImagePreview(news.imageUrl ? `${BASE_URL}/${news.imageUrl}` : '');
       setImageFile(null);
-
     } else {
-
       setTitle('');
-
-      setCategory(
-        'Edukasi'
-      );
-
-      setStatus(
-        'PUBLISHED'
-      );
-
+      setSlug('');
+      setSummary('');
       setContent('');
-
+      setCategory('Edukasi');
+      setStatus('PUBLISHED');
+      setStartDate('');
+      setEndDate('');
+      setTags([]);
       setImagePreview('');
-
       setImageFile(null);
     }
-
   }, [news, isOpen]);
 
-  // =========================
-  // IMAGE CHANGE
-  // =========================
+  // Auto-generate slug from title if empty
+  useEffect(() => {
+    if (title && !news) {
+      setSlug(title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
+    }
+  }, [title, news]);
 
-  const handleImageChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-
-    const file =
-      e.target.files?.[0];
-
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (!file) return;
 
-    console.log(
-      'SELECTED FILE:',
-      file
-    );
-
     setImageFile(file);
-
-    setImagePreview(
-      URL.createObjectURL(
-        file
-      )
-    );
+    setImagePreview(URL.createObjectURL(file));
   };
 
-  // =========================
-  // SUBMIT
-  // =========================
+  const handleAddTag = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && tagInput.trim()) {
+      e.preventDefault();
+      if (!tags.includes(tagInput.trim())) {
+        setTags([...tags, tagInput.trim()]);
+      }
+      setTagInput('');
+    }
+  };
 
-  const handleSubmit = (
-    e: React.FormEvent
-  ) => {
+  const removeTag = (tagToRemove: string) => {
+    setTags(tags.filter(tag => tag !== tagToRemove));
+  };
 
+  const handleSubmit = (e: React.FormEvent, submitStatus?: 'PUBLISHED' | 'DRAFT') => {
     e.preventDefault();
-
-    console.log(
-      'SUBMIT IMAGE FILE:',
-      imageFile
-    );
+    
+    // Use the explicit status if provided (by Save Draft / Publish buttons), otherwise use state
+    const finalStatus = submitStatus || status;
 
     onSubmit({
-
       title,
-
+      slug,
+      summary,
       content,
-
       category,
-
-      status,
-
+      status: finalStatus,
+      tags,
+      publishDate: startDate,
       imageFile,
-
     });
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-
-      {/* BACKDROP */}
-      <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* MODAL */}
-      <Card className="w-full max-w-lg relative z-10 max-h-[90vh] overflow-y-auto rounded-3xl p-8">
-
-        {/* HEADER */}
-        <div className="flex items-center justify-between mb-8">
-
-          <h3 className="text-2xl font-black text-[#1B361F]">
-
-            {news
-              ? 'Edit Berita'
-              : 'Tulis Berita Baru'}
-
-          </h3>
-
-          <button
-            onClick={onClose}
-            className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition"
-          >
-            <X size={20} />
-          </button>
-
-        </div>
-
-        {/* FORM */}
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6"
+    <div className="fixed inset-0 z-[100] flex flex-col bg-[#F9FAF8] overflow-hidden">
+      {/* HEADER BAR */}
+      <div className="flex-none px-12 py-6">
+        <button 
+          onClick={onClose}
+          className="flex items-center text-[13px] font-medium text-[#72796E] hover:text-[#2A3426] transition-colors"
         >
+          <ArrowLeft size={16} className="mr-2" />
+          Back to Programs Management
+        </button>
+        <h1 className="text-3xl font-serif font-bold text-[#2A3426] mt-6">
+          {news ? 'Edit Program' : 'Add New Program'}
+        </h1>
+      </div>
 
-          {/* IMAGE */}
-          <div className="space-y-3">
-
-            <label className="text-sm font-semibold text-[#1B361F]">
-
-              Gambar Berita
-
-            </label>
-
-            {/* PREVIEW */}
-            <div className="w-full h-56 rounded-2xl overflow-hidden border bg-[#F3F4EF]">
-
-              {imagePreview ? (
-
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  className="w-full h-full object-cover"
+      {/* SCROLLABLE CONTENT */}
+      <div className="flex-1 overflow-y-auto px-12 pb-32">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          {/* LEFT COLUMN (Forms) */}
+          <div className="lg:col-span-2 space-y-6">
+            
+            {/* Title & Slug */}
+            <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-6">
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Program Title</label>
+                <input
+                  type="text"
+                  placeholder="Enter program title..."
+                  className="w-full px-4 py-3 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none focus:border-[#c2c9bb]"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
+              </div>
 
-              ) : (
-
-                <div className="w-full h-full flex items-center justify-center text-sm text-[#72796E]">
-
-                  Belum ada gambar
-
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Slug / URL</label>
+                <div className="flex w-full overflow-hidden rounded-[14px] border border-[#F0F2EB]">
+                  <div className="bg-[#F3F4EF] px-4 py-3 flex items-center justify-center border-r border-[#F0F2EB]">
+                    <span className="text-[13px] font-medium text-[#72796E]">temanpilah.com/programs/</span>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="new-program-slug"
+                    className="flex-1 px-4 py-3 bg-[#F9FAF8] text-[14px] text-[#2A3426] focus:outline-none"
+                    value={slug}
+                    onChange={(e) => setSlug(e.target.value)}
+                  />
                 </div>
-
-              )}
-
+              </div>
             </div>
 
-            {/* INPUT */}
-            <input
-              type="file"
-              accept="image/*"
-              onChange={
-                handleImageChange
-              }
-              className="w-full border border-[#D6D9D2] rounded-xl p-3 text-sm"
-            />
-
-          </div>
-
-          {/* TITLE */}
-          <Input
-            label="Judul Berita"
-            value={title}
-            onChange={(e) =>
-              setTitle(
-                e.target.value
-              )
-            }
-            required
-          />
-
-          {/* CONTENT */}
-          <div className="space-y-2">
-
-            <label className="text-sm font-semibold text-[#1B361F]">
-
-              Konten Berita
-
-            </label>
-
-            <textarea
-              value={content}
-              onChange={(e) =>
-                setContent(
-                  e.target.value
-                )
-              }
-              className="w-full min-h-[140px] border border-[#D6D9D2] rounded-2xl p-4 resize-none focus:outline-none focus:ring-2 focus:ring-[#1B361F]/20"
-              required
-            />
-
-          </div>
-
-          {/* CATEGORY + STATUS */}
-          <div className="grid grid-cols-2 gap-4">
-
-            {/* CATEGORY */}
-            <div className="space-y-2">
-
-              <label className="text-sm font-semibold text-[#1B361F]">
-
-                Kategori
-
-              </label>
-
-              <select
-                value={category}
-                onChange={(e) =>
-                  setCategory(
-                    e.target.value
-                  )
-                }
-                className="w-full border border-[#D6D9D2] rounded-xl p-3"
-              >
-
-                <option value="Edukasi">
-                  Edukasi
-                </option>
-
-                <option value="Kampanye">
-                  Kampanye
-                </option>
-
-                <option value="Produk">
-                  Produk
-                </option>
-
-                <option value="Tips & Trick">
-                  Tips & Trick
-                </option>
-
-              </select>
-
+            {/* Program Description */}
+            <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
+              <label className="text-[13px] font-bold text-[#72796E]">Program Description</label>
+              
+              <div className="border border-[#F0F2EB] rounded-[14px] overflow-hidden bg-[#F9FAF8]">
+                {/* Editor Toolbar Mock */}
+                <div className="flex items-center gap-1 border-b border-[#F0F2EB] px-3 py-2 bg-[#F3F4EF]">
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Bold size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Italic size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Underline size={16} strokeWidth={2.5} /></button>
+                  <div className="w-px h-4 bg-[#D6D9D2] mx-1"></div>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><List size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><ListOrdered size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Quote size={16} strokeWidth={2.5} /></button>
+                  <div className="w-px h-4 bg-[#D6D9D2] mx-1"></div>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Link2 size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><ImageIcon size={16} strokeWidth={2.5} /></button>
+                  <button type="button" className="p-1.5 text-[#42493E] hover:bg-white rounded"><Code size={16} strokeWidth={2.5} /></button>
+                </div>
+                {/* Editor Content */}
+                <textarea
+                  placeholder="Start writing your program content here..."
+                  className="w-full min-h-[300px] p-4 bg-transparent resize-none text-[14px] text-[#2A3426] focus:outline-none"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                ></textarea>
+              </div>
             </div>
 
-            {/* STATUS */}
-            <div className="space-y-2">
-
-              <label className="text-sm font-semibold text-[#1B361F]">
-
-                Status
-
-              </label>
-
-              <select
-                value={status}
-                onChange={(e) =>
-                  setStatus(
-                    e.target
-                      .value as
-                      | 'PUBLISHED'
-                      | 'DRAFT'
-                      | 'ARCHIVED'
-                  )
-                }
-                className="w-full border border-[#D6D9D2] rounded-xl p-3"
-              >
-
-                <option value="PUBLISHED">
-                  Published
-                </option>
-
-                <option value="DRAFT">
-                  Draft
-                </option>
-
-                <option value="ARCHIVED">
-                  Archived
-                </option>
-
-              </select>
-
+            {/* Program Overview */}
+            <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
+              <label className="text-[13px] font-bold text-[#72796E]">Program Overview</label>
+              <textarea
+                placeholder="Write a short overview of the program..."
+                className="w-full min-h-[100px] px-4 py-3 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] resize-none text-[14px] text-[#2A3426] focus:outline-none focus:border-[#c2c9bb]"
+                value={summary}
+                onChange={(e) => setSummary(e.target.value)}
+              ></textarea>
             </div>
 
           </div>
 
-          {/* BUTTON */}
-          <div className="flex gap-3 pt-4">
+          {/* RIGHT COLUMN (Settings) */}
+          <div className="lg:col-span-1 space-y-6">
+            
+            {/* Image Upload */}
+            <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-4">
+              <label className="text-[13px] font-bold text-[#72796E]">Program Banner</label>
+              
+              <div className="relative border-2 border-dashed border-[#D6D9D2] rounded-[16px] p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors group overflow-hidden">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                />
+                
+                {imagePreview ? (
+                  <img src={imagePreview} alt="Preview" className="absolute inset-0 w-full h-full object-cover" />
+                ) : (
+                  <>
+                    <div className="w-12 h-12 bg-[#F3F4EF] rounded-full flex items-center justify-center mb-3 text-[#8F9A8A] group-hover:scale-110 transition-transform">
+                      <ImageIcon size={24} />
+                    </div>
+                    <p className="text-[13px] font-bold text-[#2A3426]">Click to upload or drag and drop</p>
+                    <p className="text-[11px] text-[#8F9A8A] mt-1">SVG, PNG, JPG or GIF (max. 10MB)</p>
+                  </>
+                )}
+              </div>
+            </div>
 
-            <Button
-              type="button"
-              variant="secondary"
-              className="flex-1"
-              onClick={onClose}
-            >
-              Batal
-            </Button>
+            {/* Details */}
+            <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-5">
+              
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Program Status</label>
+                <select
+                  className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none appearance-none"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value as 'PUBLISHED' | 'DRAFT' | 'ARCHIVED')}
+                >
+                  <option value="PUBLISHED">Published</option>
+                  <option value="DRAFT">Draft / Upcoming</option>
+                  <option value="ARCHIVED">Completed / Archived</option>
+                </select>
+              </div>
 
-            <Button
-              type="submit"
-              className="flex-[2]"
-            >
-              Simpan Berita
-            </Button>
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Program Start Date</label>
+                <input
+                  type="date"
+                  className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Program End Date</label>
+                <input
+                  type="date"
+                  className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[13px] font-bold text-[#72796E]">Tags</label>
+                <input
+                  type="text"
+                  placeholder="Recycling, Education..."
+                  className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
+                  value={tagInput}
+                  onChange={(e) => setTagInput(e.target.value)}
+                  onKeyDown={handleAddTag}
+                />
+                {tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {tags.map((tag, idx) => (
+                      <div key={idx} className="flex items-center gap-1.5 bg-[#E2F5EB] text-[#166534] px-3 py-1 rounded-full text-[12px] font-medium">
+                        {tag}
+                        <button type="button" onClick={() => removeTag(tag)} className="hover:text-red-600">
+                          <X size={12} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+            </div>
 
           </div>
+        </div>
+      </div>
 
-        </form>
+      {/* FIXED FOOTER */}
+      <div className="flex-none bg-white border-t border-[#F0F2EB] px-12 py-5 flex items-center justify-between shadow-[0_-4px_12px_rgba(0,0,0,0.02)]">
+        <button
+          type="button"
+          onClick={onClose}
+          className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#D05B5B] font-bold text-[13px] hover:bg-red-50 transition-colors"
+        >
+          Cancel Changes
+        </button>
 
-      </Card>
-
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={(e) => handleSubmit(e, 'DRAFT')}
+            className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#2A3426] font-bold text-[13px] hover:bg-gray-50 transition-colors"
+          >
+            Save Draft
+          </button>
+          <button
+            type="button"
+            onClick={(e) => handleSubmit(e, 'PUBLISHED')}
+            className="px-8 py-2.5 rounded-[12px] bg-[#8C5A00] text-white font-bold text-[13px] hover:brightness-110 transition-colors shadow-sm"
+          >
+            Publish
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,746 +1,244 @@
-// // 'use client';
-
-// // import { News } from '@/types';
-
-// // interface NewsTableProps {
-// //   newsList: News[];
-// //   onEdit: (news: News) => void;
-// //   onDelete: (id: string) => void;
-// // }
-
-// // const EyeIcon = () => (
-// //   <svg
-// //     aria-hidden="true"
-// //     fill="none"
-// //     height="16"
-// //     viewBox="0 0 16 16"
-// //     width="16"
-// //     xmlns="http://www.w3.org/2000/svg"
-// //   >
-// //     <path
-// //       d="M1.33301 8.00016C2.39967 5.3335 4.66634 4.00016 7.99967 4.00016C11.333 4.00016 13.5997 5.3335 14.6663 8.00016C13.5997 10.6668 11.333 12.0002 7.99967 12.0002C4.66634 12.0002 2.39967 10.6668 1.33301 8.00016Z"
-// //       stroke="#42493E"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <circle
-// //       cx="8"
-// //       cy="8"
-// //       r="2"
-// //       stroke="#42493E"
-// //       strokeWidth="1.3"
-// //     />
-// //   </svg>
-// // );
-
-// // const EditIcon = () => (
-// //   <svg
-// //     aria-hidden="true"
-// //     fill="none"
-// //     height="16"
-// //     viewBox="0 0 16 16"
-// //     width="16"
-// //     xmlns="http://www.w3.org/2000/svg"
-// //   >
-// //     <path
-// //       d="M8.66699 2.00016L14.0003 7.3335L6.00033 15.3335H0.666992V10.0002L8.66699 2.00016Z"
-// //       stroke="#E9A23B"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <path
-// //       d="M7.33301 3.3335L12.6663 8.66683"
-// //       stroke="#E9A23B"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //   </svg>
-// // );
-
-// // const TrashIcon = () => (
-// //   <svg
-// //     aria-hidden="true"
-// //     fill="none"
-// //     height="16"
-// //     viewBox="0 0 16 16"
-// //     width="16"
-// //     xmlns="http://www.w3.org/2000/svg"
-// //   >
-// //     <path
-// //       d="M2.66699 4.00016H13.3337"
-// //       stroke="#D05B5B"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <path
-// //       d="M6 6.6665V10.6665"
-// //       stroke="#D05B5B"
-// //       strokeLinecap="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <path
-// //       d="M10 6.6665V10.6665"
-// //       stroke="#D05B5B"
-// //       strokeLinecap="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <path
-// //       d="M4 4.00016L4.66667 12.0002C4.72228 12.6666 5.2791 13.1784 5.94766 13.1784H10.053C10.7215 13.1784 11.2784 12.6666 11.334 12.0002L12 4.00016"
-// //       stroke="#D05B5B"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //     <path
-// //       d="M6 4.00016V2.66683C6 2.29864 6.29848 2.00016 6.66667 2.00016H9.33333C9.70152 2.00016 10 2.29864 10 2.66683V4.00016"
-// //       stroke="#D05B5B"
-// //       strokeLinecap="round"
-// //       strokeLinejoin="round"
-// //       strokeWidth="1.3"
-// //     />
-// //   </svg>
-// // );
-
-// // export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
-// //   return (
-// //     <div className="overflow-hidden rounded-2xl border border-[#c2c9bb4c] bg-white shadow-[0px_4px_12px_#0000000d]">
-// //       <div className="flex items-center border-b border-[#c2c9bb] px-6 py-4 bg-gray-50/50">
-// //         <div className="w-[373.59px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-// //           ARTICLE TITLE
-// //         </div>
-// //         <div className="w-[125.39px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-// //           AUTHOR
-// //         </div>
-// //         <div className="w-[155.72px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-// //           DATE PUBLISHED
-// //         </div>
-// //         <div className="w-[147.28px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-// //           STATUS
-// //         </div>
-// //         <div className="flex-1 text-right text-xs font-bold uppercase tracking-wider text-[#72796e]">
-// //           ACTIONS
-// //         </div>
-// //       </div>
-
-// //       <div className="divide-y divide-[#c2c9bb]">
-// //         {newsList.map((article) => (
-// //           <div
-// //             key={article.id}
-// //             className="flex items-center px-6 py-4 hover:bg-gray-50/30 transition-colors"
-// //           >
-// //             <div className="w-[373.59px] text-base font-medium text-[#1a1c19] line-clamp-1">
-// //               {article.title}
-// //             </div>
-
-// //             <div className="w-[125.39px] text-sm text-[#42493e]">
-// //               Admin<br />
-// //               <span className="text-xs text-slate-400">Teman Pilah</span>
-// //             </div>
-
-// //             <div className="w-[155.72px] text-sm text-[#42493e]">
-// //               {article.date}
-// //             </div>
-
-// //             <div className="w-[147.28px]">
-// //               <div
-// //                 className={`inline-flex rounded-full px-3 py-1 text-xs font-medium ${
-// //                   article.status === 'published' 
-// //                     ? 'bg-[#bcf0ae] text-[#23501e]' 
-// //                     : 'bg-[#fffdcc] text-[#6e3900]'
-// //                 }`}
-// //               >
-// //                 {article.status.charAt(0).toUpperCase() + article.status.slice(1)}
-// //               </div>
-// //             </div>
-
-// //             <div className="flex flex-1 items-center justify-end gap-3">
-// //               <button
-// //                 aria-label={`View ${article.title}`}
-// //                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-// //                 type="button"
-// //               >
-// //                 <EyeIcon />
-// //               </button>
-
-// //               <button
-// //                 onClick={() => onEdit(article)}
-// //                 aria-label={`Edit ${article.title}`}
-// //                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-// //                 type="button"
-// //               >
-// //                 <EditIcon />
-// //               </button>
-
-// //               <button
-// //                 onClick={() => onDelete(article.id)}
-// //                 aria-label={`Delete ${article.title}`}
-// //                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-// //                 type="button"
-// //               >
-// //                 <TrashIcon />
-// //               </button>
-// //             </div>
-// //           </div>
-// //         ))}
-        
-// //         {newsList.length === 0 && (
-// //           <div className="py-20 text-center">
-// //             <p className="text-[#72796e]">Belum ada berita yang tersedia.</p>
-// //           </div>
-// //         )}
-// //       </div>
-
-// //       <div className="flex items-center justify-between border-t border-[#c2c9bb] bg-[#f3f4ef] px-6 py-4">
-// //         <p className="text-sm text-[#42493e]">
-// //           Showing 1 to {newsList.length} of {newsList.length} news
-// //         </p>
-
-// //         <nav
-// //           aria-label="Pagination"
-// //           className="inline-flex items-center gap-2"
-// //         >
-// //           <button
-// //             disabled
-// //             className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb80] text-[#c2c9bb]"
-// //           >
-// //             <svg
-// //               aria-hidden="true"
-// //               fill="none"
-// //               height="16"
-// //               viewBox="0 0 16 16"
-// //               width="16"
-// //               xmlns="http://www.w3.org/2000/svg"
-// //             >
-// //               <path
-// //                 d="M9.5 4L5.5 8L9.5 12"
-// //                 stroke="#C2C9BB"
-// //                 strokeLinecap="round"
-// //                 strokeLinejoin="round"
-// //                 strokeWidth="1.5"
-// //               />
-// //             </svg>
-// //           </button>
-
-// //           <button
-// //             className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#154212]"
-// //             type="button"
-// //           >
-// //             <span className="text-sm font-bold text-white">1</span>
-// //           </button>
-
-// //           <button
-// //             disabled
-// //             className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb] text-[#42493e]"
-// //           >
-// //             <svg
-// //               aria-hidden="true"
-// //               fill="none"
-// //               height="16"
-// //               viewBox="0 0 16 16"
-// //               width="16"
-// //               xmlns="http://www.w3.org/2000/svg"
-// //             >
-// //               <path
-// //                 d="M6.5 4L10.5 8L6.5 12"
-// //                 stroke="#72796E"
-// //                 strokeLinecap="round"
-// //                 strokeLinejoin="round"
-// //                 strokeWidth="1.5"
-// //               />
-// //             </svg>
-// //           </button>
-// //         </nav>
-// //       </div>
-// //     </div>
-// //   );
-// // }
-
-// 'use client';
-
-// import { News } from '@/types';
-// import Link from 'next/link';
-
-// interface NewsTableProps {
-//   newsList: News[];
-//   onEdit: (news: News) => void;
-//   onDelete: (id: string) => void;
-// }
-
-// const EyeIcon = () => (
-//   <svg
-//     aria-hidden="true"
-//     fill="none"
-//     height="16"
-//     viewBox="0 0 16 16"
-//     width="16"
-//     xmlns="http://www.w3.org/2000/svg"
-//   >
-//     <path
-//       d="M1.33301 8.00016C2.39967 5.3335 4.66634 4.00016 7.99967 4.00016C11.333 4.00016 13.5997 5.3335 14.6663 8.00016C13.5997 10.6668 11.333 12.0002 7.99967 12.0002C4.66634 12.0002 2.39967 10.6668 1.33301 8.00016Z"
-//       stroke="#42493E"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//     <circle
-//       cx="8"
-//       cy="8"
-//       r="2"
-//       stroke="#42493E"
-//       strokeWidth="1.3"
-//     />
-//   </svg>
-// );
-
-// const EditIcon = () => (
-//   <svg
-//     aria-hidden="true"
-//     fill="none"
-//     height="16"
-//     viewBox="0 0 16 16"
-//     width="16"
-//     xmlns="http://www.w3.org/2000/svg"
-//   >
-//     <path
-//       d="M8.66699 2.00016L14.0003 7.3335L6.00033 15.3335H0.666992V10.0002L8.66699 2.00016Z"
-//       stroke="#E9A23B"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//     <path
-//       d="M7.33301 3.3335L12.6663 8.66683"
-//       stroke="#E9A23B"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//   </svg>
-// );
-
-// const TrashIcon = () => (
-//   <svg
-//     aria-hidden="true"
-//     fill="none"
-//     height="16"
-//     viewBox="0 0 16 16"
-//     width="16"
-//     xmlns="http://www.w3.org/2000/svg"
-//   >
-//     <path
-//       d="M2.66699 4.00016H13.3337"
-//       stroke="#D05B5B"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//     <path
-//       d="M6 6.6665V10.6665"
-//       stroke="#D05B5B"
-//       strokeLinecap="round"
-//       strokeWidth="1.3"
-//     />
-//     <path
-//       d="M10 6.6665V10.6665"
-//       stroke="#D05B5B"
-//       strokeLinecap="round"
-//       strokeWidth="1.3"
-//     />
-//     <path
-//       d="M4 4.00016L4.66667 12.0002C4.72228 12.6666 5.2791 13.1784 5.94766 13.1784H10.053C10.7215 13.1784 11.2784 12.6666 11.334 12.0002L12 4.00016"
-//       stroke="#D05B5B"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//     <path
-//       d="M6 4.00016V2.66683C6 2.29864 6.29848 2.00016 6.66667 2.00016H9.33333C9.70152 2.00016 10 2.29864 10 2.66683V4.00016"
-//       stroke="#D05B5B"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//       strokeWidth="1.3"
-//     />
-//   </svg>
-// );
-
-// export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
-//   return (
-//     <div className="overflow-hidden rounded-2xl border border-[#c2c9bb4c] bg-white shadow-[0px_4px_12px_#0000000d]">
-//       <div className="flex items-center border-b border-[#c2c9bb] px-6 py-4 bg-gray-50/50">
-//         <div className="w-[373.59px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-//           ARTICLE TITLE
-//         </div>
-//         <div className="w-[155.72px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-//           DATE PUBLISHED
-//         </div>
-//         <div className="flex-1 text-right text-xs font-bold uppercase tracking-wider text-[#72796e]">
-//           ACTIONS
-//         </div>
-//       </div>
-
-//       <div className="divide-y divide-[#c2c9bb]">
-//         {newsList.map((article) => (
-//           <div
-//             key={article.id}
-//             className="flex items-center px-6 py-4 hover:bg-gray-50/30 transition-colors"
-//           >
-//             <div className="w-[373.59px] text-base font-medium text-[#1a1c19] line-clamp-1">
-//               {article.title}
-//             </div>
-
-//             <div className="w-[155.72px] text-sm text-[#42493e]">
-//               {new Date(article.createdAt).toLocaleDateString('id-ID', {
-//                 year: 'numeric',
-//                 month: 'short',
-//                 day: 'numeric'
-//               })}
-//             </div>
-
-//             <div className="flex flex-1 items-center justify-end gap-3">
-//               <button
-//                 aria-label={`View ${article.title}`}
-//                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-//                 type="button"
-//               >
-//                 <EyeIcon />
-//               </button>
-
-//               <Link
-//                 href={`/admin/news/${article.id}/edit`}
-//                 aria-label={`Edit ${article.title}`}
-//                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-//                 title="Edit"
-//               >
-//                 <EditIcon />
-//               </Link>
-
-//               <button
-//                 onClick={() => onDelete(article.id)}
-//                 aria-label={`Delete ${article.title}`}
-//                 className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-//                 type="button"
-//               >
-//                 <TrashIcon />
-//               </button>
-//             </div>
-//           </div>
-//         ))}
-        
-//         {newsList.length === 0 && (
-//           <div className="py-20 text-center">
-//             <p className="text-[#72796e]">Belum ada berita yang tersedia.</p>
-//           </div>
-//         )}
-//       </div>
-
-//       <div className="flex items-center justify-between border-t border-[#c2c9bb] bg-[#f3f4ef] px-6 py-4">
-//         <p className="text-sm text-[#42493e]">
-//           Showing 1 to {newsList.length} of {newsList.length} news
-//         </p>
-
-//         <nav
-//           aria-label="Pagination"
-//           className="inline-flex items-center gap-2"
-//         >
-//           <button
-//             disabled
-//             className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb80] text-[#c2c9bb]"
-//           >
-//             <svg
-//               aria-hidden="true"
-//               fill="none"
-//               height="16"
-//               viewBox="0 0 16 16"
-//               width="16"
-//               xmlns="http://www.w3.org/2000/svg"
-//             >
-//               <path
-//                 d="M9.5 4L5.5 8L9.5 12"
-//                 stroke="#C2C9BB"
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="1.5"
-//               />
-//             </svg>
-//           </button>
-
-//           <button
-//             className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#154212]"
-//             type="button"
-//           >
-//             <span className="text-sm font-bold text-white">1</span>
-//           </button>
-
-//           <button
-//             disabled
-//             className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb] text-[#42493e]"
-//           >
-//             <svg
-//               aria-hidden="true"
-//               fill="none"
-//               height="16"
-//               viewBox="0 0 16 16"
-//               width="16"
-//               xmlns="http://www.w3.org/2000/svg"
-//             >
-//               <path
-//                 d="M6.5 4L10.5 8L6.5 12"
-//                 stroke="#72796E"
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//                 strokeWidth="1.5"
-//               />
-//             </svg>
-//           </button>
-//         </nav>
-//       </div>
-//     </div>
-//   );
-// }
-
 'use client';
 
 import { News } from '@/types';
-import Link from 'next/link';
+import { Eye, Edit2, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface NewsTableProps {
   newsList: News[];
-  onDelete: (id: string) => void;
+  onEdit: (news: News) => void;
+  onDelete: (news: News) => void;
 }
 
+const getStatusStyles = (status: string) => {
+  switch (status) {
+    case 'PUBLISHED':
+      return {
+        label: 'Ongoing',
+        bgClass: 'bg-[#e2f5eb]',
+        dotClass: 'bg-[#21c55d]',
+        textClass: 'text-[#166534]',
+      };
+    case 'DRAFT':
+      return {
+        label: 'Upcoming',
+        bgClass: 'bg-[#fff3e0]',
+        dotClass: 'bg-[#f97316]',
+        textClass: 'text-[#c2410c]',
+      };
+    case 'ARCHIVED':
+      return {
+        label: 'Completed',
+        bgClass: 'bg-[#f1f5f9]',
+        dotClass: 'bg-[#94a3b8]',
+        textClass: 'text-[#475569]',
+      };
+    default:
+      return {
+        label: 'Ongoing',
+        bgClass: 'bg-[#e2f5eb]',
+        dotClass: 'bg-[#21c55d]',
+        textClass: 'text-[#166534]',
+      };
+  }
+};
+
+const formatDate = (dateString: string | undefined) => {
+  if (!dateString) return '-';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric'
+  }).replace(/ /g, ' ').replace(',', ','); // Example: 12 Oct, 2023
+};
+
 const EyeIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M1.33301 8.00016C2.39967 5.3335 4.66634 4.00016 7.99967 4.00016C11.333 4.00016 13.5997 5.3335 14.6663 8.00016C13.5997 10.6668 11.333 12.0002 7.99967 12.0002C4.66634 12.0002 2.39967 10.6668 1.33301 8.00016Z"
-      stroke="#42493E"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
-    <circle
-      cx="8"
-      cy="8"
-      r="2"
-      stroke="#42493E"
-      strokeWidth="1.3"
-    />
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+    <circle cx="12" cy="12" r="3"></circle>
   </svg>
 );
 
-const EditIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M8.66699 2.00016L14.0003 7.3335L6.00033 15.3335H0.666992V10.0002L8.66699 2.00016Z"
-      stroke="#E9A23B"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
-    <path
-      d="M7.33301 3.3335L12.6663 8.66683"
-      stroke="#E9A23B"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
+const PencilIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 20h9"></path>
+    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
   </svg>
 );
 
 const TrashIcon = () => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    height="16"
-    viewBox="0 0 16 16"
-    width="16"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M2.66699 4.00016H13.3337"
-      stroke="#D05B5B"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
-    <path
-      d="M6 6.6665V10.6665"
-      stroke="#D05B5B"
-      strokeLinecap="round"
-      strokeWidth="1.3"
-    />
-    <path
-      d="M10 6.6665V10.6665"
-      stroke="#D05B5B"
-      strokeLinecap="round"
-      strokeWidth="1.3"
-    />
-    <path
-      d="M4 4.00016L4.66667 12.0002C4.72228 12.6666 5.2791 13.1784 5.94766 13.1784H10.053C10.7215 13.1784 11.2784 12.6666 11.334 12.0002L12 4.00016"
-      stroke="#D05B5B"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
-    <path
-      d="M6 4.00016V2.66683C6 2.29864 6.29848 2.00016 6.66667 2.00016H9.33333C9.70152 2.00016 10 2.29864 10 2.66683V4.00016"
-      stroke="#D05B5B"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.3"
-    />
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="3 6 5 6 21 6"></polyline>
+    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
   </svg>
 );
 
-export function NewsTable({ newsList, onDelete }: NewsTableProps) {
+export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#c2c9bb4c] bg-white shadow-[0px_4px_12px_#0000000d]">
-      <div className="flex items-center border-b border-[#c2c9bb] px-6 py-4 bg-gray-50/50">
-        <div className="w-[373.59px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-          ARTICLE TITLE
-        </div>
-        <div className="w-[155.72px] text-xs font-bold uppercase tracking-wider text-[#72796e]">
-          DATE PUBLISHED
-        </div>
-        <div className="flex-1 text-right text-xs font-bold uppercase tracking-wider text-[#72796e]">
-          ACTIONS
-        </div>
-      </div>
-
-      <div className="divide-y divide-[#c2c9bb]">
-        {newsList.map((article) => (
-          <div
-            key={article.id}
-            className="flex items-center px-6 py-4 hover:bg-gray-50/30 transition-colors"
-          >
-            <div className="w-[373.59px] text-base font-medium text-[#1a1c19] line-clamp-1">
-              {article.title}
-            </div>
-
-            <div className="w-[155.72px] text-sm text-[#42493e]">
-              {new Date(article.createdAt).toLocaleDateString('id-ID', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </div>
-
-            <div className="flex flex-1 items-center justify-end gap-3">
-              <button
-                aria-label={`View ${article.title}`}
-                className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-                type="button"
-              >
-                <EyeIcon />
-              </button>
-
-              <Link
-                href={`/admin/news/${article.id}/edit`}
-                aria-label={`Edit ${article.title}`}
-                className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-                title="Edit"
-              >
-                <EditIcon />
-              </Link>
-
-              <button
-                onClick={() => onDelete(article.id)}
-                aria-label={`Delete ${article.title}`}
-                className="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100 transition-colors"
-                type="button"
-              >
-                <TrashIcon />
-              </button>
-            </div>
-          </div>
-        ))}
-        
-        {newsList.length === 0 && (
-          <div className="py-20 text-center">
-            <p className="text-[#72796e]">Belum ada berita yang tersedia.</p>
-          </div>
-        )}
-      </div>
-
-      <div className="flex items-center justify-between border-t border-[#c2c9bb] bg-[#f3f4ef] px-6 py-4">
-        <p className="text-sm text-[#42493e]">
-          Showing 1 to {newsList.length} of {newsList.length} news
+    <div className="overflow-hidden rounded-[24px] border border-[#F0F2EB] bg-white shadow-sm mt-6">
+      {/* HEADER */}
+      <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
+        <h2 className="text-xl font-serif font-bold text-[#2A3426]">
+          All Programs
+        </h2>
+        <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F9A8A]">
+          {newsList.length} ITEMS TOTAL
         </p>
+      </div>
 
-        <nav
-          aria-label="Pagination"
-          className="inline-flex items-center gap-2"
-        >
-          <button
-            disabled
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb80] text-[#c2c9bb]"
-          >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="16"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.5 4L5.5 8L9.5 12"
-                stroke="#C2C9BB"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </button>
+      <div className="overflow-x-auto">
+        <div className="min-w-[800px]">
+          {/* TABLE HEADER */}
+          <div className="flex items-center border-b border-[#F0F2EB] px-8 py-5">
+            <div className="w-12"></div> {/* Space for dot */}
+            <div className="w-[350px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+              PROGRAM TITLE
+            </div>
+            <div className="w-[180px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+              STATUS
+            </div>
+            <div className="w-[180px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+              DATE
+            </div>
+            <div className="flex-1 text-right text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+              ACTIONS
+            </div>
+          </div>
 
+          {/* TABLE ROWS */}
+          <div className="divide-y divide-[#F0F2EB]">
+            {newsList.map((article) => {
+              const statusStyles = getStatusStyles(article.status);
+
+              return (
+                <div
+                  key={article.id}
+                  className="flex items-center px-8 py-6 hover:bg-gray-50/50 transition-colors"
+                >
+                  {/* Dot */}
+                  <div className="w-12 flex items-center">
+                    <div className={`h-2.5 w-2.5 rounded-full ${statusStyles.dotClass}`} />
+                  </div>
+
+                  {/* Title */}
+                  <div className="w-[350px] pr-4">
+                    <span className="text-[13.5px] font-bold text-[#2A3426] line-clamp-1">
+                      {article.title}
+                    </span>
+                  </div>
+
+                  {/* Status Badge */}
+                  <div className="w-[180px]">
+                    <div
+                      className={`inline-flex h-[26px] items-center justify-center rounded-full px-3 ${statusStyles.bgClass}`}
+                    >
+                      <span className={`text-[11px] font-bold ${statusStyles.textClass}`}>
+                        {statusStyles.label}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Date */}
+                  <div className="w-[180px]">
+                    <span className="text-[13.5px] text-[#72796E]">
+                      {formatDate(article.publishDate || article.createdAt)}
+                    </span>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex flex-1 items-center justify-end gap-5">
+                    <button
+                      type="button"
+                      className="hover:opacity-70 transition-opacity"
+                    >
+                      <EyeIcon />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => onEdit(article)}
+                      className="hover:opacity-70 transition-opacity"
+                    >
+                      <PencilIcon />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => onDelete(article)}
+                      className="hover:opacity-70 transition-opacity"
+                    >
+                      <TrashIcon />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+            
+            {newsList.length === 0 && (
+              <div className="py-20 text-center">
+                <p className="text-[#72796e]">No programs found.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* FOOTER PAGINATION */}
+      <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-white px-8 py-5 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-center">
+          <p className="text-[13px] text-[#8F9A8A]">
+            Showing 1-{newsList.length} of {newsList.length} programs
+          </p>
+        </div>
+
+        <nav aria-label="Pagination" className="inline-flex items-center gap-2">
+          {/* PREV */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#154212]"
             type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[#C2C9BB] cursor-not-allowed"
+            disabled
           >
-            <span className="text-sm font-bold text-white">1</span>
+            <ChevronLeft size={16} />
           </button>
 
+          {/* PAGE NUMBERS */}
           <button
-            disabled
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#c2c9bb] text-[#42493e]"
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#27532B] text-[13px] font-bold text-white shadow-sm"
           >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              height="16"
-              viewBox="0 0 16 16"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6.5 4L10.5 8L6.5 12"
-                stroke="#72796E"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-              />
-            </svg>
+            1
+          </button>
+          
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
+          >
+            2
+          </button>
+          
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
+          >
+            3
+          </button>
+          
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
+          >
+            4
+          </button>
+
+          {/* NEXT */}
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[#72796E] hover:bg-gray-50"
+          >
+            <ChevronRight size={16} />
           </button>
         </nav>
       </div>
     </div>
   );
 }
-

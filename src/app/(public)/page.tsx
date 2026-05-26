@@ -198,16 +198,23 @@ export default async function LandingPage() {
   // =========================
   // PRODUCTS
   // =========================
-  const productsRes = await fetch(
-    'http://localhost:2000/api/products',
-    {
-      cache: 'no-store',
-    }
-  );
+  let products = [];
 
-  const productsJson = await productsRes.json();
+  try {
+    const productsRes = await fetch(
+      'http://localhost:2000/api/products',
+      {
+        cache: 'no-store',
+      }
+    );
 
-  const products = productsJson?.data || [];
+    const productsJson = await productsRes.json();
+
+    products = productsJson?.data || [];
+  } catch (error) {
+    console.error('Failed to fetch products:', error);
+    products = [];
+  }
 
   // =========================
   // PROGRAMS / NEWS
