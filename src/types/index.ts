@@ -171,3 +171,17 @@ export interface User {
 
   role: 'ADMIN';
 }
+
+export interface Education {
+  id: string;
+  title: string;
+  slug: string;
+  overview: string;
+  description: string;
+  thumbnail?: string;
+  tags: string[];
+  publishDate?: string;
+  status: 'DRAFT' | 'PUBLISHED';
+  createdAt?: string;
+  updatedAt?: string;
+}

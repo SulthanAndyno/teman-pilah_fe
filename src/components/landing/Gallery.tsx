@@ -44,8 +44,8 @@ const galleryImages = [
 
 export function Gallery() {
   return (
-    <section className="py-28 bg-[#ffffff] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 space-y-20">
+    <section className="py-28 bg-[#F9FAF5] overflow-hidden">
+      <div className="max-w-[1440px] 2xl:px-12 mx-auto px-6 space-y-20">
 
         {/* Heading */}
         <motion.div
@@ -55,11 +55,11 @@ export function Gallery() {
           transition={{ duration: 0.7 }}
           className="text-center space-y-6 max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl lg:text-4xl font-bold text-[#1B3022] leading-tight">
+          <h2 className="text-[32px] md:text-[40px] lg:text-5xl font-bold text-[#1B3022] leading-tight">
             Galeri Aksi Nyata
           </h2>
 
-          <p className="text-xl text-[#3D4F41] leading-relaxed font-medium opacity-80">
+          <p className="text-lg md:text-xl text-[#3D4F41] leading-relaxed font-medium opacity-80">
            Jejak langkah kami bersama masyarakat dan mitra dalam melestarikan
            lingkungan.
           </p>

@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Product } from '@/types';
-import { toast } from 'sonner';
-import { ProductTable } from '@/components/admin/ProductTable';
-import { ProductModal } from '@/components/admin/ProductModal';
+import { EducationTable } from '@/components/admin/EducationTable';
+import { EducationModal } from '@/components/admin/EducationModal';
 import { SuccessModal } from '@/components/admin/SuccessModal';
 import { DeleteModal } from '@/components/admin/DeleteModal';
-import { productApi } from '@/lib/api/Products';
+import { toast } from 'sonner';
+import { Education } from '@/types';
+import { educationApi } from '@/lib/api/education';
 
 const SearchIcon = () => (
   <svg
@@ -30,31 +30,6 @@ const SearchIcon = () => (
       r="5.5625"
       stroke="#72796E"
       strokeWidth="1.4"
-    />
-  </svg>
-);
-
-const PlusCircleIcon = () => (
-  <svg
-    aria-hidden="true"
-    width="20"
-    height="20"
-    viewBox="0 0 20 20"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <circle cx="10" cy="10" r="7.5" stroke="white" strokeWidth="1.5" />
-    <path
-      d="M10 7V13"
-      stroke="white"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-    <path
-      d="M7 10H13"
-      stroke="white"
-      strokeWidth="1.5"
-      strokeLinecap="round"
     />
   </svg>
 );
@@ -119,114 +94,153 @@ const SortIcon = () => (
   </svg>
 );
 
-export default function AdminProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
+export default function AdminEducationPage() {
+  const [contents, setContents] = useState<Education[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [dateFilter, setDateFilter] = useState('newest');
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+  const [editingContent, setEditingContent] = useState<Education | null>(null);
+
   const [successModal, setSuccessModal] = useState<{
     isOpen: boolean;
     title: string;
     message: string;
   }>({ isOpen: false, title: '', message: '' });
+
   const [deleteModal, setDeleteModal] = useState<{
     isOpen: boolean;
     id: string;
     name: string;
   }>({ isOpen: false, id: '', name: '' });
 
-  const fetchProducts = async () => {
+  // Instead of actual API call, we just use the dummy data to match exactly the mock requirements
+  // Wait, I will wrap it in a mock fetch to simulate loading.
+  const fetchContents = async () => {
     setIsLoading(true);
     try {
-      const data = await productApi.getAll();
-      setProducts(data);
+      const data = await educationApi.getAll();
+      setContents(data);
     } catch (error) {
-      toast.error('Gagal mengambil data produk dari server');
+      toast.error('Failed to load education content');
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    fetchContents();
   }, []);
 
-  const filteredProducts = useMemo(() => {
-    let result = [...products];
+  const filteredContents = useMemo(() => {
+    let result = [...contents];
 
     if (searchTerm) {
       result = result.filter(item => 
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
-    if (categoryFilter !== 'all') {
-      result = result.filter(item => item.category === categoryFilter);
+    if (statusFilter !== 'all') {
+      result = result.filter(item => item.status === statusFilter);
     }
 
-    if (statusFilter !== 'all') {
-      result = result.filter(item => item.stockLabel === statusFilter);
+    // Client-side date sorting
+    if (dateFilter === 'newest') {
+      result.sort((a, b) => {
+        const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return timeB - timeA;
+      });
+    } else if (dateFilter === 'oldest') {
+      result.sort((a, b) => {
+        const timeA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const timeB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        return timeA - timeB;
+      });
     }
 
     return result;
-  }, [products, searchTerm, categoryFilter, statusFilter]);
+  }, [contents, searchTerm, statusFilter, dateFilter]);
 
-  const handleOpenModal = (product?: Product) => {
-    setEditingProduct(product || null);
+  const handleEdit = (content: Education) => {
+    setEditingContent(content);
     setIsModalOpen(true);
   };
 
-  const handleSubmit = async (data: FormData) => {
+  const handleOpenNewModal = () => {
+    setEditingContent(null);
+    setIsModalOpen(true);
+  };
+
+  const handleModalSubmit = async (data: any) => {
+    setIsLoading(true);
+    setIsModalOpen(false);
     try {
-      if (editingProduct) {
-        await productApi.update(editingProduct.id, data);
-        setSuccessModal({
-          isOpen: true,
-          title: 'Success Update',
-          message: 'Produk berhasil diperbarui.'
-        });
-      } else {
-        await productApi.create(data);
-        setSuccessModal({
-          isOpen: true,
-          title: 'Success Add',
-          message: 'Produk berhasil ditambahkan.'
-        });
+      const formData = new FormData();
+      formData.append('title', data.title);
+      formData.append('slug', data.slug);
+      formData.append('overview', data.overview || '');
+      formData.append('description', data.description || '');
+      if (data.publishDate) {
+        formData.append('publishDate', data.publishDate);
       }
-      fetchProducts();
-      setIsModalOpen(false);
-    } catch (error: unknown) {
-      const err = error as Error;
-      toast.error(err.message || 'Gagal menyimpan produk');
+      if (data.tags && data.tags.length > 0) {
+        formData.append('tags', data.tags.join(','));
+      }
+      formData.append('status', data.status);
+
+      if (data.imageFile) {
+        formData.append('thumbnail', data.imageFile);
+      }
+
+      if (editingContent) {
+        await educationApi.update(editingContent.id, formData);
+      } else {
+        await educationApi.create(formData);
+      }
+
+      setSuccessModal({
+        isOpen: true,
+        title: editingContent ? 'Success Update' : 'Success Add',
+        message: editingContent 
+          ? 'Education content has been successfully updated.' 
+          : 'Education content has been successfully added.'
+      });
+      fetchContents();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to save education content');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleDeleteClick = (id: string) => {
-    const product = products.find(p => p.id === id);
+    const content = contents.find(c => c.id === id);
     setDeleteModal({
       isOpen: true,
       id,
-      name: product?.name || 'this product'
+      name: content?.title || 'this content'
     });
   };
 
   const confirmDelete = async () => {
+    setIsLoading(true);
+    setDeleteModal({ isOpen: false, id: '', name: '' });
     try {
-      await productApi.delete(deleteModal.id);
+      await educationApi.delete(deleteModal.id);
       setSuccessModal({
         isOpen: true,
         title: 'Success Delete',
-        message: 'Produk berhasil dihapus.'
+        message: 'Education content has been successfully deleted.'
       });
-      fetchProducts();
-    } catch (error: unknown) {
-      const err = error as Error;
-      toast.error(err.message || 'Gagal menghapus produk');
+      fetchContents();
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to delete education content');
     } finally {
-      setDeleteModal({ isOpen: false, id: '', name: '' });
+      setIsLoading(false);
     }
   };
 
@@ -244,12 +258,12 @@ export default function AdminProducts() {
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
           <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
-            Product Management
+            Education Content
           </h1>
         </div>
 
         <button
-          onClick={() => handleOpenModal()}
+          onClick={handleOpenNewModal}
           className="inline-flex items-center gap-2 rounded-lg bg-[#27532B] px-5 py-2.5 hover:brightness-110 transition-all text-white font-medium text-[13px]"
           type="button"
         >
@@ -257,7 +271,7 @@ export default function AdminProducts() {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>New Product</span>
+          <span>Add Content</span>
         </button>
       </header>
 
@@ -266,12 +280,12 @@ export default function AdminProducts() {
         <div className="flex flex-col gap-2 lg:flex-row lg:items-center">
           {/* SEARCH */}
           <div className="relative flex-1">
-            <label className="sr-only" htmlFor="product-search">
-              Search product
+            <label className="sr-only" htmlFor="content-search">
+              Search content
             </label>
             <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
-                id="product-search"
+                id="content-search"
                 placeholder="Search by title..."
                 type="text"
                 value={searchTerm}
@@ -294,8 +308,8 @@ export default function AdminProducts() {
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
                 <option value="all">Status: All</option>
-                <option value="IN_STOCK">In Stock</option>
-                <option value="OUT_OF_STOCK">Out of Stock</option>
+                <option value="PUBLISHED">Published</option>
+                <option value="DRAFT">Draft</option>
               </select>
               <ChevronDownIcon />
             </div>
@@ -303,13 +317,11 @@ export default function AdminProducts() {
             <div className="relative w-full sm:w-[140px]">
               <select
                 className="h-11 w-full appearance-none rounded-[14px] bg-[#F9FAF8] border border-[#F0F2EB] px-4 pr-10 text-[13px] font-medium text-[#72796E] outline-none cursor-pointer"
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
               >
-                <option value="all">Category: All</option>
-                <option value="UPCYCLED_GOODS">Upcycled</option>
-                <option value="ORGANIC">Organic</option>
-                <option value="ZERO_WASTE">Zero Waste</option>
+                <option value="newest">Date: Newest</option>
+                <option value="oldest">Date: Oldest</option>
               </select>
               <ChevronDownIcon />
             </div>
@@ -325,17 +337,17 @@ export default function AdminProducts() {
         </div>
       </div>
 
-      <ProductTable 
-        products={filteredProducts} 
-        onEdit={handleOpenModal} 
+      <EducationTable 
+        contents={filteredContents} 
+        onEdit={handleEdit} 
         onDelete={handleDeleteClick} 
       />
 
-      <ProductModal 
-        isOpen={isModalOpen} 
-        product={editingProduct} 
-        onClose={() => setIsModalOpen(false)} 
-        onSubmit={handleSubmit} 
+      <EducationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        content={editingContent}
+        onSubmit={handleModalSubmit}
       />
 
       <SuccessModal
@@ -349,9 +361,9 @@ export default function AdminProducts() {
         isOpen={deleteModal.isOpen}
         onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
         onConfirm={confirmDelete}
-        title="Delete Product?"
+        title="Delete Content?"
         itemName={deleteModal.name}
-        confirmText="Delete Product"
+        confirmText="Delete Content"
       />
     </div>
   );

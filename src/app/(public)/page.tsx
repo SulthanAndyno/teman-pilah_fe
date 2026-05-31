@@ -1,177 +1,3 @@
-
-// // // import React from 'react';
-// // // import { Hero } from '@/components/landing/Hero';
-// // // import { About } from '@/components/landing/About';
-// // // import { Programs } from '@/components/landing/Programs';
-// // // import { Education } from '@/components/landing/Education';
-// // // import { ProductCatalog } from '@/components/landing/ProductCatalog';
-// // // import { Gallery } from '@/components/landing/Gallery';
-// // // import { Partnerships } from '@/components/landing/Partnerships';
-// // // import { JoinCTA } from '@/components/landing/JoinCTA';
-// // // // import { products } from '@/data/products';
-
-// // // export default async function LandingPage() {
-// // //   const res = await fetch ("http://localhost:2000/api/products")
-// // //   const resJson = await res.json();
-// // //   const products = resJson?.data;
-// // //   return (
-// // //     <div className="overflow-x-hidden pt-20">
-// // //       <Hero />
-// // //       <About />
-// // //       <Programs />
-// // //       <Education />
-// // //       <ProductCatalog products={products}  />
-// // //       <Gallery />
-// // //       <Partnerships />
-// // //       <JoinCTA />
-// // //     </div>
-// // //   );
-// // // }
-
-// // import React from 'react';
-// // import { Hero } from '@/components/landing/Hero';
-// // import { About } from '@/components/landing/About';
-// // import { Programs } from '@/components/landing/Programs';
-// // import { Education } from '@/components/landing/Education';
-// // import { ProductCatalog } from '@/components/landing/ProductCatalog';
-// // import { Gallery } from '@/components/landing/Gallery';
-// // import { Partnerships } from '@/components/landing/Partnerships';
-// // import { JoinCTA } from '@/components/landing/JoinCTA';
-
-// // export default async function LandingPage() {
-
-// //   // PRODUCTS
-// //   const productsRes = await fetch(
-// //     'http://localhost:2000/api/products',
-// //     {
-// //       cache: 'no-store',
-// //     }
-// //   );
-
-// //   const productsJson = await productsRes.json();
-
-// //   const products = productsJson?.data;
-
-// //   // PROGRAMS
-// //   const programsRes = await fetch(
-// //     'http://localhost:2000/api/news',
-// //     {
-// //       cache: 'no-store',
-// //     }
-// //   );
-
-// //   const programsJson = await programsRes.json();
-
-// //   const programs = programsJson?.data;
-
-// //   return (
-// //     <div className="overflow-x-hidden pt-20">
-// //       <Hero />
-
-// //       <About />
-
-// //       {/* PROGRAMS */}
-// //       <Programs programs={programs} />
-
-// //       <Education />
-
-// //       {/* PRODUCTS */}
-// //       <ProductCatalog products={products} />
-
-// //       <Gallery />
-
-// //       <Partnerships />
-
-// //       <JoinCTA />
-// //     </div>
-// //   );
-// // }
-
-// import React from 'react';
-
-// import { Hero } from '@/components/landing/Hero';
-// import { About } from '@/components/landing/About';
-// import { Programs } from '@/components/landing/Programs';
-// import { Education } from '@/components/landing/Education';
-// import { ProductCatalog } from '@/components/landing/ProductCatalog';
-// import { Gallery } from '@/components/landing/Gallery';
-// import { Partnerships } from '@/components/landing/Partnerships';
-// import { JoinCTA } from '@/components/landing/JoinCTA';
-
-// export default async function LandingPage() {
-
-//   // =========================
-//   // PRODUCTS
-//   // =========================
-//   const productsRes = await fetch(
-//     'http://localhost:2000/api/products',
-//     {
-//       cache: 'no-store',
-//     }
-//   );
-
-//   const productsJson = await productsRes.json();
-
-//   const products = productsJson?.data;
-
-//   // =========================
-//   // PROGRAMS / NEWS
-//   // =========================
-//   const programsRes = await fetch(
-//     'http://localhost:2000/api/news',
-//     {
-//       cache: 'no-store',
-//     }
-//   );
-
-//   const programsJson = await programsRes.json();
-
-//   // const programs = programsJson?.data.map((item) => ({
-//   const programs = programsJson?.data.map((item: {
-//   id: number;
-//   title: string;
-//   summary?: string;
-//   content: string;
-//   image?: string;
-//   slug: string;
-//           }) => ({
-//     id: item.id,
-
-//     title: item.title,
-
-//     description:
-//       item.summary || item.content,
-
-//     image:
-//       item.image ||
-//       'https://picsum.photos/500/300',
-
-//     slug: item.slug,
-//   }));
-
-//   return (
-//     <div className="overflow-x-hidden pt-20">
-
-//       <Hero />
-
-//       <About />
-
-//       <Programs programs={programs} />
-
-//       <Education />
-
-//       <ProductCatalog products={products} />
-
-//       <Gallery />
-
-//       <Partnerships />
-
-//       <JoinCTA />
-
-//     </div>
-//   );
-// }
-
 import React from 'react';
 
 import { Hero } from '@/components/landing/Hero';
@@ -180,8 +6,6 @@ import { Programs } from '@/components/landing/Programs';
 import { Education } from '@/components/landing/Education';
 import { ProductCatalog } from '@/components/landing/ProductCatalog';
 import { Gallery } from '@/components/landing/Gallery';
-import { Partnerships } from '@/components/landing/Partnerships';
-import { JoinCTA } from '@/components/landing/JoinCTA';
 
 type ProgramItem = {
   id: number;
@@ -191,6 +15,9 @@ type ProgramItem = {
   image?: string;
   imageUrl?: string;
   slug: string;
+  status?: string;
+  publishDate?: string;
+  endDate?: string;
 };
 
 export default async function LandingPage() {
@@ -230,25 +57,38 @@ export default async function LandingPage() {
     );
 
     const programsJson = await programsRes.json();
+    const now = new Date();
+    const wibTime = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+    const todayStr = wibTime.toISOString().split('T')[0]; // "2026-05-28"
 
-    programs = (programsJson?.data || []).map(
-      (item: ProgramItem) => ({
-        id: item.id,
-
-        title: item.title,
-
-        description:
-          item.summary || item.content,
-
-        image:
-          item.imageUrl
-            ? `http://localhost:2000/${item.imageUrl}`
-            : item.image ||
-              `https://picsum.photos/seed/${item.id}/500/300`,
-
-        slug: item.slug,
+    programs = (programsJson?.data || [])
+      .filter((item: ProgramItem) => {
+        // Only show PUBLISHED programs
+        if (item.status && item.status !== 'PUBLISHED') return false;
+        
+        // Check Start Date
+        if (item.publishDate) {
+          const startStr = item.publishDate.split('T')[0];
+          if (todayStr < startStr) return false;
+        }
+        
+        // Check End Date
+        if (item.endDate) {
+          const endStr = item.endDate.split('T')[0];
+          if (todayStr > endStr) return false;
+        }
+        
+        return true;
       })
-    );
+      .map((item: ProgramItem) => ({
+        id: item.id,
+        title: item.title,
+        description: item.summary || item.content,
+        image: item.imageUrl
+          ? `http://localhost:2000/${item.imageUrl}`
+          : item.image || `https://picsum.photos/seed/${item.id}/500/300`,
+        slug: item.slug,
+      }));
   } catch (error) {
     console.error(
       'Failed to fetch programs:',
@@ -258,8 +98,30 @@ export default async function LandingPage() {
     programs = [];
   }
 
+  // =========================
+  // EDUCATION
+  // =========================
+  let education = [];
+
+  try {
+    const educationRes = await fetch(
+      'http://localhost:2000/api/education',
+      {
+        cache: 'no-store',
+      }
+    );
+
+    const educationJson = await educationRes.json();
+    education = (educationJson?.data || [])
+      .filter((item: any) => item.status === 'PUBLISHED')
+      .slice(0, 4); // Display at most 4 items on the landing page
+  } catch (error) {
+    console.error('Failed to fetch education:', error);
+    education = [];
+  }
+
   return (
-    <div className="overflow-x-hidden pt-20">
+    <div className="overflow-x-hidden pt-[88px]">
 
       <Hero />
 
@@ -267,15 +129,11 @@ export default async function LandingPage() {
 
       <Programs programs={programs} />
 
-      <Education />
+      <Education items={education} />
 
       <ProductCatalog products={products} />
 
       <Gallery />
-
-      <Partnerships />
-
-      <JoinCTA />
 
     </div>
   );

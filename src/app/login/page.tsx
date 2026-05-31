@@ -476,6 +476,11 @@ export default function LoginPage() {
         'true'
       );
 
+      localStorage.setItem(
+        'adminEmail',
+        email
+      );
+
       toast.success(
         'Login berhasil!'
       );

@@ -477,6 +477,16 @@ export const newsApi = {
         'PUBLIC'
     );
 
+    if (data.publishDate) {
+      formData.append('publishDate', data.publishDate);
+    }
+    if (data.endDate) {
+      formData.append('endDate', data.endDate);
+    }
+    if (data.partnership) {
+      formData.append('partnership', data.partnership);
+    }
+
     // AUTHORS
     if (
       Array.isArray(data.authors)
@@ -597,6 +607,16 @@ export const newsApi = {
       data.visibility ||
         'PUBLIC'
     );
+
+    if (data.publishDate) {
+      formData.append('publishDate', data.publishDate);
+    }
+    if (data.endDate) {
+      formData.append('endDate', data.endDate);
+    }
+    if (data.partnership) {
+      formData.append('partnership', data.partnership);
+    }
 
     // AUTHORS
     if (
