@@ -10,8 +10,10 @@ import {
   ListOrdered, 
   Quote, 
   Link as LinkIcon, 
-  ImageIcon, 
-  Code,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  AlignJustify,
   ChevronDown,
   X,
   CheckCircle2
@@ -112,8 +114,11 @@ export function EditNewsForm({
                   <ToolbarButton icon={Quote} />
                   <div className="w-px h-6 bg-[#C2C9BB]/30 mx-1" />
                   <ToolbarButton icon={LinkIcon} />
-                  <ToolbarButton icon={ImageIcon} />
-                  <ToolbarButton icon={Code} />
+                  <div className="w-px h-6 bg-[#C2C9BB]/30 mx-1" />
+                  <ToolbarButton icon={AlignLeft} />
+                  <ToolbarButton icon={AlignCenter} />
+                  <ToolbarButton icon={AlignRight} />
+                  <ToolbarButton icon={AlignJustify} />
                 </div>
                 <textarea 
                   value={formData.content}

@@ -73,31 +73,39 @@ const TrashIcon = () => (
   </svg>
 );
 
+import { useState } from 'react';
+
 export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  
+  const totalPages = Math.ceil(newsList.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedList = newsList.slice(startIndex, startIndex + itemsPerPage);
+
+  const startItem = startIndex + 1;
+  const endItem = Math.min(startIndex + itemsPerPage, newsList.length);
+
   return (
     <div className="overflow-hidden rounded-[24px] border border-[#F0F2EB] bg-white shadow-sm mt-6">
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
-        <h2 className="text-xl font-serif font-bold text-[#2A3426]">
+        <h2 className="text-lg font-bold text-[#2A3426]">
           All Programs
         </h2>
-        <p className="text-[11px] font-bold uppercase tracking-[1.5px] text-[#8F9A8A]">
-          {newsList.length} ITEMS TOTAL
+        <p className="text-[11px] font-medium text-[#8F9A8A]">
+          {newsList.length} items total
         </p>
       </div>
 
       <div className="overflow-x-auto">
         <div className="min-w-[800px]">
           {/* TABLE HEADER */}
-          <div className="flex items-center border-b border-[#F0F2EB] px-8 py-5">
-            <div className="w-12"></div> {/* Space for dot */}
-            <div className="w-[350px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+          <div className="flex items-center border-b border-[#F0F2EB] bg-[#F4F5F2] px-8 py-5">
+            <div className="w-[400px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
               PROGRAM TITLE
             </div>
-            <div className="w-[180px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
-              STATUS
-            </div>
-            <div className="w-[180px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
+            <div className="w-[200px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
               DATE
             </div>
             <div className="flex-1 text-right text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
@@ -107,7 +115,7 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
 
           {/* TABLE ROWS */}
           <div className="divide-y divide-[#F0F2EB]">
-            {newsList.map((article) => {
+            {paginatedList.map((article) => {
               const statusStyles = getStatusStyles(article.status);
 
               return (
@@ -115,38 +123,23 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
                   key={article.id}
                   className="flex items-center px-8 py-6 hover:bg-gray-50/50 transition-colors"
                 >
-                  {/* Dot */}
-                  <div className="w-12 flex items-center">
+                  {/* Title & Dot */}
+                  <div className="w-[400px] pr-4 flex items-center gap-4">
                     <div className={`h-2.5 w-2.5 rounded-full ${statusStyles.dotClass}`} />
-                  </div>
-
-                  {/* Title */}
-                  <div className="w-[350px] pr-4">
                     <span className="text-[13.5px] font-bold text-[#2A3426] line-clamp-1">
                       {article.title}
                     </span>
                   </div>
 
-                  {/* Status Badge */}
-                  <div className="w-[180px]">
-                    <div
-                      className={`inline-flex h-[26px] items-center justify-center rounded-full px-3 ${statusStyles.bgClass}`}
-                    >
-                      <span className={`text-[11px] font-bold ${statusStyles.textClass}`}>
-                        {statusStyles.label}
-                      </span>
-                    </div>
-                  </div>
-
                   {/* Date */}
-                  <div className="w-[180px]">
+                  <div className="w-[200px]">
                     <span className="text-[13.5px] text-[#72796E]">
                       {formatDate(article.publishDate || article.createdAt)}
                     </span>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex flex-1 items-center justify-end gap-5">
+                  <div className="flex flex-1 items-center justify-end gap-4">
                     <button
                       type="button"
                       className="hover:opacity-70 transition-opacity"
@@ -184,61 +177,47 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
       </div>
 
       {/* FOOTER PAGINATION */}
-      <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-white px-8 py-5 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex items-center">
-          <p className="text-[13px] text-[#8F9A8A]">
-            Showing 1-{newsList.length} of {newsList.length} programs
-          </p>
+      {newsList.length > 0 && (
+        <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF5] px-8 py-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center">
+            <p className="text-[13px] text-[#8F9A8A] font-medium">
+              Showing {startItem}–{endItem} of {newsList.length} programs
+            </p>
+          </div>
+
+          <nav aria-label="Pagination" className="inline-flex items-center gap-1.5">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#72796E] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft size={16} />
+            </button>
+
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`flex h-8 w-8 items-center justify-center rounded-lg text-[13px] font-bold ${
+                  currentPage === page 
+                    ? 'bg-[#154212] text-white' 
+                    : 'bg-white border border-[#E5E7EB] text-[#72796E] hover:bg-gray-50'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#72796E] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronRight size={16} />
+            </button>
+          </nav>
         </div>
-
-        <nav aria-label="Pagination" className="inline-flex items-center gap-2">
-          {/* PREV */}
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[#C2C9BB] cursor-not-allowed"
-            disabled
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          {/* PAGE NUMBERS */}
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#27532B] text-[13px] font-bold text-white shadow-sm"
-          >
-            1
-          </button>
-          
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
-          >
-            2
-          </button>
-          
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
-          >
-            3
-          </button>
-          
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[13px] text-[#72796E] hover:bg-gray-50"
-          >
-            4
-          </button>
-
-          {/* NEXT */}
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F0F2EB] text-[#72796E] hover:bg-gray-50"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </nav>
-      </div>
+      )}
     </div>
   );
 }

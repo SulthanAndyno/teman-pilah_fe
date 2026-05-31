@@ -129,9 +129,9 @@ const legalLinks = [
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer className="w-full rounded-t-[48px] bg-bg px-6 py-16">
+    <footer id="kontak" className="w-full rounded-t-[48px] bg-[#F3F4EF] px-6 py-16">
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-14">
+      <div className="mx-auto flex max-w-[1440px] 2xl:px-12 flex-col gap-14">
 
         {/* TOP */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.6fr_0.7fr_0.7fr]">

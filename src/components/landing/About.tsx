@@ -17,11 +17,11 @@ export function About() {
   };
 
   return (
-    <section id="tentang" className="py-24">
-      <div className="max-w-7xl mx-auto px-6 text-center space-y-16">
+    <section id="tentang" className="py-24 bg-[#F9FAF5]">
+      <div className="max-w-[1440px] 2xl:px-12 mx-auto px-6 text-center space-y-16">
         <motion.div {...fadeInUp} className="max-w-3xl mx-auto space-y-6">
-          <h2 className="text-5xl font-bold text-[#1B3022]">Tentang Teman Pilah</h2>
-          <p className="text-xl text-[#3D4F41] leading-relaxed font-medium">
+          <h2 className="text-[32px] md:text-[40px] lg:text-5xl font-bold text-[#1B3022]">Tentang Teman Pilah</h2>
+          <p className="text-lg md:text-xl text-[#3D4F41] leading-relaxed font-medium">
             Kami adalah komunitas pejuang lingkungan yang berkomitmen untuk menciptakan ekosistem bersih dan bebas sampah melalui aksi kolektif.
           </p>
         </motion.div>

@@ -1,42 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Product } from '@/types';
+import { Education } from '@/types';
 
-interface ProductTableProps {
-  products: Product[];
-  onEdit: (product: Product) => void;
+interface EducationTableProps {
+  contents: Education[];
+  onEdit: (content: Education) => void;
   onDelete: (id: string) => void;
 }
-
-const getCategoryStyles = (category: string) => {
-  const cat = category.toUpperCase();
-  if (cat.includes('ORGANIC')) {
-    return {
-      bgClass: 'bg-[#FCE7F3]',
-      textClass: 'text-[#EC4899]',
-      label: 'Organic Product'
-    };
-  } else if (cat.includes('CRAFT') || cat.includes('UPCYCLED')) {
-    return {
-      bgClass: 'bg-[#FEEFD8]',
-      textClass: 'text-[#D88D54]',
-      label: 'Craft'
-    };
-  } else if (cat.includes('ZERO_WASTE') || cat.includes('WASTE')) {
-    return {
-      bgClass: 'bg-[#E2F5EB]',
-      textClass: 'text-[#166534]',
-      label: 'Zero Waste'
-    };
-  }
-  
-  return {
-    bgClass: 'bg-[#F1F5F9]',
-    textClass: 'text-[#475569]',
-    label: category.replace(/_/g, ' ')
-  };
-};
 
 const EyeIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -59,35 +30,25 @@ const TrashIcon = () => (
   </svg>
 );
 
-export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) {
+export function EducationTable({ contents, onEdit, onDelete }: EducationTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4;
-  const totalPages = Math.ceil(products.length / itemsPerPage) || 1;
+  const totalPages = Math.ceil(contents.length / itemsPerPage) || 1;
 
-  // Reset page when products change
-  // Actually, we can use a quick effect or just rely on parent resetting it, but let's keep it simple.
-  
-  const currentProducts = products.slice(
+  const currentContents = contents.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
-  // Format category to title case
-  const formatCategory = (cat: string) => {
-    return cat.replace(/_/g, ' ').replace(/\w\S*/g, (txt) => {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
-  };
 
   return (
     <div className="overflow-hidden rounded-[24px] border border-[#F0F2EB] bg-white shadow-sm mt-6">
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
         <h2 className="text-[18px] font-bold text-[#1B361F]">
-          All Products
+          All Content
         </h2>
         <p className="text-[13px] text-[#A1A89A]">
-          {products.length} Items total
+          {contents.length} Items total
         </p>
       </div>
 
@@ -95,11 +56,11 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
         <div className="min-w-[800px]">
           {/* TABLE HEADER */}
           <div className="flex items-center px-8 py-4 bg-[#F9FAF8] border-b border-[#F0F2EB]">
-            <div className="w-[350px] pl-10 text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              PRODUCT NAME
+            <div className="w-[450px] pl-10 text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
+              CONTENT TITLE
             </div>
             <div className="w-[300px] text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              CATEGORY
+              DATE
             </div>
             <div className="flex-1 text-right text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
               ACTIONS
@@ -108,26 +69,28 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
 
           {/* TABLE ROWS */}
           <div className="divide-y divide-[#F0F2EB]">
-            {currentProducts.map((product) => {
-              const catStyles = getCategoryStyles(product.category);
-
+            {currentContents.map((content) => {
               return (
                 <div
-                  key={product.id}
+                  key={content.id}
                   className="flex items-center px-8 py-5 hover:bg-gray-50/50 transition-colors group"
                 >
                   {/* Title & Dot */}
-                  <div className="w-[350px] flex items-center gap-4">
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#22C55E]" />
+                  <div className="w-[450px] flex items-center gap-4">
+                    <div className={`h-2.5 w-2.5 rounded-full ${content.status === 'PUBLISHED' ? 'bg-[#22C55E]' : 'bg-[#EAB308]'}`} />
                     <span className="text-[14px] font-bold text-[#1B361F] line-clamp-1">
-                      {product.name}
+                      {content.title}
                     </span>
                   </div>
 
-                  {/* Category */}
+                  {/* Date */}
                   <div className="w-[300px]">
-                    <span className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold ${catStyles.bgClass} ${catStyles.textClass}`}>
-                      {catStyles.label}
+                    <span className="text-[13.5px] text-[#72796E]">
+                      {content.createdAt ? new Date(content.createdAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      }) : '-'}
                     </span>
                   </div>
 
@@ -142,7 +105,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
 
                     <button
                       type="button"
-                      onClick={() => onEdit(product)}
+                      onClick={() => onEdit(content)}
                       className="p-1.5 text-[#72796E] hover:text-[#2A3426] transition-colors"
                     >
                       <PencilIcon />
@@ -150,7 +113,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
 
                     <button
                       type="button"
-                      onClick={() => onDelete(product.id)}
+                      onClick={() => onDelete(content.id)}
                       className="p-1.5 text-[#72796E] hover:text-red-600 transition-colors"
                     >
                       <TrashIcon />
@@ -160,9 +123,9 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
               );
             })}
             
-            {products.length === 0 && (
+            {contents.length === 0 && (
               <div className="py-20 text-center">
-                <p className="text-[#72796e]">No products found.</p>
+                <p className="text-[#72796e]">No education content found.</p>
               </div>
             )}
           </div>
@@ -173,7 +136,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
       <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF8] px-8 py-5 lg:flex-row lg:items-center lg:justify-between rounded-b-[24px]">
         <div className="flex items-center">
           <p className="text-[14px] font-medium text-[#72796E]">
-            Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, products.length)} of {products.length} products
+            Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, contents.length)} of {contents.length} contents
           </p>
         </div>
 
