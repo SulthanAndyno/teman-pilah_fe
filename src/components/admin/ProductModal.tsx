@@ -36,7 +36,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
 
     if (product) {
       setName(product.name || '');
-      setSlug(product.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
+      setSlug(product.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
       setDescription(product.description || '');
       setCategory(product.category || 'ORGANIC');
       setPrice(product.price?.toString() || '');
@@ -58,8 +58,8 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
 
   // Sync Slug automatically from Name for new products
   useEffect(() => {
-    if (!product && name) {
-      setSlug(name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
+    if (name && !product) {
+      setSlug(name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
     }
   }, [name, product]);
 

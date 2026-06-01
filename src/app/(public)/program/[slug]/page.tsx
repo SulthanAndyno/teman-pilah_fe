@@ -100,7 +100,7 @@ export default async function DetailProgramPage({ params }: Props) {
         {program.summary && (
           <div className="bg-[#f4f2ea] rounded-[24px] p-6 md:p-8 mb-12 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#ecebe1]">
             <p className="text-[#42493E] text-[16px] md:text-[17px] leading-relaxed font-medium">
-              {program.summary}
+              {program.summary ? program.summary.replace(/<[^>]*>/g, '') : ''}
             </p>
           </div>
         )}

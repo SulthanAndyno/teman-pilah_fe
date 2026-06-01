@@ -18,6 +18,7 @@ type ProgramItem = {
   status?: string;
   publishDate?: string;
   endDate?: string;
+  partnership?: string;
 };
 
 export default async function LandingPage() {
@@ -88,6 +89,7 @@ export default async function LandingPage() {
           ? `http://localhost:2000/${item.imageUrl}`
           : item.image || `https://picsum.photos/seed/${item.id}/500/300`,
         slug: item.slug,
+        partnership: item.partnership,
       }));
   } catch (error) {
     console.error(

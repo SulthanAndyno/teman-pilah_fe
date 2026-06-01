@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import type { JSX } from 'react';
-import { Program } from '@/types/program';
+import { Program } from '@/types';
 
 type ProgramsProps = {
   programs: Program[];
@@ -95,11 +95,11 @@ export function Programs({
               key={program.id}
               role="listitem"
               {...fadeInUp}
-              className="overflow-hidden rounded-[32px] bg-[#F9FAF5] shadow-[0px_1px_2px_#0000000d] transition-transform duration-300 hover:scale-[1.01]"
+              className="flex flex-col h-full overflow-hidden rounded-[32px] bg-[#F9FAF5] shadow-[0px_1px_2px_#0000000d] transition-transform duration-300 hover:scale-[1.01]"
             >
 
               {/* IMAGE */}
-              <div className="h-64 w-full overflow-hidden bg-[#F1F3F2]">
+              <div className="h-64 w-full flex-none overflow-hidden bg-[#F1F3F2]">
 
                 <img
                   src={getImageUrl(
@@ -113,46 +113,61 @@ export function Programs({
               </div>
 
               {/* CONTENT */}
-              <div className="flex flex-col gap-6 p-6">
+              <div className="flex flex-col flex-1 p-6 gap-4">
 
-                {/* TITLE */}
-                <div>
-
+                {/* TEXT CONTENT GROUP */}
+                <div className="flex flex-col gap-3">
+                  {/* TITLE */}
                   <h3 className="text-2xl font-bold leading-7 text-[#154212]">
                     {program.title}
                   </h3>
 
-                </div>
-
-                {/* DESCRIPTION */}
-                <div>
-
+                  {/* DESCRIPTION */}
                   <p className="line-clamp-3 text-sm leading-6 text-[#42493E]">
-                    {program.description}
+                    {program.description ? program.description.replace(/<[^>]*>/g, '') : ''}
                   </p>
-
                 </div>
 
-                {/* BUTTON */}
-                <a
-                  href={`/program/${program.slug ?? program.id}`}
-                  aria-label={`Pelajari lebih lanjut tentang ${program.title}`}
-                  className={`inline-flex items-center pt-2 text-base font-semibold text-[#FC9430] transition-opacity hover:opacity-80 ${
-                    index === 2
-                      ? 'gap-[4px]'
-                      : 'gap-1'
-                  }`}
-                >
+                {/* MITRA & BUTTON GROUP */}
+                <div className="flex flex-col gap-2.5 mt-auto">
+                  {/* MITRA */}
+                  {program.partnership && (
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[11px] font-bold tracking-widest text-[#8F9A8A] uppercase">
+                        MITRA
+                      </span>
+                      <div className="flex items-center gap-2 text-[15px] font-medium text-[#2A3426]">
+                        <img 
+                          src="/program/town.png" 
+                          alt="Mitra Logo" 
+                          className="w-[16px] h-[16px] object-contain flex-shrink-0" 
+                        />
+                        <span>{program.partnership}</span>
+                      </div>
+                    </div>
+                  )}
 
-                  <span>
-                    Pelajari lebih lanjut
-                  </span>
+                  {/* BUTTON */}
+                  <a
+                    href={`/program/${program.slug ?? program.id}`}
+                    aria-label={`Pelajari lebih lanjut tentang ${program.title}`}
+                    className={`inline-flex items-center text-base font-semibold text-[#FC9430] transition-opacity hover:opacity-80 ${
+                      index === 2
+                        ? 'gap-[4px]'
+                        : 'gap-1'
+                    }`}
+                  >
 
-                  <span className="text-lg">
-                    →
-                  </span>
+                    <span>
+                      Pelajari lebih lanjut
+                    </span>
 
-                </a>
+                    <span className="text-lg">
+                      →
+                    </span>
+
+                  </a>
+                </div>
 
               </div>
 

@@ -185,7 +185,7 @@ export function EditNewsForm({
                   className="w-full h-14 bg-[#F9FAF5] border border-[#C2C9BB]/30 rounded-2xl px-6 text-sm font-medium text-[#1B361F] outline-none"
                 />
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {formData.tags.map(tag => (
+                  {formData.tags.map((tag: string) => (
                     <span key={tag} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-[#DCFCE7] text-[#046C4E]">
                       {tag}
                       <X size={14} className="cursor-pointer" />

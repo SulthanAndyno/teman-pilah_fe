@@ -1,8 +1,8 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { CalendarDays, Link as LinkIcon, Download, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { CalendarDays, Link as LinkIcon, ArrowLeft } from 'lucide-react';
 import { educationApi, getThumbnailUrl } from '@/lib/api/education';
+import { DownloadPdfButton } from '@/components/landing/DownloadPdfButton';
 
 interface PageProps {
   params: Promise<{
@@ -127,10 +127,7 @@ export default async function DynamicEducationDetail({ params }: PageProps) {
 
           {/* BOTTOM BUTTON */}
           <div className="mt-14 mb-8">
-            <Button className="bg-[#1a2f1d] hover:bg-[#234926] text-white rounded-full px-7 py-[26px] text-[15px] font-bold flex items-center gap-3 transition-all hover:scale-105 active:scale-95 shadow-md">
-              <Download size={20} />
-              Download Materi Edukasi Lengkap
-            </Button>
+            <DownloadPdfButton content={content} />
           </div>
 
         </div>

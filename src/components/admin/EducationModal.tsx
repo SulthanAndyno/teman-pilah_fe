@@ -71,9 +71,10 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
     }
   }, [content, isOpen]);
 
+  // Auto-generate slug from title if empty
   useEffect(() => {
-    if (!content && title) {
-      setSlug(title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
+    if (title && !content) {
+      setSlug(title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
     }
   }, [title, content]);
 
@@ -254,7 +255,14 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
                   type="text"
                   placeholder="new-content-slug"
                   value={slug}
-                  onChange={(e) => setSlug(e.target.value)}
+                  onChange={(e) => {
+                    const formatted = e.target.value
+                      .toLowerCase()
+                      .replace(/\s+/g, '-')
+                      .replace(/[^a-z0-9-]/g, '')
+                      .replace(/-+/g, '-'); // prevent consecutive hyphens
+                    setSlug(formatted);
+                  }}
                   className="flex-1 px-4 bg-transparent text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] outline-none"
                 />
               </div>

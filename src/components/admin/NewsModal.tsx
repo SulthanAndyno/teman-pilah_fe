@@ -305,7 +305,14 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
                     placeholder="new-program-slug"
                     className="flex-1 px-4 py-3 bg-[#F9FAF8] text-[14px] text-[#2A3426] focus:outline-none"
                     value={slug}
-                    onChange={(e) => setSlug(e.target.value)}
+                    onChange={(e) => {
+                      const formatted = e.target.value
+                        .toLowerCase()
+                        .replace(/\s+/g, '-')
+                        .replace(/[^a-z0-9-]/g, '')
+                        .replace(/-+/g, '-'); // prevent consecutive hyphens
+                      setSlug(formatted);
+                    }}
                   />
                 </div>
               </div>
