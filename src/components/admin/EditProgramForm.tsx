@@ -64,7 +64,7 @@ export function EditProgramForm({
   };
 
   const removeTag = (tagToRemove: string) => {
-    setFormData({ ...formData, tags: formData.tags.filter(t => t !== tagToRemove) });
+    setFormData({ ...formData, tags: formData.tags.filter((t: string) => t !== tagToRemove) });
   };
 
   return (
@@ -246,7 +246,7 @@ export function EditProgramForm({
                   className="w-full h-14 bg-[#F9FAF5] border border-[#C2C9BB]/30 rounded-2xl px-6 text-sm font-medium text-[#1B361F] outline-none focus:border-[#1B361F]/30"
                 />
                 <div className="flex flex-wrap gap-2 pt-2">
-                  {formData.tags.map(tag => (
+                  {formData.tags.map((tag: string) => (
                     <span 
                       key={tag} 
                       className={cn(

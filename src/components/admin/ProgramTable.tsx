@@ -1,17 +1,16 @@
 'use client';
 
 import { Program } from '@/types';
-import { getImageUrl } from '@/lib/utils';
+import { getImageUrl } from '@/lib/api/Products';
 import { Edit2, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 interface ProgramTableProps {
   programs: Program[];
-  onEdit: (program: Program) => void;
   onDelete: (id: string) => void;
 }
 
-export function ProgramTable({ programs, onEdit, onDelete }: ProgramTableProps) {
+export function ProgramTable({ programs, onDelete }: ProgramTableProps) {
   return (
     <div className="w-full overflow-hidden rounded-2xl border border-[#c2c9bb] bg-white shadow-[0px_1px_2px_#0000000d]">
       <div className="overflow-x-auto">

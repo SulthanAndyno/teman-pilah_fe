@@ -8,7 +8,7 @@ export const news: News[] = [
     content: 'Minggu lalu Teman Pilah mengadakan aksi bersih pantai di pesisir utara Jakarta bersama 200 relawan...',
     date: '2024-03-15',
     image: 'https://images.unsplash.com/photo-1618477461853-cf6ed67ffadd?auto=format&fit=crop&q=80&w=800',
-    status: 'published',
+    status: 'PUBLISHED',
   },
   {
     id: '2',
@@ -17,7 +17,7 @@ export const news: News[] = [
     content: 'Edukasi sejak dini sangat penting. Kami mengunjungi SDN 01 Hijau untuk mengajarkan cara memilah sampah...',
     date: '2024-03-10',
     image: 'https://images.unsplash.com/photo-1532187875605-1ef6ec82110e?auto=format&fit=crop&q=80&w=800',
-    status: 'published',
+    status: 'PUBLISHED',
   },
   {
     id: '3',
@@ -26,7 +26,7 @@ export const news: News[] = [
     content: 'Siapa bilang tinggal di apartemen tidak bisa mengompos? Gunakan metode bokashi yang minim bau dan hemat tempat...',
     date: '2024-03-05',
     image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800',
-    status: 'published',
+    status: 'PUBLISHED',
   },
   {
     id: '4',
@@ -35,7 +35,7 @@ export const news: News[] = [
     content: 'Temui koleksi tas terbaru kami yang terbuat dari rombakan ban bekas dan terpal bekas armada logistik...',
     date: '2024-03-01',
     image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=800',
-    status: 'published',
+    status: 'PUBLISHED',
   },
   {
     id: '5',
@@ -44,6 +44,6 @@ export const news: News[] = [
     content: 'Pernah melihat segitiga dengan angka 1-7 di bawah botol? Ternyata setiap angka memiliki makna yang berbeda...',
     date: '2024-02-25',
     image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=800',
-    status: 'draft',
+    status: 'DRAFT',
   },
 ];
