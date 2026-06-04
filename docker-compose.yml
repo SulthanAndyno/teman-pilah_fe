@@ -1,0 +1,9 @@
+services:
+  fe:
+    build: .
+    container_name: temanpilah-fe
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.temanpilah.com
