@@ -8,6 +8,8 @@ type ProgramsProps = {
   programs: Program[];
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 export function Programs({
   programs,
 }: ProgramsProps): JSX.Element {
@@ -53,7 +55,7 @@ export function Programs({
     }
 
     // backend local
-    return `http://localhost:2000/${image}`;
+    return `${BASE_URL}/${image}`;
   }
 
   return (

@@ -8,6 +8,8 @@ import {
   MoreVertical,
 } from 'lucide-react';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 export default function AdminDashboard() {
   const [stats, setStats] = React.useState({
     programs: 0,
@@ -20,9 +22,9 @@ export default function AdminDashboard() {
     const fetchStats = async () => {
       try {
         const [newsRes, productsRes, educationRes] = await Promise.all([
-          fetch('http://localhost:2000/api/news').catch(() => null),
-          fetch('http://localhost:2000/api/products').catch(() => null),
-          fetch('http://localhost:2000/api/education').catch(() => null),
+          fetch(`${BASE_URL}/api/news`).catch(() => null),
+          fetch(`${BASE_URL}/api/products`).catch(() => null),
+          fetch(`${BASE_URL}/api/education`).catch(() => null),
         ]);
         
         let programsCount = 0;

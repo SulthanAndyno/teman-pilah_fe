@@ -394,6 +394,8 @@ import { Card } from '@/components/ui/Card';
 
 import { toast } from 'sonner';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 export default function LoginPage() {
 
   const emailId = useId();
@@ -433,7 +435,7 @@ export default function LoginPage() {
     try {
 
       const res = await fetch(
-        'http://localhost:2000/api/auth/login',
+        `${BASE_URL}/api/auth/login`,
         {
           method: 'POST',
 

@@ -81,7 +81,7 @@ export function Navbar() {
             rel="noopener noreferrer"
           >
             <Button
-              className="flex h-[46px] items-center justify-center gap-2 rounded-full bg-[#1a2f1d] px-6 py-3 text-white transition-all duration-300 hover:scale-[1.03] hover:bg-[#234926] active:scale-95"
+              className="flex h-[46px] items-center justify-center gap-6 rounded-full bg-gradient-to-r from-[#154212] to-[#2D5A27] px-12 py-3 text-white transition-all duration-300 hover:scale-[1.03] hover:brightness-110 active:scale-95"
             >
               <img
                 src="/wa.png"
@@ -142,7 +142,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button className="flex h-[46px] w-full items-center justify-center gap-2 rounded-full bg-[#1a2f1d] text-sm font-bold text-white shadow-md transition-transform active:scale-95 hover:bg-[#234926]">
+                  <Button className="flex h-[46px] w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#154212] to-[#2D5A27] text-sm font-bold text-white shadow-md transition-transform active:scale-95 hover:brightness-110">
                     <img
                       src="/wa.png"
                       alt="WhatsApp"

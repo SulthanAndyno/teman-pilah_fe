@@ -7,6 +7,8 @@ import { Education } from '@/components/landing/Education';
 import { ProductCatalog } from '@/components/landing/ProductCatalog';
 import { Gallery } from '@/components/landing/Gallery';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 type ProgramItem = {
   id: number;
   title: string;
@@ -30,7 +32,7 @@ export default async function LandingPage() {
 
   try {
     const productsRes = await fetch(
-      'http://localhost:2000/api/products',
+      `${BASE_URL}/api/products`,
       {
         cache: 'no-store',
       }
@@ -51,7 +53,7 @@ export default async function LandingPage() {
 
   try {
     const programsRes = await fetch(
-      'http://localhost:2000/api/news',
+      `${BASE_URL}/api/news`,
       {
         cache: 'no-store',
       }
@@ -86,7 +88,7 @@ export default async function LandingPage() {
         title: item.title,
         description: item.summary || item.content,
         image: item.imageUrl
-          ? `http://localhost:2000/${item.imageUrl}`
+          ? `${BASE_URL}/${item.imageUrl}`
           : item.image || `https://picsum.photos/seed/${item.id}/500/300`,
         slug: item.slug,
         partnership: item.partnership,
@@ -107,7 +109,7 @@ export default async function LandingPage() {
 
   try {
     const educationRes = await fetch(
-      'http://localhost:2000/api/education',
+      `${BASE_URL}/api/education`,
       {
         cache: 'no-store',
       }

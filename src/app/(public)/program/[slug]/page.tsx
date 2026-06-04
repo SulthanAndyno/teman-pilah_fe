@@ -7,13 +7,15 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 export default async function DetailProgramPage({ params }: Props) {
   const { slug } = await params;
 
   let program = null;
 
   try {
-    const res = await fetch('http://localhost:2000/api/news', { cache: 'no-store' });
+    const res = await fetch(`${BASE_URL}/api/news`, { cache: 'no-store' });
     const json = await res.json();
     
     // Find the matching program (check slug first, fallback to id)
@@ -33,7 +35,7 @@ export default async function DetailProgramPage({ params }: Props) {
   const endDate = program.endDate ? new Date(program.endDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
   const dateRange = startDate && endDate ? `${startDate} - ${endDate}` : (startDate || 'Tanggal Belum Ditentukan');
 
-  const imageUrl = program.imageUrl ? `http://localhost:2000/${program.imageUrl}` : (program.image || `https://picsum.photos/seed/${program.id}/2000/1000`);
+  const imageUrl = program.imageUrl ? `${BASE_URL}/${program.imageUrl}` : (program.image || `https://picsum.photos/seed/${program.id}/2000/1000`);
 
   return (
     <div className="pt-[88px] min-h-screen bg-[#FAFAF8]">

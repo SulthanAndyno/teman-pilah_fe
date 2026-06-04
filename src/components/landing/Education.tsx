@@ -15,13 +15,15 @@ interface EducationProps {
   items?: EducationItem[];
 }
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+
 export const Education = ({ items }: EducationProps): JSX.Element => {
   const displayData = items && items.length > 0 ? items.map(item => ({
     id: item.id,
     title: item.title,
     description: item.overview || '',
     href: `/edukasi/${item.slug}`,
-    thumbnail: item.thumbnail ? `http://localhost:2000/${item.thumbnail}` : null,
+    thumbnail: item.thumbnail ? `${BASE_URL}/${item.thumbnail}` : null,
   })) : [
     {
       id: 'prinsip-3r',
