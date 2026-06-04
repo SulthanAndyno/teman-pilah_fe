@@ -513,7 +513,7 @@ export default function LoginPage() {
       <div className="absolute inset-0 z-0">
 
         <Image
-          src="/tb.png"
+          src="/login/login.png"
           alt="Teman Pilah Background"
           fill
           className="object-cover"
