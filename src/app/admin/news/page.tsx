@@ -1,17 +1,11 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-
 import { News } from '@/types';
-
 import { newsApi } from '@/lib/api/news';
-
 import { NewsTable } from '@/components/admin/NewsTable';
-
 import { NewsModal } from '@/components/admin/NewsModal';
-
 import { DeleteModal } from '@/components/admin/DeleteModal';
-
 import { SuccessModal } from '@/components/admin/SuccessModal';
 
 const BASE_URL =
