@@ -228,9 +228,10 @@ export default function AdminEducationPage() {
 
   const confirmDelete = async () => {
     setIsLoading(true);
+    const nameToDelete = deleteModal.name;
     setDeleteModal({ isOpen: false, id: '', name: '' });
     try {
-      await educationApi.delete(deleteModal.id);
+      await educationApi.delete(deleteModal.id, nameToDelete);
       setSuccessModal({
         isOpen: true,
         title: 'Success Delete',

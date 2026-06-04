@@ -1,5 +1,6 @@
 'use client';
 
+import { getBaseUrl } from '../../lib/api-config';
 import React, { useState, useId } from 'react';
 import { motion } from 'motion/react';
 import {
@@ -19,7 +20,7 @@ import { Card } from '@/components/ui/Card';
 
 import { toast } from 'sonner';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 export default function LoginPage() {
 

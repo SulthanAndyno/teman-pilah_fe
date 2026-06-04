@@ -1,8 +1,8 @@
+import { getBaseUrl } from '../api-config';
 import { News } from '@/types';
+import { logAdminActivity } from '@/lib/utils';
 
-export const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  'http://localhost:2000';
+export const BASE_URL = getBaseUrl();
 
 interface ApiResponse<T> {
   status: string;
@@ -108,6 +108,12 @@ export const newsApi = {
     });
 
     const body = await handleResponse<ApiResponse<News>>(res);
+    try {
+      const title = data.title || 'Program';
+      logAdminActivity(`Created program: ${title}`, 'bg-[#FDF2F2]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
@@ -167,17 +173,29 @@ export const newsApi = {
     });
 
     const body = await handleResponse<ApiResponse<News>>(res);
+    try {
+      const title = data.title || body.data.title || 'Program';
+      logAdminActivity(`Updated program: ${title}`, 'bg-[#FDF2F2]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
   // =========================
   // DELETE NEWS
   // =========================
-  async delete(id: string): Promise<void> {
+  async delete(id: string, title?: string): Promise<void> {
     const res = await fetch(`${BASE_URL}/api/news/${id}`, {
       method: 'DELETE',
       headers: authHeader(),
     });
     await handleResponse(res);
+    try {
+      const display = title ? `: ${title}` : ` (ID: ${id})`;
+      logAdminActivity(`Deleted program${display}`, 'bg-[#FDF2F2]');
+    } catch (e) {
+      console.error(e);
+    }
   },
 };

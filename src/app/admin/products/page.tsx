@@ -215,7 +215,7 @@ export default function AdminProducts() {
 
   const confirmDelete = async () => {
     try {
-      await productApi.delete(deleteModal.id);
+      await productApi.delete(deleteModal.id, deleteModal.name);
       setSuccessModal({
         isOpen: true,
         title: 'Success Delete',

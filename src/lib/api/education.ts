@@ -1,9 +1,11 @@
 // lib/api/education.ts
 // Disesuaikan 100% dengan backend teman-pilah (port 2000)
 
+import { getBaseUrl } from '../api-config';
 import { Education } from "@/types";
+import { logAdminActivity } from '@/lib/utils';
 
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+export const BASE_URL = getBaseUrl();
 
 // Helper to get full thumbnail URL
 export function getThumbnailUrl(imagePath?: string | null): string {
@@ -54,17 +56,6 @@ export const educationApi = {
   },
 
   /**
-   * GET /api/education/:id
-   */
-  async getById(id: string): Promise<Education> {
-    const res = await fetch(`${BASE_URL}/api/education/${id}`, {
-      cache: "no-store",
-    });
-    const body = await handleResponse<SingleResponse<Education>>(res);
-    return body.data;
-  },
-
-  /**
    * POST /api/education
    */
   async create(data: FormData): Promise<Education> {
@@ -74,6 +65,12 @@ export const educationApi = {
       body: data,
     });
     const body = await handleResponse<SingleResponse<Education>>(res);
+    try {
+      const title = data.get('title') as string || 'Education Content';
+      logAdminActivity(`Created education content: ${title}`, 'bg-[#DCFCE7]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
@@ -87,17 +84,29 @@ export const educationApi = {
       body: data,
     });
     const body = await handleResponse<SingleResponse<Education>>(res);
+    try {
+      const title = data.get('title') as string || body.data.title || 'Education Content';
+      logAdminActivity(`Updated education content: ${title}`, 'bg-[#DCFCE7]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
   /**
    * DELETE /api/education/:id
    */
-  async delete(id: string): Promise<void> {
+  async delete(id: string, title?: string): Promise<void> {
     const res = await fetch(`${BASE_URL}/api/education/${id}`, {
       method: "DELETE",
       headers: { ...authHeader(), "Content-Type": "application/json" },
     });
     await handleResponse<unknown>(res);
+    try {
+      const display = title ? `: ${title}` : ` (ID: ${id})`;
+      logAdminActivity(`Deleted education content${display}`, 'bg-[#DCFCE7]');
+    } catch (e) {
+      console.error(e);
+    }
   },
 };

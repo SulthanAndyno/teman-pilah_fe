@@ -1,5 +1,6 @@
 'use client';
 
+import { getBaseUrl } from '../../lib/api-config';
 import React from 'react';
 import {
   FolderKanban,
@@ -8,7 +9,7 @@ import {
   MoreVertical,
 } from 'lucide-react';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 export default function AdminDashboard() {
   const [stats, setStats] = React.useState({
@@ -65,10 +66,25 @@ export default function AdminDashboard() {
         if (educationRes && educationRes.ok) {
           const educationData = await educationRes.json();
           educationCount = educationData.data?.length || 0;
+          
+          const mappedEducation = (educationData.data || []).map((e: any) => ({
+            id: 'edu-' + e.id,
+            title: `Education content published: ${e.title}`,
+            date: e.createdAt ? new Date(e.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
+            status: 'SUCCESS',
+            iconBg: 'bg-[#DCFCE7]', // Greenish empty square
+            rawDate: e.createdAt ? new Date(e.createdAt).getTime() : 0,
+          }));
+          newActivities = [...newActivities, ...mappedEducation];
         }
+
+        // Load CRUD activities recorded in localStorage
+        const stored = localStorage.getItem('admin_activities');
+        const localActivities = stored ? JSON.parse(stored) : [];
+        newActivities = [...newActivities, ...localActivities];
         
         newActivities.sort((a, b) => b.rawDate - a.rawDate);
-        setActivities(newActivities.slice(0, 5)); // Take top 5 recent activities
+        setActivities(newActivities.slice(0, 10)); // Take top 10 recent activities
 
         setStats({
           programs: programsCount,
@@ -155,32 +171,39 @@ export default function AdminDashboard() {
             </thead>
             <tbody className="divide-y divide-[#C2C9BB]/10">
               {activities.length > 0 ? (
-                activities.map((row) => (
-                  <tr key={row.id} className="hover:bg-[#F9FAF5]/50 transition-colors">
-                    <td className="px-4 sm:px-8 py-3 sm:py-5">
-                      <div className="flex items-center gap-3 sm:gap-4">
-                        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${row.iconBg} flex items-center justify-center flex-shrink-0`}>
+                activities.map((row) => {
+                  const isProgram = row.id.includes('news') || row.id.includes('program');
+                  const isProduct = row.id.includes('prod');
+                  const Icon = isProgram ? FolderKanban : isProduct ? Package : Handshake;
+                  const iconColor = isProgram ? 'text-[#E02424]' : isProduct ? 'text-[#D97706]' : 'text-[#059669]';
+                  return (
+                    <tr key={row.id} className="hover:bg-[#F9FAF5]/50 transition-colors">
+                      <td className="px-4 sm:px-8 py-3 sm:py-5">
+                        <div className="flex items-center gap-3 sm:gap-4">
+                          <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${row.iconBg} ${iconColor} flex items-center justify-center flex-shrink-0`}>
+                            <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </div>
+                          <span className="font-bold text-[#1B361F] text-xs sm:text-sm">{row.title}</span>
                         </div>
-                        <span className="font-bold text-[#1B361F] text-xs sm:text-sm">{row.title}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 sm:px-8 py-4 sm:py-5 text-[#42493E] font-medium text-xs">
-                      {row.date}
-                    </td>
-                    <td className="px-4 sm:px-8 py-4 sm:py-5">
-                      <span className={`px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-black tracking-widest ${
-                        row.status === 'SUCCESS' ? 'bg-[#E3F2E7] text-[#2F6F1E]' : 'bg-[#FEF3C7] text-[#92400E]'
-                      }`}>
-                        {row.status}
-                      </span>
-                    </td>
-                    <td className="px-4 sm:px-8 py-4 sm:py-5">
-                      <button className="text-[#C2C9BB] hover:text-[#42493E]">
-                        <MoreVertical size={18} />
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-5 text-[#42493E] font-medium text-xs">
+                        {row.date}
+                      </td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-5">
+                        <span className={`px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-black tracking-widest ${
+                          row.status === 'SUCCESS' ? 'bg-[#E3F2E7] text-[#2F6F1E]' : 'bg-[#FEF3C7] text-[#92400E]'
+                        }`}>
+                          {row.status}
+                        </span>
+                      </td>
+                      <td className="px-4 sm:px-8 py-4 sm:py-5">
+                        <button className="text-[#C2C9BB] hover:text-[#42493E]">
+                          <MoreVertical size={18} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td colSpan={4} className="px-6 sm:px-8 py-8 text-center text-[#72796E] text-sm">

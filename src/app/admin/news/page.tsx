@@ -1,5 +1,6 @@
 'use client';
 
+import { getBaseUrl } from '../../../lib/api-config';
 import { useEffect, useState, useMemo } from 'react';
 import { News } from '@/types';
 import { newsApi } from '@/lib/api/news';
@@ -8,9 +9,7 @@ import { NewsModal } from '@/components/admin/NewsModal';
 import { DeleteModal } from '@/components/admin/DeleteModal';
 import { SuccessModal } from '@/components/admin/SuccessModal';
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 export default function AdminNewsPage() {
 
@@ -310,7 +309,7 @@ export default function AdminNewsPage() {
   async function confirmDelete() {
     if (!deletingNews) return;
     try {
-      await newsApi.delete(deletingNews.id);
+      await newsApi.delete(deletingNews.id, deletingNews.title);
       setNewsList((prev) => prev.filter((item) => item.id !== deletingNews.id));
       setDeletingNews(null);
       setSuccessModal({

@@ -9,9 +9,11 @@
 // ✓ Gambar      : disimpan sebagai "uploads/products/xxx.png" (path relatif)
 //                 → gunakan getImageUrl() untuk menampilkan di <img>
 
+import { getBaseUrl } from '../api-config';
 import { Product } from '@/types';
+import { logAdminActivity } from '@/lib/utils';
 
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:2000';
+export const BASE_URL = getBaseUrl();
 
 // ─── Helper: bangun URL gambar penuh ─────────────────────────────────────────
 export function getImageUrl(imagePath?: string | null): string {
@@ -82,6 +84,12 @@ export const productApi = {
       body: data,
     });
     const body = await handleResponse<SingleResponse<Product>>(res);
+    try {
+      const name = data.get('name') as string || 'Product';
+      logAdminActivity(`Created product: ${name}`, 'bg-[#FEF3C7]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
@@ -96,6 +104,12 @@ export const productApi = {
       body: data,
     });
     const body = await handleResponse<SingleResponse<Product>>(res);
+    try {
+      const name = data.get('name') as string || body.data.name || 'Product';
+      logAdminActivity(`Updated product: ${name}`, 'bg-[#FEF3C7]');
+    } catch (e) {
+      console.error(e);
+    }
     return body.data;
   },
 
@@ -103,11 +117,17 @@ export const productApi = {
    * DELETE /api/products/:id
    * Butuh auth token. Backend juga hapus file gambar dari disk otomatis.
    */
-  async delete(id: string): Promise<void> {
+  async delete(id: string, name?: string): Promise<void> {
     const res = await fetch(`${BASE_URL}/api/products/${id}`, {
       method: 'DELETE',
       headers: { ...authHeader(), 'Content-Type': 'application/json' },
     });
     await handleResponse<unknown>(res);
+    try {
+      const display = name ? `: ${name}` : ` (ID: ${id})`;
+      logAdminActivity(`Deleted product${display}`, 'bg-[#FEF3C7]');
+    } catch (e) {
+      console.error(e);
+    }
   },
 };

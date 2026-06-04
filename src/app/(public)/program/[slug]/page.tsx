@@ -1,3 +1,4 @@
+import { getBaseUrl } from '../../../../lib/api-config';
 import React from 'react';
 import { CalendarDays, Building, Recycle, Users, BookOpen, Tag, ArrowLeft } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -7,7 +8,7 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 export default async function DetailProgramPage({ params }: Props) {
   const { slug } = await params;

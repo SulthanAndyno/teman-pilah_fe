@@ -16,6 +16,10 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Teman Pilah",
   description: "Platform komunitas lingkungan hidup Indonesia untuk pengelolaan sampah, edukasi daur ulang, dan produk upcycled.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

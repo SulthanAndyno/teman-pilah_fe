@@ -1,5 +1,6 @@
 'use client';
 
+import { getBaseUrl } from '../../lib/api-config';
 import React, { useState, useEffect } from 'react';
 import { News } from '@/types';
 import { X, ArrowLeft, Bold, Italic, Underline, List, ListOrdered, Quote, Link2, Image as ImageIcon, AlignLeft, AlignCenter, AlignRight, AlignJustify } from 'lucide-react';
@@ -12,7 +13,7 @@ interface NewsModalProps {
   onSubmit: (data: any) => void;
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
   const [title, setTitle] = useState('');

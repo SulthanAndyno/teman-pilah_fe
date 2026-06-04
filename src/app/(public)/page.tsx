@@ -1,4 +1,7 @@
+import { getBaseUrl } from '../../lib/api-config';
 import React from 'react';
+
+export const dynamic = 'force-dynamic';
 
 import { Hero } from '@/components/landing/Hero';
 import { About } from '@/components/landing/About';
@@ -7,7 +10,7 @@ import { Education } from '@/components/landing/Education';
 import { ProductCatalog } from '@/components/landing/ProductCatalog';
 import { Gallery } from '@/components/landing/Gallery';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:2000';
+const BASE_URL = getBaseUrl();
 
 type ProgramItem = {
   id: number;
