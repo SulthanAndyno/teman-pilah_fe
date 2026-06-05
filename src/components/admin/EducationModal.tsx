@@ -28,7 +28,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
 
   const [confirmModal, setConfirmModal] = useState<{
     isOpen: boolean;
-    status: 'PUBLISHED' | 'DRAFT' | 'ERROR' | null;
+    status: 'PUBLISHED' | 'DRAFT' | 'ERROR' | 'ERROR_FILE_SIZE' | null;
   }>({ isOpen: false, status: null });
 
   // Rich Text Editor State
@@ -81,6 +81,11 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        setConfirmModal({ isOpen: true, status: 'ERROR_FILE_SIZE' });
+        e.target.value = ''; // Clear selection
+        return;
+      }
       setImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -467,24 +472,36 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
 
       <ConfirmModal
         isOpen={confirmModal.isOpen}
-        isAlert={confirmModal.status === 'ERROR'}
+        isAlert={confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE'}
         onClose={() => setConfirmModal({ isOpen: false, status: null })}
         onConfirm={() => {
-          if (confirmModal.status === 'ERROR') {
+          if (confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE') {
             setConfirmModal({ isOpen: false, status: null });
           } else {
             executeSubmit();
           }
         }}
-        title={confirmModal.status === 'ERROR' ? "Incomplete Data" : (content ? "Save Changes?" : "Add New Content?")}
+        title={
+          confirmModal.status === 'ERROR'
+            ? "Incomplete Data"
+            : confirmModal.status === 'ERROR_FILE_SIZE'
+            ? "File Too Large"
+            : (content ? "Save Changes?" : "Add New Content?")
+        }
         message={
           confirmModal.status === 'ERROR'
             ? "Please fill in all required fields (Title and Description) before saving."
+            : confirmModal.status === 'ERROR_FILE_SIZE'
+            ? "The uploaded file exceeds the 2MB size limit. Please upload an image smaller than 2MB."
             : content 
             ? `Are you sure you want to save changes to "${title || 'this content'}"?`
             : `Are you sure you want to Add "${title || 'this content'}"? This action cannot be undone.`
         }
-        confirmText={confirmModal.status === 'ERROR' ? "OK" : (content ? "Save Changes" : "Add New Content")}
+        confirmText={
+          confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE'
+            ? "OK"
+            : (content ? "Save Changes" : "Add New Content")
+        }
       />
     </div>
   );

@@ -12,12 +12,12 @@ export function Navbar() {
   const [activeLink, setActiveLink] = useState('Beranda');
 
   const navLinks = [
-    { name: 'Beranda', href: '#' },
-    { name: 'Tentang Kami', href: '#tentang' },
-    { name: 'Program', href: '#program' },
-    { name: 'Edukasi', href: '#edukasi' },
-    { name: 'Katalog', href: '#katalog' },
-    { name: 'Kontak', href: '#kontak' },
+    { name: 'Beranda', href: '/' },
+    { name: 'Tentang Kami', href: '/#tentang' },
+    { name: 'Program', href: '/#program' },
+    { name: 'Edukasi', href: '/#edukasi' },
+    { name: 'Katalog', href: '/#katalog' },
+    { name: 'Kontak', href: '/#kontak' },
   ];
 
   const whatsappLink = 'https://wa.me/6281234567890';

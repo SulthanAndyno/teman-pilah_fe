@@ -73,21 +73,21 @@
 import type { JSX } from 'react';
 
 const navigationLinks = [
-  { label: 'Beranda', href: '#' },
-  { label: 'Tentang Kami', href: '#' },
-  { label: 'Program', href: '#' },
-  { label: 'Edukasi', href: '#' },
+  { label: 'Beranda', href: '/' },
+  { label: 'Tentang Kami', href: '/#tentang' },
+  { label: 'Program', href: '/#program' },
+  { label: 'Edukasi', href: '/#edukasi' },
 ];
 
 const otherLinks = [
-  { label: 'Katalog', href: '#' },
+  { label: 'Katalog', href: '/#katalog' },
   { label: 'Dokumentasi', href: '#' },
-  { label: 'Kontak', href: '#' },
+  { label: 'Kontak', href: '/#kontak' },
 ];
     const socialLinks = [
       {
         label: 'globe',
-        href: '#',
+        href: '/',
         icon: (
           <img
             src="/globe.png"
@@ -99,7 +99,7 @@ const otherLinks = [
 
       {
         label: 'Email',
-        href: '#',
+        href: 'mailto:info@temanpilah.com',
         icon: (
           <img
             src="/mail.png"
@@ -111,7 +111,7 @@ const otherLinks = [
 
       {
         label: 'Telepon',
-        href: '#',
+        href: 'https://wa.me/6281234567890',
         icon: (
           <img
             src="/call.png"

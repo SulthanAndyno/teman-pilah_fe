@@ -215,16 +215,6 @@ export default function AdminNewsPage() {
           null,
       };
 
-      console.log(
-        'FINAL PAYLOAD:',
-        payload
-      );
-
-      console.log(
-        'IMAGE FILE:',
-        payload.imageFile
-      );
-
       // =========================
       // UPDATE
       // =========================
