@@ -66,7 +66,7 @@ export function Hero() {
             </button>
 
             {/* SECONDARY BUTTON */}
-            <button className="group inline-flex items-center gap-3 rounded-full bg-[#E8E9E4] px-7 py-4 transition-all duration-300 hover:scale-[1.02] active:scale-95">
+            {/* <button className="group inline-flex items-center gap-3 rounded-full bg-[#E8E9E4] px-7 py-4 transition-all duration-300 hover:scale-[1.02] active:scale-95">
               <img src="/igg.png" alt="Instagram" className="h-5 w-5 object-contain" />
               <span className="text-sm font-bold leading-7 text-[#154212]">
                 Jelajahi Kegiatan
@@ -74,8 +74,22 @@ export function Hero() {
             </button>
 
           </div>
-        </motion.div>
+        </motion.div> */}
 
+            <a
+          href="https://www.instagram.com/temanpilah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-3 rounded-full bg-[#E8E9E4] px-7 py-4 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+          >
+          <img src="/igg.png" alt="Instagram" className="h-5 w-5 object-contain" />
+          <span className="text-sm font-bold leading-7 text-[#154212]">
+            Jelajahi Kegiatan
+          </span>
+        </a>
+
+        </div>
+        </motion.div>
         {/* RIGHT CONTENT */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
