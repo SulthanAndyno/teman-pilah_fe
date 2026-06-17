@@ -42,7 +42,27 @@ const galleryImages = [
   },
 ];
 
-export function Gallery() {
+import { Gallery as GalleryType } from '@/types';
+import { getGalleryImageUrl } from '@/lib/api/gallery';
+
+interface GalleryProps {
+  items?: GalleryType[];
+}
+
+export function Gallery({ items }: GalleryProps) {
+  // Map database items or fallback images to exactly 6 slots to preserve layout
+  const displayImages = Array.from({ length: 6 }).map((_, index) => {
+    const dbItem = items && items[index];
+    const fallbackImage = galleryImages[index];
+
+    return {
+      id: dbItem ? dbItem.id : `fallback-${fallbackImage.id}`,
+      src: dbItem ? getGalleryImageUrl(dbItem.image) : fallbackImage.src,
+      alt: dbItem ? (dbItem.description || 'Aksi nyata Teman Pilah') : fallbackImage.alt,
+      className: fallbackImage.className,
+    };
+  });
+
   return (
     <section className="py-28 bg-[#F9FAF5] overflow-hidden">
       <div className="max-w-[1440px] 2xl:px-12 mx-auto px-6 space-y-20">
@@ -73,24 +93,24 @@ export function Gallery() {
 
             <div className="grid grid-cols-2 gap-8">
 
-              <GalleryCard image={galleryImages[0]} />
-              <GalleryCard image={galleryImages[1]} />
+              <GalleryCard image={displayImages[0]} />
+              <GalleryCard image={displayImages[1]} />
 
             </div>
 
-            <GalleryCard image={galleryImages[2]} />
+            <GalleryCard image={displayImages[2]} />
 
           </div>
 
           {/* Right */}
           <div className="space-y-8">
 
-            <GalleryCard image={galleryImages[3]} />
+            <GalleryCard image={displayImages[3]} />
 
             <div className="grid grid-cols-2 gap-8">
 
-              <GalleryCard image={galleryImages[4]} />
-              <GalleryCard image={galleryImages[5]} />
+              <GalleryCard image={displayImages[4]} />
+              <GalleryCard image={displayImages[5]} />
 
             </div>
 
@@ -124,6 +144,7 @@ function GalleryCard({ image }: GalleryCardProps) {
         alt={image.alt}
         fill
         className="object-cover group-hover:scale-105 transition-transform duration-700"
+        unoptimized
       />
 
       {/* Overlay */}
