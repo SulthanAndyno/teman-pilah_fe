@@ -3,9 +3,10 @@
 import { getBaseUrl } from '../../lib/api-config';
 import React from 'react';
 import {
-  FolderKanban,
+  ClipboardList,
   Package,
-  Handshake,
+  GraduationCap,
+  Image as ImageIcon,
   MoreVertical,
 } from 'lucide-react';
 
@@ -16,21 +17,24 @@ export default function AdminDashboard() {
     programs: 0,
     products: 0,
     education: 0,
+    gallery: 0,
   });
   const [activities, setActivities] = React.useState<any[]>([]);
 
   React.useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [newsRes, productsRes, educationRes] = await Promise.all([
+        const [newsRes, productsRes, educationRes, galleryRes] = await Promise.all([
           fetch(`${BASE_URL}/api/news`).catch(() => null),
           fetch(`${BASE_URL}/api/products`).catch(() => null),
           fetch(`${BASE_URL}/api/education`).catch(() => null),
+          fetch(`${BASE_URL}/api/gallery`).catch(() => null),
         ]);
         
         let programsCount = 0;
         let productsCount = 0;
         let educationCount = 0;
+        let galleryCount = 0;
         let newActivities: any[] = [];
 
         if (newsRes && newsRes.ok) {
@@ -78,6 +82,21 @@ export default function AdminDashboard() {
           newActivities = [...newActivities, ...mappedEducation];
         }
 
+        if (galleryRes && galleryRes.ok) {
+          const galleryData = await galleryRes.json();
+          galleryCount = galleryData.data?.length || 0;
+          
+          const mappedGallery = (galleryData.data || []).map((g: any) => ({
+            id: 'gal-' + g.id,
+            title: `Gallery item uploaded`,
+            date: g.createdAt ? new Date(g.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
+            status: 'SUCCESS',
+            iconBg: 'bg-[#F3E8FF]', // Purple empty square
+            rawDate: g.createdAt ? new Date(g.createdAt).getTime() : 0,
+          }));
+          newActivities = [...newActivities, ...mappedGallery];
+        }
+
         // Load CRUD activities recorded in localStorage
         const stored = localStorage.getItem('admin_activities');
         const localActivities = stored ? JSON.parse(stored) : [];
@@ -89,7 +108,8 @@ export default function AdminDashboard() {
         setStats({
           programs: programsCount,
           products: productsCount,
-          education: educationCount
+          education: educationCount,
+          gallery: galleryCount
         });
       } catch (error) {
         console.error('Error fetching dashboard stats:', error);
@@ -104,7 +124,7 @@ export default function AdminDashboard() {
       id: 'total-programs',
       title: 'TOTAL PROGRAMS',
       value: stats.programs.toString(),
-      icon: FolderKanban,
+      icon: ClipboardList,
       iconBg: 'bg-[#FDF2F2]',
       iconColor: 'text-[#E02424]',
     },
@@ -120,9 +140,17 @@ export default function AdminDashboard() {
       id: 'total-education',
       title: 'TOTAL EDUCATION',
       value: stats.education.toString(),
-      icon: Handshake,
+      icon: GraduationCap,
       iconBg: 'bg-[#DCFCE7]',
       iconColor: 'text-[#059669]',
+    },
+    {
+      id: 'total-gallery',
+      title: 'TOTAL GALLERY',
+      value: stats.gallery.toString(),
+      icon: ImageIcon,
+      iconBg: 'bg-[#F3E8FF]',
+      iconColor: 'text-[#7C3AED]',
     },
   ];
 
@@ -139,7 +167,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* METRIC CARDS */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
         {currentCards.map((card) => (
           <div key={card.id} className="bg-white rounded-[16px] sm:rounded-[24px] p-4 sm:p-8 border border-[#C2C9BB]/30 shadow-sm flex flex-row sm:flex-col items-center sm:items-start gap-4 sm:gap-8 transition-all hover:shadow-md">
             <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${card.iconBg} ${card.iconColor} flex items-center justify-center flex-shrink-0`}>
@@ -174,8 +202,9 @@ export default function AdminDashboard() {
                 activities.map((row) => {
                   const isProgram = row.id.includes('news') || row.id.includes('program');
                   const isProduct = row.id.includes('prod');
-                  const Icon = isProgram ? FolderKanban : isProduct ? Package : Handshake;
-                  const iconColor = isProgram ? 'text-[#E02424]' : isProduct ? 'text-[#D97706]' : 'text-[#059669]';
+                  const isGallery = row.id.includes('gal');
+                  const Icon = isProgram ? ClipboardList : isProduct ? Package : isGallery ? ImageIcon : GraduationCap;
+                  const iconColor = isProgram ? 'text-[#E02424]' : isProduct ? 'text-[#D97706]' : isGallery ? 'text-[#7C3AED]' : 'text-[#059669]';
                   return (
                     <tr key={row.id} className="hover:bg-[#F9FAF5]/50 transition-colors">
                       <td className="px-4 sm:px-8 py-3 sm:py-5">
