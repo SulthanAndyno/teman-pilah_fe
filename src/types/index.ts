@@ -109,3 +109,11 @@ export interface Education {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface Gallery {
+  id: string;
+  image: string;
+  description?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
