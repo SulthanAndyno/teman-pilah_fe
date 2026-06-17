@@ -12,6 +12,7 @@ import {
   Users2,
   ArrowLeft,
   X,
+  Image as ImageIcon,
 } from 'lucide-react';
 
 const navigationItems = [
@@ -34,6 +35,11 @@ const navigationItems = [
     label: 'Education Content',
     icon: GraduationCap,
     path: '/admin/education',
+  },
+  {
+    label: 'Gallery Management',
+    icon: ImageIcon,
+    path: '/admin/gallery',
   },
 ];
 
