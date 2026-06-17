@@ -4,6 +4,7 @@ import React from 'react';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { getThumbnailUrl } from '@/lib/api/education';
+import { toast } from 'sonner';
 
 interface DownloadPdfButtonProps {
   content: {
@@ -23,7 +24,7 @@ export function DownloadPdfButton({ content }: DownloadPdfButtonProps) {
     // Open a temporary blank window
     const printWindow = window.open('', '_blank');
     if (!printWindow) {
-      alert('Mohon izinkan pop-up browser untuk mengunduh materi.');
+      toast.warning('Mohon izinkan pop-up browser untuk mengunduh materi.');
       return;
     }
 
