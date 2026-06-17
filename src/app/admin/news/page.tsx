@@ -8,6 +8,7 @@ import { NewsTable } from '@/components/admin/NewsTable';
 import { NewsModal } from '@/components/admin/NewsModal';
 import { DeleteModal } from '@/components/admin/DeleteModal';
 import { SuccessModal } from '@/components/admin/SuccessModal';
+import { toast } from 'sonner';
 
 const BASE_URL = getBaseUrl();
 
@@ -280,7 +281,7 @@ export default function AdminNewsPage() {
         error
       );
 
-      alert(
+      toast.error(
         error instanceof Error
           ? error.message
           : 'Gagal menyimpan news'
@@ -309,7 +310,7 @@ export default function AdminNewsPage() {
       });
     } catch (error) {
       console.error('Delete News Error:', error);
-      alert(error instanceof Error ? error.message : 'Gagal menghapus news');
+      toast.error(error instanceof Error ? error.message : 'Gagal menghapus news');
     }
   }
 
