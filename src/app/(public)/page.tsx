@@ -9,6 +9,8 @@ import { Programs } from '@/components/landing/Programs';
 import { Education } from '@/components/landing/Education';
 import { ProductCatalog } from '@/components/landing/ProductCatalog';
 import { Gallery } from '@/components/landing/Gallery';
+import { galleryApi } from '@/lib/api/gallery';
+import { Gallery as GalleryItem } from '@/types';
 
 const BASE_URL = getBaseUrl();
 
@@ -120,11 +122,22 @@ export default async function LandingPage() {
 
     const educationJson = await educationRes.json();
     education = (educationJson?.data || [])
-      .filter((item: any) => item.status === 'PUBLISHED')
-      .slice(0, 4); // Display at most 4 items on the landing page
+      .filter((item: any) => item.status === 'PUBLISHED');
   } catch (error) {
     console.error('Failed to fetch education:', error);
     education = [];
+  }
+
+  // =========================
+  // GALLERY
+  // =========================
+  let gallery: GalleryItem[] = [];
+
+  try {
+    gallery = await galleryApi.getAll();
+  } catch (error) {
+    console.error('Failed to fetch gallery:', error);
+    gallery = [];
   }
 
   return (
@@ -140,7 +153,7 @@ export default async function LandingPage() {
 
       <ProductCatalog products={products} />
 
-      <Gallery />
+      <Gallery items={gallery} />
 
     </div>
   );
