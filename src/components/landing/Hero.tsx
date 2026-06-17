@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ArrowRight, Play, Users, Leaf } from 'lucide-react';
+import { ArrowRight, Leaf } from 'lucide-react';
 
 export function Hero() {
   return (
@@ -66,16 +66,6 @@ export function Hero() {
             </button>
 
             {/* SECONDARY BUTTON */}
-            {/* <button className="group inline-flex items-center gap-3 rounded-full bg-[#E8E9E4] px-7 py-4 transition-all duration-300 hover:scale-[1.02] active:scale-95">
-              <img src="/igg.png" alt="Instagram" className="h-5 w-5 object-contain" />
-              <span className="text-sm font-bold leading-7 text-[#154212]">
-                Jelajahi Kegiatan
-              </span>
-            </button>
-
-          </div>
-        </motion.div> */}
-
             <a
           href="https://www.instagram.com/temanpilah?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
           target="_blank"
