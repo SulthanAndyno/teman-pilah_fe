@@ -84,7 +84,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
     e.preventDefault();
     
     // Validation
-    if (!name.trim() || !description.trim() || !price.trim()) {
+    if (!name.trim() || !description.trim() || !price.trim() || !whatsappLink.trim()) {
       setConfirmModal({ isOpen: true, status: 'ERROR' });
       return;
     }
@@ -277,7 +277,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">WhatsApp Number / Link</label>
+                <label className="text-[13px] font-bold text-[#72796E]">WhatsApp Number / Link <span className="text-red-500">*</span></label>
                 <input
                   type="text"
                   placeholder="e.g. 08123456789 or https://wa.me/..."
@@ -336,24 +336,24 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
         }}
         title={
           confirmModal.status === 'ERROR'
-            ? "Incomplete Data"
+            ? "Data Belum Lengkap"
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "File Too Large"
-            : (product ? "Save Changes?" : "Add New Product?")
+            ? "Ukuran File Terlalu Besar"
+            : (product ? "Simpan Perubahan?" : "Tambah Produk Baru?")
         }
         message={
           confirmModal.status === 'ERROR'
-            ? "Please fill in all required fields (Name, Description, and Price) before saving."
+            ? "Silakan lengkapi semua bidang yang wajib diisi (Nama, Deskripsi, Harga, dan Nomor WhatsApp) sebelum menyimpan."
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "The uploaded file exceeds the 2MB size limit. Please upload an image smaller than 2MB."
+            ? "File yang diunggah melebihi batas ukuran 2MB. Silakan unggah gambar yang lebih kecil dari 2MB."
             : product 
-            ? `Are you sure you want to save changes to "${name || 'this product'}"?`
-            : `Are you sure you want to Add "${name || 'this product'}"? This action cannot be undone.`
+            ? `Apakah Anda yakin ingin menyimpan perubahan pada "${name || 'produk ini'}"?`
+            : `Apakah Anda yakin ingin menambahkan "${name || 'produk ini'}"? Tindakan ini tidak dapat dibatalkan.`
         }
         confirmText={
           confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE'
             ? "OK"
-            : (product ? "Save Changes" : "Add New Product")
+            : (product ? "Simpan Perubahan" : "Tambah Produk Baru")
         }
       />
     </div>

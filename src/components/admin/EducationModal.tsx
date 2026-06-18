@@ -483,24 +483,24 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
         }}
         title={
           confirmModal.status === 'ERROR'
-            ? "Incomplete Data"
+            ? "Data Belum Lengkap"
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "File Too Large"
-            : (content ? "Save Changes?" : "Add New Content?")
+            ? "Ukuran File Terlalu Besar"
+            : (content ? "Simpan Perubahan?" : "Tambah Konten Baru?")
         }
         message={
           confirmModal.status === 'ERROR'
-            ? "Please fill in all required fields (Title and Description) before saving."
+            ? "Silakan lengkapi semua bidang yang wajib diisi (Judul dan Deskripsi) sebelum menyimpan."
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "The uploaded file exceeds the 2MB size limit. Please upload an image smaller than 2MB."
+            ? "File yang diunggah melebihi batas ukuran 2MB. Silakan unggah gambar yang lebih kecil dari 2MB."
             : content 
-            ? `Are you sure you want to save changes to "${title || 'this content'}"?`
-            : `Are you sure you want to Add "${title || 'this content'}"? This action cannot be undone.`
+            ? `Apakah Anda yakin ingin menyimpan perubahan pada "${title || 'konten ini'}"?`
+            : `Apakah Anda yakin ingin menambahkan "${title || 'konten ini'}"? Tindakan ini tidak dapat dibatalkan.`
         }
         confirmText={
           confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE'
             ? "OK"
-            : (content ? "Save Changes" : "Add New Content")
+            : (content ? "Simpan Perubahan" : "Tambah Konten Baru")
         }
       />
     </div>

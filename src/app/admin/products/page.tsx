@@ -185,14 +185,14 @@ export default function AdminProducts() {
         await productApi.update(editingProduct.id, data);
         setSuccessModal({
           isOpen: true,
-          title: 'Success Update',
+          title: 'Berhasil Memperbarui',
           message: 'Produk berhasil diperbarui.'
         });
       } else {
         await productApi.create(data);
         setSuccessModal({
           isOpen: true,
-          title: 'Success Add',
+          title: 'Berhasil Menambahkan',
           message: 'Produk berhasil ditambahkan.'
         });
       }
@@ -218,7 +218,7 @@ export default function AdminProducts() {
       await productApi.delete(deleteModal.id, deleteModal.name);
       setSuccessModal({
         isOpen: true,
-        title: 'Success Delete',
+        title: 'Berhasil Menghapus',
         message: 'Produk berhasil dihapus.'
       });
       fetchProducts();
@@ -349,9 +349,9 @@ export default function AdminProducts() {
         isOpen={deleteModal.isOpen}
         onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
         onConfirm={confirmDelete}
-        title="Delete Product?"
+        title="Hapus Produk?"
         itemName={deleteModal.name}
-        confirmText="Delete Product"
+        confirmText="Hapus Produk"
       />
     </div>
   );

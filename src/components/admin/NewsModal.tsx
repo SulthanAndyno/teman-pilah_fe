@@ -533,24 +533,24 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
         }}
         title={
           confirmModal.status === 'ERROR'
-            ? "Incomplete Data"
+            ? "Data Belum Lengkap"
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "File Too Large"
-            : (news ? "Save Changes?" : "Add New Program?")
+            ? "Ukuran File Terlalu Besar"
+            : (news ? "Simpan Perubahan?" : "Tambah Program Baru?")
         }
         message={
           confirmModal.status === 'ERROR'
-            ? "Please fill in all required fields (Program Title, Slug, and Description) before saving."
+            ? "Silakan lengkapi semua bidang yang wajib diisi (Judul Program, Slug, dan Deskripsi) sebelum menyimpan."
             : confirmModal.status === 'ERROR_FILE_SIZE'
-            ? "The uploaded file exceeds the 2MB size limit. Please upload an image smaller than 2MB."
+            ? "File yang diunggah melebihi batas ukuran 2MB. Silakan unggah gambar yang lebih kecil dari 2MB."
             : news 
-            ? `Are you sure you want to save changes to "${title || 'this program'}"?`
-            : `Are you sure you want to Add "${title || 'this program'}"? This action cannot be undone.`
+            ? `Apakah Anda yakin ingin menyimpan perubahan pada "${title || 'program ini'}"?`
+            : `Apakah Anda yakin ingin menambahkan "${title || 'program ini'}"? Tindakan ini tidak dapat dibatalkan.`
         }
         confirmText={
           confirmModal.status === 'ERROR' || confirmModal.status === 'ERROR_FILE_SIZE'
             ? "OK"
-            : (news ? "Save Changes" : "Add New Program")
+            : (news ? "Simpan Perubahan" : "Tambah Program Baru")
         }
       />
     </div>

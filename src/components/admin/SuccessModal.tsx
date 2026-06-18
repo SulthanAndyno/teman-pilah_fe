@@ -14,16 +14,16 @@ interface SuccessModalProps {
 export function SuccessModal({
   isOpen,
   onClose,
-  title = "Success!",
-  message = "Your action was completed successfully. Great Job!",
-  buttonText = "Go Home"
+  title = "Berhasil!",
+  message = "Tindakan Anda telah berhasil diselesaikan. Kerja Bagus!",
+  buttonText = "Kembali ke Beranda"
 }: SuccessModalProps) {
   const router = useRouter();
 
   if (!isOpen) return null;
 
   const handleButtonClick = () => {
-    if (buttonText === 'Go Home') {
+    if (buttonText === 'Go Home' || buttonText === 'Kembali ke Beranda') {
       router.push('/admin');
     }
     onClose();

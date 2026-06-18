@@ -220,13 +220,13 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
         isOpen={confirmModal.isOpen && (confirmModal.status === 'PUBLISHED')}
         onClose={() => setConfirmModal({ isOpen: false, status: null })}
         onConfirm={executeSubmit}
-        title={item ? 'Update Gallery Item?' : 'Upload Gallery Item?'}
+        title={item ? 'Perbarui Item Galeri?' : 'Upload Item Galeri?'}
         message={
           item
             ? 'Apakah Anda yakin ingin menyimpan perubahan pada item galeri ini?'
             : 'Apakah Anda yakin ingin mengupload gambar baru ke galeri aksi nyata?'
         }
-        confirmText={item ? 'Yes, Update' : 'Yes, Upload'}
+        confirmText={item ? 'Ya, Perbarui' : 'Ya, Upload'}
         confirmColor="#27532B"
       />
     </div>

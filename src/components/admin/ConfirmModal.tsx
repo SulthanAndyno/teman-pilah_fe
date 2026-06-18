@@ -58,7 +58,7 @@ export function ConfirmModal({
               type="button"
               className="flex-1 rounded-xl border border-[#D6D9D2] bg-white px-4 py-2.5 text-[13px] font-medium text-[#72796E] transition-all duration-200 hover:bg-gray-50 active:scale-95"
             >
-              Cancel
+              Batal
             </button>
           )}
           <button

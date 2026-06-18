@@ -13,9 +13,9 @@ export function DeleteModal({
   isOpen,
   onClose,
   onConfirm,
-  title = "Delete Program?",
+  title = "Hapus Program?",
   itemName = "",
-  confirmText = "Delete Program",
+  confirmText = "Hapus Program",
 }: DeleteModalProps) {
   if (!isOpen) return null;
 
@@ -42,7 +42,7 @@ export function DeleteModal({
           </div>
           <h3 className="mb-2 text-[18px] font-bold text-[#1a1c19]">{title}</h3>
           <p className="text-[13px] leading-relaxed text-[#72796E]">
-            Are you sure you want to delete "{itemName}"? This action cannot be undone.
+            Apakah Anda yakin ingin menghapus "{itemName}"? Tindakan ini tidak dapat dibatalkan.
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export function DeleteModal({
             type="button"
             className="flex-1 rounded-xl border border-[#D6D9D2] bg-white px-4 py-2.5 text-[13px] font-medium text-[#72796E] transition-all duration-200 hover:bg-gray-50 active:scale-95"
           >
-            Cancel
+            Batal
           </button>
           <button
             onClick={onConfirm}

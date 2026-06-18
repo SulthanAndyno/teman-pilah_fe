@@ -9,12 +9,6 @@ interface EducationTableProps {
   onDelete: (id: string) => void;
 }
 
-const EyeIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
-  </svg>
-);
 
 const PencilIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -96,12 +90,6 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
 
                   {/* Actions */}
                   <div className="flex flex-1 items-center justify-end gap-3">
-                    <button
-                      type="button"
-                      className="p-1.5 text-[#72796E] hover:text-[#2A3426] transition-colors"
-                    >
-                      <EyeIcon />
-                    </button>
 
                     <button
                       type="button"

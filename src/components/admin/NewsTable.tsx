@@ -1,7 +1,7 @@
 'use client';
 
 import { News } from '@/types';
-import { Eye, Edit2, Trash2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface NewsTableProps {
   newsList: News[];
@@ -52,12 +52,6 @@ const formatDate = (dateString: string | undefined) => {
   }).replace(/ /g, ' ').replace(',', ','); // Example: 12 Oct, 2023
 };
 
-const EyeIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-    <circle cx="12" cy="12" r="3"></circle>
-  </svg>
-);
 
 const PencilIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -140,12 +134,6 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
 
                   {/* Actions */}
                   <div className="flex flex-1 items-center justify-end gap-4">
-                    <button
-                      type="button"
-                      className="hover:opacity-70 transition-opacity"
-                    >
-                      <EyeIcon />
-                    </button>
 
                     <button
                       type="button"
