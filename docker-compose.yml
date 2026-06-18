@@ -1,9 +1,11 @@
 services:
   fe:
-    build: .
+    build: /opt/app/teman-pilah_fe
     container_name: temanpilah-fe
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
       - NEXT_PUBLIC_API_URL=https://api.temanpilah.com
+    depends_on: 
+      - app
