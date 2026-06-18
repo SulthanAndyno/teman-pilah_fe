@@ -124,7 +124,7 @@ export default function AdminEducationPage() {
       const data = await educationApi.getAll();
       setContents(data);
     } catch (error) {
-      toast.error('Failed to load education content');
+      toast.error('Gagal memuat konten edukasi');
     } finally {
       setIsLoading(false);
     }
@@ -204,14 +204,14 @@ export default function AdminEducationPage() {
 
       setSuccessModal({
         isOpen: true,
-        title: editingContent ? 'Success Update' : 'Success Add',
+        title: editingContent ? 'Berhasil Memperbarui' : 'Berhasil Menambahkan',
         message: editingContent 
-          ? 'Education content has been successfully updated.' 
-          : 'Education content has been successfully added.'
+          ? 'Konten edukasi berhasil diperbarui.' 
+          : 'Konten edukasi berhasil ditambahkan.'
       });
       fetchContents();
     } catch (error: any) {
-      toast.error(error.message || 'Failed to save education content');
+      toast.error(error.message || 'Gagal menyimpan konten edukasi');
     } finally {
       setIsLoading(false);
     }
@@ -234,12 +234,12 @@ export default function AdminEducationPage() {
       await educationApi.delete(deleteModal.id, nameToDelete);
       setSuccessModal({
         isOpen: true,
-        title: 'Success Delete',
-        message: 'Education content has been successfully deleted.'
+        title: 'Berhasil Menghapus',
+        message: 'Konten edukasi berhasil dihapus.'
       });
       fetchContents();
     } catch (error: any) {
-      toast.error(error.message || 'Failed to delete education content');
+      toast.error(error.message || 'Gagal menghapus konten edukasi');
     } finally {
       setIsLoading(false);
     }
@@ -362,9 +362,9 @@ export default function AdminEducationPage() {
         isOpen={deleteModal.isOpen}
         onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
         onConfirm={confirmDelete}
-        title="Delete Content?"
+        title="Hapus Konten?"
         itemName={deleteModal.name}
-        confirmText="Delete Content"
+        confirmText="Hapus Konten"
       />
     </div>
   );
