@@ -13,28 +13,28 @@ const getStatusStyles = (status: string) => {
   switch (status) {
     case 'PUBLISHED':
       return {
-        label: 'Ongoing',
+        label: 'Aktif',
         bgClass: 'bg-[#e2f5eb]',
         dotClass: 'bg-[#21c55d]',
         textClass: 'text-[#166534]',
       };
     case 'DRAFT':
       return {
-        label: 'Upcoming',
+        label: 'Mendatang',
         bgClass: 'bg-[#fff3e0]',
         dotClass: 'bg-[#f97316]',
         textClass: 'text-[#c2410c]',
       };
     case 'ARCHIVED':
       return {
-        label: 'Completed',
+        label: 'Selesai',
         bgClass: 'bg-[#f1f5f9]',
         dotClass: 'bg-[#94a3b8]',
         textClass: 'text-[#475569]',
       };
     default:
       return {
-        label: 'Ongoing',
+        label: 'Aktif',
         bgClass: 'bg-[#e2f5eb]',
         dotClass: 'bg-[#21c55d]',
         textClass: 'text-[#166534]',
@@ -45,7 +45,7 @@ const getStatusStyles = (status: string) => {
 const formatDate = (dateString: string | undefined) => {
   if (!dateString) return '-';
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-GB', {
+  return date.toLocaleDateString('id-ID', {
     day: '2-digit',
     month: 'short',
     year: 'numeric'
@@ -85,10 +85,10 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
         <h2 className="text-lg font-bold text-[#2A3426]">
-          All Programs
+          Semua Program
         </h2>
         <p className="text-[11px] font-medium text-[#8F9A8A]">
-          {newsList.length} items total
+          {newsList.length} total item
         </p>
       </div>
 
@@ -97,13 +97,13 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
           {/* TABLE HEADER */}
           <div className="flex items-center border-b border-[#F0F2EB] bg-[#F4F5F2] px-8 py-5">
             <div className="w-[400px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
-              PROGRAM TITLE
+              JUDUL PROGRAM
             </div>
             <div className="w-[200px] text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
-              DATE
+              TANGGAL
             </div>
             <div className="flex-1 text-right text-[11px] font-bold uppercase tracking-[1px] text-[#A1A89A]">
-              ACTIONS
+              AKSI
             </div>
           </div>
 
@@ -157,7 +157,7 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
             
             {newsList.length === 0 && (
               <div className="py-20 text-center">
-                <p className="text-[#72796e]">No programs found.</p>
+                <p className="text-[#72796e]">Program tidak ditemukan.</p>
               </div>
             )}
           </div>
@@ -169,7 +169,7 @@ export function NewsTable({ newsList, onEdit, onDelete }: NewsTableProps) {
         <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF5] px-8 py-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center">
             <p className="text-[13px] text-[#8F9A8A] font-medium">
-              Showing {startItem}–{endItem} of {newsList.length} programs
+              Menampilkan {startItem}–{endItem} dari {newsList.length} program
             </p>
           </div>
 

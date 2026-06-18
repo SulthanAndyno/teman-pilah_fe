@@ -274,10 +274,10 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
           className="flex items-center text-[13px] font-medium text-[#72796E] hover:text-[#2A3426] transition-colors"
         >
           <ArrowLeft size={16} className="mr-2" />
-          Back to Programs Management
+          Kembali ke Kelola Program
         </button>
         <h1 className="text-3xl font-serif font-bold text-[#2A3426] mt-6">
-          {news ? 'Edit Program' : 'Add New Program'}
+          {news ? 'Edit Program' : 'Tambah Program Baru'}
         </h1>
       </div>
 
@@ -291,10 +291,10 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
             {/* Title & Slug */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-6">
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Program Title</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Judul Program</label>
                 <input
                   type="text"
-                  placeholder="Enter program title..."
+                  placeholder="Masukkan judul program..."
                   className="w-full px-4 py-3 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none focus:border-[#c2c9bb]"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -327,7 +327,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
 
             {/* Program Description */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Program Description</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Deskripsi Program</label>
               
               <div className="border border-[#F0F2EB] rounded-[14px] overflow-hidden bg-[#F9FAF8] relative">
                 <style>{`
@@ -360,7 +360,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
                           autoFocus
                           onKeyDown={(e) => e.key === 'Enter' && handleLinkSubmit()}
                         />
-                        <button type="button" onClick={handleLinkSubmit} className="bg-[#2D5A27] text-white px-3 rounded-lg text-[12px] font-bold hover:brightness-110">Add</button>
+                        <button type="button" onClick={handleLinkSubmit} className="bg-[#2D5A27] text-white px-3 rounded-lg text-[12px] font-bold hover:brightness-110">Tambah</button>
                       </div>
                     )}
                   </div>
@@ -386,9 +386,9 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
 
             {/* Program Overview */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Program Overview</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Ringkasan Program</label>
               <textarea
-                placeholder="Write a short overview of the program..."
+                placeholder="Tulis ringkasan singkat program..."
                 className="w-full min-h-[100px] px-4 py-3 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] resize-none text-[14px] text-[#2A3426] focus:outline-none focus:border-[#c2c9bb]"
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
@@ -402,7 +402,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
             
             {/* Image Upload */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-4">
-              <label className="text-[13px] font-bold text-[#72796E]">Program Banner</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Banner Program</label>
               
               <div className="relative border-2 border-dashed border-[#D6D9D2] rounded-[16px] p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors group overflow-hidden">
                 <input
@@ -419,8 +419,8 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
                     <div className="w-12 h-12 bg-[#F3F4EF] rounded-full flex items-center justify-center mb-3 text-[#8F9A8A] group-hover:scale-110 transition-transform">
                       <ImageIcon size={24} />
                     </div>
-                    <p className="text-[13px] font-bold text-[#2A3426]">Click to upload or drag and drop</p>
-                    <p className="text-[11px] text-[#8F9A8A] mt-1">SVG, PNG, JPG or GIF (max. 2MB)</p>
+                    <p className="text-[13px] font-bold text-[#2A3426]">Klik untuk mengunggah atau seret dan lepas</p>
+                    <p className="text-[11px] text-[#8F9A8A] mt-1">SVG, PNG, JPG atau GIF (maks. 2MB)</p>
                   </>
                 )}
               </div>
@@ -430,10 +430,10 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-5">
               
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Partnership</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Kemitraan</label>
                 <input
                   type="text"
-                  placeholder="Input the partner collaborating in the program."
+                  placeholder="Masukkan mitra yang berkolaborasi dalam program."
                   className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none focus:border-[#c2c9bb]"
                   value={partnership}
                   onChange={(e) => setPartnership(e.target.value)}
@@ -441,7 +441,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Program Start Date</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Tanggal Mulai Program</label>
                 <input
                   type="date"
                   className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
@@ -451,7 +451,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Program End Date</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Tanggal Selesai Program</label>
                 <input
                   type="date"
                   className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
@@ -461,10 +461,10 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Tags</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Tag</label>
                 <input
                   type="text"
-                  placeholder="Recycling Education..."
+                  placeholder="Pendidikan Daur Ulang..."
                   className="w-full h-11 px-4 bg-[#F9FAF8] border border-[#F0F2EB] rounded-[14px] text-[14px] text-[#2A3426] focus:outline-none"
                   value={tagInput}
                   onChange={handleTagInput}
@@ -497,7 +497,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
           onClick={onClose}
           className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#D05B5B] font-bold text-[13px] hover:bg-red-50 transition-all duration-200 active:scale-95"
         >
-          Cancel Changes
+          Batal
         </button>
 
         <div className="flex items-center gap-4">
@@ -507,7 +507,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
               onClick={(e) => handlePreSubmit(e, 'DRAFT')}
               className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#2A3426] font-bold text-[13px] hover:bg-gray-50 transition-all duration-200 active:scale-95"
             >
-              Save Draft
+              Simpan Draft
             </button>
           )}
           <button
@@ -515,7 +515,7 @@ export function NewsModal({ news, isOpen, onClose, onSubmit }: NewsModalProps) {
             onClick={(e) => handlePreSubmit(e, 'PUBLISHED')}
             className="px-8 py-2.5 rounded-[12px] bg-[#8C5A00] text-white font-bold text-[13px] hover:brightness-110 transition-all duration-200 shadow-sm active:scale-95"
           >
-            {news ? 'Save Changes' : 'Publish'}
+            {news ? 'Simpan Perubahan' : 'Terbitkan'}
           </button>
         </div>
       </div>

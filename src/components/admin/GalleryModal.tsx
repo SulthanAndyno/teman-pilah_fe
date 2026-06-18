@@ -92,10 +92,10 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
           className="flex items-center text-[13px] font-medium text-[#72796E] hover:text-[#2A3426] transition-colors"
         >
           <ArrowLeft size={16} className="mr-2" />
-          Back to Gallery Management
+          Kembali ke Kelola Galeri
         </button>
         <h1 className="text-3xl font-serif font-bold text-[#2A3426] mt-6">
-          {item ? 'Edit Gallery Item' : 'Add New Gallery Item'}
+          {item ? 'Edit Item Galeri' : 'Tambah Item Galeri Baru'}
         </h1>
       </div>
 
@@ -109,7 +109,7 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
             {/* Description */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
               <div className="flex justify-between items-center">
-                <label className="text-[13px] font-bold text-[#72796E]">Description</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Deskripsi</label>
                 <span className="text-[11px] text-[#A1A89A]">{description.length}/500</span>
               </div>
               <textarea
@@ -127,7 +127,7 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
           <div className="space-y-6">
             
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-4">
-              <label className="text-[13px] font-bold text-[#72796E]">Gallery Image</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Foto Galeri</label>
               
               <div 
                 onClick={() => fileInputRef.current?.click()}
@@ -144,9 +144,9 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
                       alt="Preview" 
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center transition-opacity">
                       <span className="text-white text-[12px] font-semibold bg-[#27532B] px-3 py-1.5 rounded-full">
-                        Change Image
+                        Ubah Gambar
                       </span>
                     </div>
                   </div>
@@ -156,8 +156,8 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
                       <ImageIcon size={24} />
                     </div>
                     <div>
-                      <p className="text-[13px] font-bold text-[#42493E]">Upload Image</p>
-                      <p className="text-[11px] text-[#A1A89A] mt-1">PNG, JPG, or JPEG (Max. 2MB)</p>
+                      <p className="text-[13px] font-bold text-[#42493E]">Unggah Gambar</p>
+                      <p className="text-[11px] text-[#A1A89A] mt-1">PNG, JPG, atau JPEG (Maks. 2MB)</p>
                     </div>
                   </div>
                 )}
@@ -184,14 +184,14 @@ export function GalleryModal({ item, isOpen, onClose, onSubmit }: GalleryModalPr
           type="button"
           className="rounded-xl border border-[#D6D9D2] bg-white px-6 py-3 text-[13px] font-bold text-[#72796E] hover:bg-gray-50 transition-colors active:scale-95"
         >
-          Cancel
+          Batal
         </button>
         <button
           onClick={handlePreSubmit}
           type="button"
           className="rounded-xl bg-[#27532B] px-6 py-3 text-[13px] font-bold text-white hover:brightness-110 transition-all active:scale-95"
         >
-          {item ? 'Save Changes' : 'Upload Gallery Item'}
+          {item ? 'Simpan Perubahan' : 'Unggah Item Galeri'}
         </button>
       </div>
 

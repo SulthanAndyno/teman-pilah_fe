@@ -225,10 +225,10 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
           className="flex items-center text-[13px] font-medium text-[#72796E] hover:text-[#2A3426] transition-colors"
         >
           <ArrowLeft size={16} className="mr-2" />
-          Back to Education Content
+          Kembali ke Konten Edukasi
         </button>
         <h1 className="text-3xl font-serif font-bold text-[#2A3426] mt-6">
-          {content ? 'Edit Content' : 'Add New Content'}
+          {content ? 'Edit Konten' : 'Tambah Konten Baru'}
         </h1>
       </div>
 
@@ -240,10 +240,10 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
           <div className="lg:col-span-2 space-y-6">
             
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Content Title</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Judul Konten</label>
               <input
                 type="text"
-                placeholder="Enter content title..."
+                placeholder="Masukkan judul konten..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full h-12 px-4 rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all"
@@ -274,7 +274,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
             </div>
 
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Content Description</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Deskripsi Konten</label>
               <div className="border border-[#F0F2EB] rounded-[14px] overflow-hidden bg-[#F9FAF8] relative">
                 <style>{`
                   .editor-content ul { list-style-type: disc !important; padding-left: 1.5rem !important; margin: 0.5rem 0 !important; }
@@ -311,7 +311,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
                           autoFocus
                           onKeyDown={(e) => e.key === 'Enter' && handleLinkSubmit()}
                         />
-                        <button type="button" onClick={handleLinkSubmit} className="bg-[#2D5A27] text-white px-3 rounded-lg text-[12px] font-bold hover:brightness-110">Add</button>
+                        <button type="button" onClick={handleLinkSubmit} className="bg-[#2D5A27] text-white px-3 rounded-lg text-[12px] font-bold hover:brightness-110">Tambah</button>
                       </div>
                     )}
                   </div>
@@ -327,16 +327,16 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
                   onInput={handleInput}
                   onKeyUp={updateActiveFormats}
                   onMouseUp={updateActiveFormats}
-                  data-placeholder="Start writing your educational content here..."
+                  data-placeholder="Mulai tulis konten edukatif Anda di sini..."
                   className="editor-content w-full p-4 min-h-[300px] text-[14px] text-[#2A3426] focus:outline-none"
                 />
               </div>
             </div>
 
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Content Overview</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Ringkasan Konten</label>
               <textarea
-                placeholder="Write a short overview of the content..."
+                placeholder="Tulis ringkasan singkat konten..."
                 value={overview}
                 onChange={(e) => setOverview(e.target.value)}
                 className="w-full p-4 rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all resize-none min-h-[140px]"
@@ -350,7 +350,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
             
             {/* Thumbnail */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Content Thumbnail</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Thumbnail Konten</label>
               <div 
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative h-[200px] rounded-[16px] flex flex-col items-center justify-center cursor-pointer overflow-hidden group ${
@@ -369,7 +369,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
                   <>
                     <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <span className="text-white text-[13px] font-medium">Change Image</span>
+                      <span className="text-white text-[13px] font-medium">Ubah Gambar</span>
                     </div>
                   </>
                 ) : (
@@ -378,10 +378,10 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
                       <ImageIcon className="h-6 w-6 text-[#A1A89A]" />
                     </div>
                     <p className="text-[13px] font-bold text-[#2A3426] mb-1">
-                      Click to upload or drag and drop
+                      Klik untuk mengunggah atau seret dan lepas
                     </p>
                     <p className="text-[11px] text-[#A1A89A]">
-                      SVG, PNG, JPG or GIF (max. 2MB)
+                      SVG, PNG, JPG atau GIF (maks. 2MB)
                     </p>
                   </div>
                 )}
@@ -392,7 +392,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-6">
               
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Publish Date</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Tanggal Publikasi</label>
                 <input
                   type="date"
                   value={publishDate}
@@ -402,10 +402,10 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Tags</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Tag</label>
                 <input
                   type="text"
-                  placeholder="Recycling, Education..."
+                  placeholder="Daur Ulang, Edukasi..."
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyDown={handleTagKeyDown}
@@ -447,7 +447,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
           onClick={onClose}
           className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#D05B5B] font-bold text-[13px] hover:bg-red-50 transition-all duration-200 active:scale-95"
         >
-          Cancel Changes
+          Batal
         </button>
 
         <div className="flex items-center gap-4">
@@ -457,7 +457,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
               onClick={(e) => handlePreSubmit(e, 'DRAFT')}
               className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#2A3426] font-bold text-[13px] hover:bg-gray-50 transition-all duration-200 active:scale-95"
             >
-              Save Draft
+              Simpan Draft
             </button>
           )}
           <button
@@ -465,7 +465,7 @@ export function EducationModal({ content, isOpen, onClose, onSubmit }: Education
             onClick={(e) => handlePreSubmit(e, 'PUBLISHED')}
             className="px-8 py-2.5 rounded-[12px] bg-[#8C5A00] text-white font-bold text-[13px] hover:brightness-110 transition-all duration-200 shadow-sm active:scale-95"
           >
-            {content ? 'Save Changes' : 'Publish'}
+            {content ? 'Simpan Perubahan' : 'Terbitkan'}
           </button>
         </div>
       </div>

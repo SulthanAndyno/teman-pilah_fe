@@ -151,7 +151,7 @@ export default function AdminGallery() {
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
           <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
-            Gallery Management
+            Kelola Galeri
           </h1>
         </div>
 
@@ -164,7 +164,7 @@ export default function AdminGallery() {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>New Gallery Item</span>
+          <span>Item Galeri Baru</span>
         </button>
       </header>
 
@@ -174,12 +174,12 @@ export default function AdminGallery() {
           {/* SEARCH */}
           <div className="relative flex-1">
             <label className="sr-only" htmlFor="gallery-search">
-              Search gallery
+              Cari galeri
             </label>
             <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
                 id="gallery-search"
-                placeholder="Search by description..."
+                placeholder="Cari berdasarkan deskripsi..."
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}

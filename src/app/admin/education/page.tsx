@@ -259,7 +259,7 @@ export default function AdminEducationPage() {
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
           <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
-            Education Content
+            Konten Edukasi
           </h1>
         </div>
 
@@ -272,7 +272,7 @@ export default function AdminEducationPage() {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>Add Content</span>
+          <span>Tambah Konten</span>
         </button>
       </header>
 
@@ -282,12 +282,12 @@ export default function AdminEducationPage() {
           {/* SEARCH */}
           <div className="relative flex-1">
             <label className="sr-only" htmlFor="content-search">
-              Search content
+              Cari konten
             </label>
             <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
                 id="content-search"
-                placeholder="Search by title..."
+                placeholder="Cari berdasarkan judul..."
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -308,8 +308,8 @@ export default function AdminEducationPage() {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="all">Status: All</option>
-                <option value="PUBLISHED">Published</option>
+                <option value="all">Status: Semua</option>
+                <option value="PUBLISHED">Diterbitkan</option>
                 <option value="DRAFT">Draft</option>
               </select>
               <ChevronDownIcon />
@@ -321,8 +321,8 @@ export default function AdminEducationPage() {
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
               >
-                <option value="newest">Date: Newest</option>
-                <option value="oldest">Date: Oldest</option>
+                <option value="newest">Tanggal: Terbaru</option>
+                <option value="oldest">Tanggal: Terlama</option>
               </select>
               <ChevronDownIcon />
             </div>
@@ -332,7 +332,7 @@ export default function AdminEducationPage() {
               className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-[#F0F2EB] bg-white px-5 hover:bg-gray-50 transition-colors"
             >
               <SortIcon />
-              <span className="text-[13px] font-medium text-[#72796E]">Sort</span>
+              <span className="text-[13px] font-medium text-[#72796E]">Urutkan</span>
             </button>
           </div>
         </div>

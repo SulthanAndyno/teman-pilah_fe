@@ -334,7 +334,7 @@ export default function AdminNewsPage() {
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
           <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
-            Programs Management
+            Kelola Program
           </h1>
         </div>
 
@@ -350,7 +350,7 @@ export default function AdminNewsPage() {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>New Program</span>
+          <span>Program Baru</span>
         </button>
       </header>
 
@@ -360,12 +360,12 @@ export default function AdminNewsPage() {
           {/* SEARCH */}
           <div className="relative flex-1">
             <label className="sr-only" htmlFor="program-search">
-              Search by title...
+              Cari berdasarkan judul...
             </label>
             <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
                 id="program-search"
-                placeholder="Search by title..."
+                placeholder="Cari berdasarkan judul..."
                 type="text"
                 autoComplete="off"
                 className="w-full border-none bg-transparent text-[13px] text-[#42493e] outline-none placeholder:text-[#A1A89A]"
@@ -386,10 +386,10 @@ export default function AdminNewsPage() {
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
               >
-                <option value="all">Status: All</option>
-                <option value="ongoing">Ongoing</option>
-                <option value="upcoming">Upcoming</option>
-                <option value="completed">Completed</option>
+                <option value="all">Status: Semua</option>
+                <option value="ongoing">Aktif</option>
+                <option value="upcoming">Mendatang</option>
+                <option value="completed">Selesai</option>
                 <option value="draft">Draft</option>
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-50 pointer-events-none">
@@ -403,8 +403,8 @@ export default function AdminNewsPage() {
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
               >
-                <option value="newest">Date: Newest</option>
-                <option value="oldest">Date: Oldest</option>
+                <option value="newest">Tanggal: Terbaru</option>
+                <option value="oldest">Tanggal: Terlama</option>
               </select>
               <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-50 pointer-events-none">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -417,7 +417,7 @@ export default function AdminNewsPage() {
               onClick={() => setSortOrder(sortOrder === 'newest' ? 'oldest' : 'newest')}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-50"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-              <span className="text-[13px] font-medium text-[#2A3426]">Sort</span>
+              <span className="text-[13px] font-medium text-[#2A3426]">Urutkan</span>
             </button>
           </div>
         </div>

@@ -43,9 +43,9 @@ export default function AdminDashboard() {
           
           const mappedNews = (newsData.data || []).map((n: any) => ({
             id: 'news-' + n.id,
-            title: `New program published: ${n.title}`,
-            date: n.createdAt ? new Date(n.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
-            status: 'SUCCESS',
+            title: `Program baru diterbitkan: ${n.title}`,
+            date: n.createdAt ? new Date(n.createdAt).toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Hari Ini',
+            status: 'SUKSES',
             iconBg: 'bg-[#FDF2F2]', // Pinkish empty square
             rawDate: n.createdAt ? new Date(n.createdAt).getTime() : 0,
           }));
@@ -58,9 +58,9 @@ export default function AdminDashboard() {
           
           const mappedProducts = (productsData.data || []).map((p: any) => ({
             id: 'prod-' + p.id,
-            title: `Product updated: ${p.name}`,
-            date: p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
-            status: 'SUCCESS',
+            title: `Produk diperbarui: ${p.name}`,
+            date: p.createdAt ? new Date(p.createdAt).toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Hari Ini',
+            status: 'SUKSES',
             iconBg: 'bg-[#FEF3C7]', // Yellow empty square
             rawDate: p.createdAt ? new Date(p.createdAt).getTime() : 0,
           }));
@@ -73,9 +73,9 @@ export default function AdminDashboard() {
           
           const mappedEducation = (educationData.data || []).map((e: any) => ({
             id: 'edu-' + e.id,
-            title: `Education content published: ${e.title}`,
-            date: e.createdAt ? new Date(e.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
-            status: 'SUCCESS',
+            title: `Konten edukasi diterbitkan: ${e.title}`,
+            date: e.createdAt ? new Date(e.createdAt).toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Hari Ini',
+            status: 'SUKSES',
             iconBg: 'bg-[#DCFCE7]', // Greenish empty square
             rawDate: e.createdAt ? new Date(e.createdAt).getTime() : 0,
           }));
@@ -88,9 +88,9 @@ export default function AdminDashboard() {
           
           const mappedGallery = (galleryData.data || []).map((g: any) => ({
             id: 'gal-' + g.id,
-            title: `Gallery item uploaded`,
-            date: g.createdAt ? new Date(g.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Today',
-            status: 'SUCCESS',
+            title: `Item galeri diunggah`,
+            date: g.createdAt ? new Date(g.createdAt).toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Hari Ini',
+            status: 'SUKSES',
             iconBg: 'bg-[#F3E8FF]', // Purple empty square
             rawDate: g.createdAt ? new Date(g.createdAt).getTime() : 0,
           }));
@@ -122,7 +122,7 @@ export default function AdminDashboard() {
   const currentCards = [
     {
       id: 'total-programs',
-      title: 'TOTAL PROGRAMS',
+      title: 'TOTAL PROGRAM',
       value: stats.programs.toString(),
       icon: ClipboardList,
       iconBg: 'bg-[#FDF2F2]',
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
     },
     {
       id: 'total-products',
-      title: 'TOTAL PRODUCTS',
+      title: 'TOTAL PRODUK',
       value: stats.products.toString(),
       icon: Package,
       iconBg: 'bg-[#FEF3C7]',
@@ -138,7 +138,7 @@ export default function AdminDashboard() {
     },
     {
       id: 'total-education',
-      title: 'TOTAL EDUCATION',
+      title: 'TOTAL EDUKASI',
       value: stats.education.toString(),
       icon: GraduationCap,
       iconBg: 'bg-[#DCFCE7]',
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
     },
     {
       id: 'total-gallery',
-      title: 'TOTAL GALLERY',
+      title: 'TOTAL GALERI',
       value: stats.gallery.toString(),
       icon: ImageIcon,
       iconBg: 'bg-[#F3E8FF]',
@@ -162,7 +162,7 @@ export default function AdminDashboard() {
           Overview Dashboard
         </h1>
         <p className="text-sm sm:text-base text-[#42493E] font-medium">
-          Welcome back! Here's what's happening with Teman Pilah today.
+          Selamat datang kembali! Berikut adalah perkembangan Teman Pilah hari ini.
         </p>
       </div>
 
@@ -184,15 +184,15 @@ export default function AdminDashboard() {
       {/* RECENT ACTIVITY TABLE */}
       <section className="bg-white rounded-[16px] sm:rounded-[24px] border border-[#C2C9BB]/30 shadow-sm overflow-hidden mb-10">
         <div className="px-4 sm:px-8 py-4 sm:py-6 border-b border-[#C2C9BB]/20 flex items-center justify-between">
-          <h2 className="text-base sm:text-xl font-bold text-[#1B361F]">Recent Activity</h2>
+          <h2 className="text-base sm:text-xl font-bold text-[#1B361F]">Aktivitas Terbaru</h2>
         </div>
         
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-[#F4F5F2] border-b border-[#C2C9BB]/20">
-                <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest min-w-[240px]">Activity</th>
-                <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest min-w-[120px]">Date</th>
+                <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest min-w-[240px]">Aktivitas</th>
+                <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest min-w-[120px]">Tanggal</th>
                 <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest min-w-[100px]">Status</th>
                 <th className="px-4 sm:px-8 py-3 text-[10px] font-bold text-[#72796E] uppercase tracking-widest w-10"></th>
               </tr>
@@ -220,9 +220,9 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-4 sm:px-8 py-4 sm:py-5">
                         <span className={`px-2.5 py-1 rounded-full text-[9px] sm:text-[10px] font-black tracking-widest ${
-                          row.status === 'SUCCESS' ? 'bg-[#E3F2E7] text-[#2F6F1E]' : 'bg-[#FEF3C7] text-[#92400E]'
+                          row.status === 'SUKSES' || row.status === 'SUCCESS' ? 'bg-[#E3F2E7] text-[#2F6F1E]' : 'bg-[#FEF3C7] text-[#92400E]'
                         }`}>
-                          {row.status}
+                          {row.status === 'SUCCESS' ? 'SUKSES' : row.status}
                         </span>
                       </td>
                       <td className="px-4 sm:px-8 py-4 sm:py-5">

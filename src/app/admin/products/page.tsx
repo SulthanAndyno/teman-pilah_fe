@@ -244,7 +244,7 @@ export default function AdminProducts() {
       <header className="flex flex-col justify-between gap-5 lg:flex-row lg:items-center">
         <div>
           <h1 className="font-serif text-[32px] font-bold leading-[38.4px] text-[#2A3426] tracking-tight">
-            Product Management
+            Kelola Produk
           </h1>
         </div>
 
@@ -257,7 +257,7 @@ export default function AdminProducts() {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>New Product</span>
+          <span>Produk Baru</span>
         </button>
       </header>
 
@@ -267,12 +267,12 @@ export default function AdminProducts() {
           {/* SEARCH */}
           <div className="relative flex-1">
             <label className="sr-only" htmlFor="product-search">
-              Search product
+              Cari produk
             </label>
             <div className="flex h-11 items-center rounded-[14px] bg-[#F9FAF8] pl-10 pr-4">
               <input
                 id="product-search"
-                placeholder="Search by title..."
+                placeholder="Cari berdasarkan nama..."
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -293,9 +293,9 @@ export default function AdminProducts() {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="all">Status: All</option>
-                <option value="IN_STOCK">In Stock</option>
-                <option value="OUT_OF_STOCK">Out of Stock</option>
+                <option value="all">Status: Semua</option>
+                <option value="IN_STOCK">Tersedia</option>
+                <option value="OUT_OF_STOCK">Habis</option>
               </select>
               <ChevronDownIcon />
             </div>
@@ -306,9 +306,9 @@ export default function AdminProducts() {
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
               >
-                <option value="all">Category: All</option>
-                <option value="UPCYCLED_GOODS">Upcycled</option>
-                <option value="ORGANIC">Organic</option>
+                <option value="all">Kategori: Semua</option>
+                <option value="UPCYCLED_GOODS">Kerajinan</option>
+                <option value="ORGANIC">Organik</option>
                 <option value="ZERO_WASTE">Zero Waste</option>
               </select>
               <ChevronDownIcon />
@@ -319,7 +319,7 @@ export default function AdminProducts() {
               className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-[#F0F2EB] bg-white px-5 hover:bg-gray-50 transition-colors"
             >
               <SortIcon />
-              <span className="text-[13px] font-medium text-[#72796E]">Sort</span>
+              <span className="text-[13px] font-medium text-[#72796E]">Urutkan</span>
             </button>
           </div>
         </div>

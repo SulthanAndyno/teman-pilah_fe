@@ -22,22 +22,22 @@ const navigationItems = [
     path: '/admin',
   },
   {
-    label: 'Programs Management',
+    label: 'Kelola Program',
     icon: ClipboardList,
     path: '/admin/news',
   },
   {
-    label: 'Product Management',
+    label: 'Kelola Produk',
     icon: Package,
     path: '/admin/products',
   },
   {
-    label: 'Education Content',
+    label: 'Konten Edukasi',
     icon: GraduationCap,
     path: '/admin/education',
   },
   {
-    label: 'Gallery Management',
+    label: 'Kelola Galeri',
     icon: ImageIcon,
     path: '/admin/gallery',
   },

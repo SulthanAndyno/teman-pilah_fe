@@ -15,13 +15,13 @@ const getCategoryStyles = (category: string) => {
     return {
       bgClass: 'bg-[#FCE7F3]',
       textClass: 'text-[#EC4899]',
-      label: 'Organic Product'
+      label: 'Produk Organik'
     };
   } else if (cat.includes('CRAFT') || cat.includes('UPCYCLED')) {
     return {
       bgClass: 'bg-[#FEEFD8]',
       textClass: 'text-[#D88D54]',
-      label: 'Craft'
+      label: 'Kerajinan'
     };
   } else if (cat.includes('ZERO_WASTE') || cat.includes('WASTE')) {
     return {
@@ -78,10 +78,10 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
         <h2 className="text-[18px] font-bold text-[#1B361F]">
-          All Products
+          Semua Produk
         </h2>
         <p className="text-[13px] text-[#A1A89A]">
-          {products.length} Items total
+          {products.length} total item
         </p>
       </div>
 
@@ -90,13 +90,13 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
           {/* TABLE HEADER */}
           <div className="flex items-center px-8 py-4 bg-[#F9FAF8] border-b border-[#F0F2EB]">
             <div className="w-[350px] pl-10 text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              PRODUCT NAME
+              NAMA PRODUK
             </div>
             <div className="w-[300px] text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              CATEGORY
+              KATEGORI
             </div>
             <div className="flex-1 text-right text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              ACTIONS
+              AKSI
             </div>
           </div>
 
@@ -150,7 +150,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
             
             {products.length === 0 && (
               <div className="py-20 text-center">
-                <p className="text-[#72796e]">No products found.</p>
+                <p className="text-[#72796e]">Produk tidak ditemukan.</p>
               </div>
             )}
           </div>
@@ -161,7 +161,7 @@ export function ProductTable({ products, onEdit, onDelete }: ProductTableProps) 
       <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF8] px-8 py-5 lg:flex-row lg:items-center lg:justify-between rounded-b-[24px]">
         <div className="flex items-center">
           <p className="text-[14px] font-medium text-[#72796E]">
-            Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, products.length)} of {products.length} products
+            Menampilkan {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, products.length)} dari {products.length} produk
           </p>
         </div>
 

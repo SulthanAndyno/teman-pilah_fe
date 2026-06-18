@@ -39,10 +39,10 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
         <h2 className="text-[18px] font-bold text-[#1B361F]">
-          All Gallery Items
+          Semua Item Galeri
         </h2>
         <p className="text-[13px] text-[#A1A89A]">
-          {items.length} Items total
+          {items.length} total item
         </p>
       </div>
 
@@ -51,16 +51,16 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
           {/* TABLE HEADER */}
           <div className="flex items-center px-8 py-4 bg-[#F9FAF8] border-b border-[#F0F2EB]">
             <div className="w-[120px] pl-10 text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              IMAGE
+              FOTO
             </div>
             <div className="w-[450px] text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              DESCRIPTION
+              DESKRIPSI
             </div>
             <div className="w-[180px] text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              CREATED DATE
+              TANGGAL DIBUAT
             </div>
             <div className="flex-1 text-right text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              ACTIONS
+              AKSI
             </div>
           </div>
 
@@ -81,7 +81,7 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
                         className="h-full w-full object-cover" 
                       />
                     ) : (
-                      <span className="text-[10px] text-gray-400">No Image</span>
+                      <span className="text-[10px] text-gray-400">Tidak ada Foto</span>
                     )}
                   </div>
                 </div>
@@ -89,7 +89,7 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
                 {/* Description */}
                 <div className="w-[450px] pr-6">
                   <span className="text-[14px] text-[#42493E] font-medium line-clamp-2">
-                    {item.description || <span className="text-gray-400 italic">No description</span>}
+                    {item.description || <span className="text-gray-400 italic">Tidak ada deskripsi</span>}
                   </span>
                 </div>
 
@@ -127,7 +127,7 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
             
             {items.length === 0 && (
               <div className="py-20 text-center">
-                <p className="text-[#72796e]">No gallery items found.</p>
+                <p className="text-[#72796e]">Item galeri tidak ditemukan.</p>
               </div>
             )}
           </div>
@@ -139,7 +139,7 @@ export function GalleryTable({ items, onEdit, onDelete }: GalleryTableProps) {
         <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF8] px-8 py-5 lg:flex-row lg:items-center lg:justify-between rounded-b-[24px]">
           <div className="flex items-center">
             <p className="text-[14px] font-medium text-[#72796E]">
-              Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, items.length)} of {items.length} gallery items
+              Menampilkan {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, items.length)} dari {items.length} item galeri
             </p>
           </div>
 

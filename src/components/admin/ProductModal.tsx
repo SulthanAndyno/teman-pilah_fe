@@ -140,10 +140,10 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
           className="flex items-center text-[13px] font-medium text-[#72796E] hover:text-[#2A3426] transition-colors"
         >
           <ArrowLeft size={16} className="mr-2" />
-          Back to Product Management
+          Kembali ke Kelola Produk
         </button>
         <h1 className="text-3xl font-serif font-bold text-[#2A3426] mt-6">
-          {product ? 'Edit Product' : 'Add New Product'}
+          {product ? 'Edit Product' : 'Tambah Produk Baru'}
         </h1>
       </div>
 
@@ -156,10 +156,10 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
             
             {/* Title */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Product Name</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Nama Produk</label>
               <input
                 type="text"
-                placeholder="Enter product name..."
+                placeholder="Masukkan nama produk..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full h-12 px-4 rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all"
@@ -185,9 +185,9 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
 
             {/* Description */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Product Overview</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Ringkasan Produk</label>
               <textarea
-                placeholder="Write a short overview of the product..."
+                placeholder="Tulis ringkasan singkat produk..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full p-4 rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all resize-none min-h-[140px]"
@@ -201,7 +201,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
             
             {/* Banner / Image */}
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-2">
-              <label className="text-[13px] font-bold text-[#72796E]">Product Image</label>
+              <label className="text-[13px] font-bold text-[#72796E]">Foto Produk</label>
               <div 
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative h-[200px] rounded-[16px] flex flex-col items-center justify-center cursor-pointer overflow-hidden group ${
@@ -220,7 +220,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
                   <>
                     <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <span className="text-white text-[13px] font-medium">Change Image</span>
+                      <span className="text-white text-[13px] font-medium">Ubah Gambar</span>
                     </div>
                   </>
                 ) : (
@@ -229,10 +229,10 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
                       <ImageIcon className="h-6 w-6 text-[#A1A89A]" />
                     </div>
                     <p className="text-[13px] font-bold text-[#2A3426] mb-1">
-                      Click to upload or drag and drop
+                      Klik untuk mengunggah atau seret dan lepas
                     </p>
                     <p className="text-[11px] text-[#A1A89A]">
-                      SVG, PNG, JPG or GIF (max. 2MB)
+                      SVG, PNG, JPG atau GIF (maks. 2MB)
                     </p>
                   </div>
                 )}
@@ -243,15 +243,15 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
             <div className="bg-white p-6 rounded-[20px] border border-[#F0F2EB] shadow-sm space-y-6">
               
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Product Category</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Kategori Produk</label>
                 <div className="relative">
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value as any)}
                     className="w-full h-12 px-4 pr-10 appearance-none rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all cursor-pointer"
                   >
-                    <option value="ORGANIC">Organic Product</option>
-                    <option value="UPCYCLED_GOODS">Craft</option>
+                    <option value="ORGANIC">Produk Organik</option>
+                    <option value="UPCYCLED_GOODS">Kerajinan</option>
                     <option value="ZERO_WASTE">Zero Waste</option>
                   </select>
                   <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-[#A1A89A]">
@@ -261,7 +261,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">Product Price</label>
+                <label className="text-[13px] font-bold text-[#72796E]">Harga Produk</label>
                 <div className="flex rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] overflow-hidden focus-within:border-[#27532B] focus-within:ring-1 focus-within:ring-[#27532B] transition-all h-12">
                   <div className="px-4 flex items-center bg-[#F0F2EB]/50 border-r border-[#E5E7EB] text-[#72796E] text-[14px] font-medium">
                     Rp
@@ -277,10 +277,10 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
               </div>
 
               <div className="space-y-2">
-                <label className="text-[13px] font-bold text-[#72796E]">WhatsApp Number / Link <span className="text-red-500">*</span></label>
+                <label className="text-[13px] font-bold text-[#72796E]">Nomor WhatsApp / Link <span className="text-red-500">*</span></label>
                 <input
                   type="text"
-                  placeholder="e.g. 08123456789 or https://wa.me/..."
+                  placeholder="misal 08123456789 atau https://wa.me/..."
                   value={whatsappLink}
                   onChange={(e) => setWhatsappLink(e.target.value)}
                   className="w-full h-12 px-4 rounded-[12px] bg-[#F9FAF8] border border-[#E5E7EB] text-[14px] text-[#2A3426] placeholder:text-[#A1A89A] focus:outline-none focus:border-[#27532B] focus:ring-1 focus:ring-[#27532B] transition-all"
@@ -300,7 +300,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
           onClick={onClose}
           className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#D05B5B] font-bold text-[13px] hover:bg-red-50 transition-all duration-200 active:scale-95"
         >
-          Cancel Changes
+          Batal
         </button>
 
         <div className="flex items-center gap-4">
@@ -310,7 +310,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
               onClick={(e) => handlePreSubmit(e, 'DRAFT')}
               className="px-6 py-2.5 rounded-[12px] border border-[#F0F2EB] text-[#2A3426] font-bold text-[13px] hover:bg-gray-50 transition-all duration-200 active:scale-95"
             >
-              Save Draft
+              Simpan Draft
             </button>
           )}
           <button
@@ -318,7 +318,7 @@ export function ProductModal({ product, isOpen, onClose, onSubmit }: ProductModa
             onClick={(e) => handlePreSubmit(e, 'PUBLISHED')}
             className="px-8 py-2.5 rounded-[12px] bg-[#8C5A00] text-white font-bold text-[13px] hover:brightness-110 transition-all duration-200 shadow-sm active:scale-95"
           >
-            {product ? 'Save Changes' : 'Publish'}
+            {product ? 'Simpan Perubahan' : 'Terbitkan'}
           </button>
         </div>
       </div>

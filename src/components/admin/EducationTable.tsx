@@ -39,10 +39,10 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
       {/* HEADER */}
       <div className="flex items-center justify-between px-8 py-7 border-b border-[#F0F2EB]">
         <h2 className="text-[18px] font-bold text-[#1B361F]">
-          All Content
+          Semua Konten
         </h2>
         <p className="text-[13px] text-[#A1A89A]">
-          {contents.length} Items total
+          {contents.length} total item
         </p>
       </div>
 
@@ -51,13 +51,13 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
           {/* TABLE HEADER */}
           <div className="flex items-center px-8 py-4 bg-[#F9FAF8] border-b border-[#F0F2EB]">
             <div className="w-[450px] pl-10 text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              CONTENT TITLE
+              JUDUL KONTEN
             </div>
             <div className="w-[300px] text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              DATE
+              TANGGAL
             </div>
             <div className="flex-1 text-right text-[13px] font-bold uppercase tracking-wider text-[#A1A89A]">
-              ACTIONS
+              AKSI
             </div>
           </div>
 
@@ -80,7 +80,7 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
                   {/* Date */}
                   <div className="w-[300px]">
                     <span className="text-[13.5px] text-[#72796E]">
-                      {content.createdAt ? new Date(content.createdAt).toLocaleDateString('en-US', {
+                      {content.createdAt ? new Date(content.createdAt).toLocaleDateString('id-ID', {
                         month: 'short',
                         day: 'numeric',
                         year: 'numeric'
@@ -113,7 +113,7 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
             
             {contents.length === 0 && (
               <div className="py-20 text-center">
-                <p className="text-[#72796e]">No education content found.</p>
+                <p className="text-[#72796e]">Konten edukasi tidak ditemukan.</p>
               </div>
             )}
           </div>
@@ -124,7 +124,7 @@ export function EducationTable({ contents, onEdit, onDelete }: EducationTablePro
       <div className="flex flex-col gap-4 border-t border-[#F0F2EB] bg-[#F9FAF8] px-8 py-5 lg:flex-row lg:items-center lg:justify-between rounded-b-[24px]">
         <div className="flex items-center">
           <p className="text-[14px] font-medium text-[#72796E]">
-            Showing {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, contents.length)} of {contents.length} contents
+            Menampilkan {(currentPage - 1) * itemsPerPage + 1}-{Math.min(currentPage * itemsPerPage, contents.length)} dari {contents.length} konten
           </p>
         </div>
 
