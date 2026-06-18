@@ -92,14 +92,14 @@ export default function AdminGallery() {
         await galleryApi.update(editingItem.id, data);
         setSuccessModal({
           isOpen: true,
-          title: 'Success Update',
+          title: 'Berhasil Memperbarui',
           message: 'Item galeri berhasil diperbarui.'
         });
       } else {
         await galleryApi.create(data);
         setSuccessModal({
           isOpen: true,
-          title: 'Success Add',
+          title: 'Berhasil Menambahkan',
           message: 'Item galeri baru berhasil diupload.'
         });
       }
@@ -125,7 +125,7 @@ export default function AdminGallery() {
       await galleryApi.delete(deleteModal.id);
       setSuccessModal({
         isOpen: true,
-        title: 'Success Delete',
+        title: 'Berhasil Menghapus',
         message: 'Item galeri berhasil dihapus.'
       });
       fetchGallery();
@@ -212,16 +212,16 @@ export default function AdminGallery() {
         onClose={() => setSuccessModal({ ...successModal, isOpen: false })}
         title={successModal.title}
         message={successModal.message}
-        buttonText="Close"
+        buttonText="Tutup"
       />
 
       <DeleteModal
         isOpen={deleteModal.isOpen}
         onClose={() => setDeleteModal({ ...deleteModal, isOpen: false })}
         onConfirm={confirmDelete}
-        title="Delete Gallery Item?"
+        title="Hapus Item Galeri?"
         itemName={deleteModal.description.length > 30 ? deleteModal.description.slice(0, 30) + '...' : deleteModal.description}
-        confirmText="Delete Item"
+        confirmText="Hapus Item"
       />
     </div>
   );

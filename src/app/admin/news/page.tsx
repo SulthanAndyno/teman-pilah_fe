@@ -270,8 +270,8 @@ export default function AdminNewsPage() {
 
       setSuccessModal({
         isOpen: true,
-        title: "Success!",
-        message: selectedNews ? "Program has been successfully updated. Great Job!" : "Program has been successfully added. Great Job!"
+        title: "Berhasil!",
+        message: selectedNews ? "Program berhasil diperbarui. Kerja Bagus!" : "Program berhasil ditambahkan. Kerja Bagus!"
       });
 
     } catch (error) {
@@ -284,7 +284,7 @@ export default function AdminNewsPage() {
       toast.error(
         error instanceof Error
           ? error.message
-          : 'Gagal menyimpan news'
+          : 'Gagal menyimpan program'
       );
     }
   }
@@ -305,12 +305,12 @@ export default function AdminNewsPage() {
       setDeletingNews(null);
       setSuccessModal({
         isOpen: true,
-        title: "Success!",
-        message: "Program has been successfully deleted. Great Job!"
+        title: "Berhasil!",
+        message: "Program berhasil dihapus. Kerja Bagus!"
       });
     } catch (error) {
       console.error('Delete News Error:', error);
-      toast.error(error instanceof Error ? error.message : 'Gagal menghapus news');
+      toast.error(error instanceof Error ? error.message : 'Gagal menghapus program');
     }
   }
 
